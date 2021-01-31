@@ -1,21 +1,16 @@
-package com.team6.internalPortal.repository;
+package com.team6.internetPortal.repository;
 
-import com.team6.internalPortal.entity.User;
-import org.springframework.stereotype.Repository;
+import com.team6.internetPortal.entity.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-@Transactional
-public class UserRepository {
 
-    @PersistenceContext
-    EntityManager entityManager;
+public interface IUserRepository extends JpaRepository<User, Long> {
+   
+	public User findByEmail(String email);
 
-    // Create
-    public void addUser(User user){
-        entityManager.persist(user);
-    }
+
+	
+
+   
 }

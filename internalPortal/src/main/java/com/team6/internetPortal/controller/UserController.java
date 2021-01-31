@@ -1,18 +1,19 @@
-package com.team6.internalPortal.registration.controller;
+package com.team6.internetPortal.controller;
 
-import com.sun.xml.bind.v2.runtime.output.SAXOutput;
-import com.team6.internalPortal.entity.User;
-import com.team6.internalPortal.registration.service.RegistrationService;
+
+import com.team6.internetPortal.entity.User;
+import com.team6.internetPortal.service.IUserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 
 @RestController
-public class RegistrationController {
+public class UserController {
 
-    @Autowired
-    private RegistrationService registrationService;
+	@Autowired
+    private IUserService userService;
 
 //    "/video"
 
@@ -24,14 +25,14 @@ public class RegistrationController {
         if(tempEmail != null && !"".equals(tempEmail)){
 
             // Check if no user found with entered emailId
-            if(registrationService.fetchUserByEmailId(tempEmail) != null){
+            if(userService.fetchUserByEmailId(tempEmail) != null){
                 throw new Exception("User with "+ tempEmail +" already exists!");
             }
         }
         user.setCreatedOn(new Date(System.currentTimeMillis()));
 
         User userObj;
-        userObj = registrationService.saveUser(user);
+        userObj = userService.saveUser(user);
         return userObj;
     }
 
@@ -43,7 +44,7 @@ public class RegistrationController {
 
         // Check if null or empty
         if(tempEmail != null && !"".equals(tempEmail)){
-            userCheck = registrationService.fetchUserByEmailId(tempEmail);
+            userCheck =userService.fetchUserByEmailId(tempEmail);
 
             // Check if no user found with entered emailId
             if(userCheck != null){
@@ -60,5 +61,7 @@ public class RegistrationController {
         }
         return userCheck;
     }
+
+	
 
 }

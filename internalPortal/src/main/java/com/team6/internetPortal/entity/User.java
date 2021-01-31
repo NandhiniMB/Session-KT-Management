@@ -1,6 +1,6 @@
-package com.team6.internalPortal.entity;
+package com.team6.internetPortal.entity;
 
-import org.hibernate.annotations.GenericGenerator;
+
 
 import javax.persistence.*;
 import java.util.Date;

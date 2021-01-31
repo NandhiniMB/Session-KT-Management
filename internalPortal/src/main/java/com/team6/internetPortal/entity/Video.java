@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "video_table")
+@Table(name = "video")
 public class Video {
 
 	@Id

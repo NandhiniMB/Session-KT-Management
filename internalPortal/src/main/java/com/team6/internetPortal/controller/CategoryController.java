@@ -18,25 +18,24 @@ import com.team6.internetPortal.service.ICategoryService;
 @RequestMapping("category")
 public class CategoryController {
 
-
-@Autowired
-private ICategoryService categoryService;
-@GetMapping("/{category_id}")
-public Optional<Category> getCategory(@PathVariable int category_id) {
+	@Autowired
+	private ICategoryService categoryService;
 	
-	return categoryService.getCategory(category_id);
-}
+	@GetMapping("/")
+	public List<Category> getAllCategories() {
+		return categoryService.getAllCategories();
+	}
 
-@GetMapping("/")
-public List<Category> getAllCategories(){
-	return categoryService.getAllCategories();
-}
+	@GetMapping("/{category_id}")
+	public Optional<Category> getCategory(@PathVariable int category_id) {
 
-@PostMapping("/")
-public Category addCategory(@RequestBody Category category) {
-	return categoryService.addCategory(category);
-}
+		return categoryService.getCategory(category_id);
+	}
 
 
+	@PostMapping("/")
+	public Category addCategory(@RequestBody Category category) {
+		return categoryService.addCategory(category);
+	}
 
 }

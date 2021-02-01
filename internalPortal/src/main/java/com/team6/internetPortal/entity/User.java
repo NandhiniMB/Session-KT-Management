@@ -32,7 +32,7 @@ public class User {
     private String password;
 
     @Column
-    private Date CreatedOn;
+    private Date createdOn;
 
     public String getName() {
         return name;
@@ -67,10 +67,10 @@ public class User {
     }
 
     public Date getCreatedOn() {
-        return CreatedOn;
+        return createdOn;
     }
 
     public void setCreatedOn(Date createdOn) {
-        CreatedOn = createdOn;
+        this.createdOn = createdOn;
     }
 }

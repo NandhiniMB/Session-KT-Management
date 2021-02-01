@@ -18,10 +18,12 @@ public class Category {
 	private int id;
 
 	@Column
-	private String category_name;
+	private String categoryName;
 
 	@Column
-	private Date created_on;
+	private Date createdOn;
+
+	
 
 	public int getId() {
 		return id;
@@ -31,30 +33,30 @@ public class Category {
 		this.id = id;
 	}
 
-	public String getCategory_name() {
-		return category_name;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
-	public Date getCreated_on() {
-		return created_on;
+	public Date getCreatedOn() {
+		return createdOn;
 	}
 
-	public void setCreated_on(Date created_on) {
-		this.created_on = created_on;
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 
 	public Category() {
 		
 	}
 
-	public Category(String category_name, Date date) {
+	public Category(String categoryName, Date date) {
 
-		this.category_name = category_name;
-		this.created_on = date;
+		this.categoryName = categoryName;
+		this.createdOn = date;
 	}
 
 }

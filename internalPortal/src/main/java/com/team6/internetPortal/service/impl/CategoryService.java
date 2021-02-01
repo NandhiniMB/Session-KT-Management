@@ -29,7 +29,7 @@ public class CategoryService implements ICategoryService {
 
 	@Override
 	public Category addCategory(Category category) {
-		category.setCreated_on( new Date(System.currentTimeMillis()));
+		category.setCreatedOn( new Date(System.currentTimeMillis()));
 		return categoryRepository.save(category);
 	}
 	

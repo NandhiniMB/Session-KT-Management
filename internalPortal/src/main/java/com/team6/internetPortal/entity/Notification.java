@@ -23,14 +23,55 @@ public class Notification {
 	private String description;
 	
 	@Column
-	private boolean is_read;
+	private boolean isRead;
 
-	public Notification(long id, User user, String desc, boolean is_read) {
+	
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public boolean isRead() {
+		return isRead;
+	}
+
+
+	public void setRead(boolean isRead) {
+		this.isRead = isRead;
+	}
+
+
+	public Notification(long id, User user, String description, boolean isRead) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.description = description;
-		this.is_read = is_read;
+		this.isRead = isRead;
 	}
 	
 	

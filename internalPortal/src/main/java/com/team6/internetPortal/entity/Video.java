@@ -1,16 +1,12 @@
 package com.team6.internetPortal.entity;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,31 +24,33 @@ public class Video {
 	private String description;
 
 	@Column
-	private boolean is_archived;
+	private boolean isArchived;
 
 	@Column
-	private Date created_on;
+	private Date createdOn;
 
 	@Column
-	private Date last_modified_on;
-
-//@OneToMany(mapping="video")
-//private List<Comment> comments;
+	private Date lastModifiedOn;
+	
+	@Column
+	private String status;
 
 	@ManyToOne
 	private User creator;
 
 	@ManyToOne
 	private Category category;
+	
+	
 
 	public Video(String title, String description, boolean is_archived, Date created_on, Date last_modified_on,
 			User creator, Category category) {
 
 		this.title = title;
 		this.description = description;
-		this.is_archived = is_archived;
-		this.created_on = created_on;
-		this.last_modified_on = last_modified_on;
+		this.isArchived = is_archived;
+		this.createdOn = created_on;
+		this.lastModifiedOn = last_modified_on;
 		this.creator = creator;
 		this.category = category;
 	}
@@ -85,30 +83,37 @@ public class Video {
 		this.description = description;
 	}
 
-	public boolean isIs_archived() {
-		return is_archived;
+	public boolean isArchived() {
+		return isArchived;
 	}
 
-	public void setIs_archived(boolean is_archived) {
-		this.is_archived = is_archived;
+	public void setArchived(boolean isArchived) {
+		this.isArchived = isArchived;
 	}
 
-	public Date getCreated_on() {
-		return created_on;
+	public Date getCreatedOn() {
+		return createdOn;
 	}
 
-	public void setCreated_on(Date created_on) {
-		this.created_on = created_on;
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 
-	public Date getLast_modified_on() {
-		return last_modified_on;
+	public Date getLastModifiedOn() {
+		return lastModifiedOn;
 	}
 
-	public void setLast_modified_on(Date last_modified_on) {
-		this.last_modified_on = last_modified_on;
+	public void setLastModifiedOn(Date lastModifiedOn) {
+		this.lastModifiedOn = lastModifiedOn;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public User getCreator() {
 		return creator;
 	}
@@ -125,6 +130,7 @@ public class Video {
 		this.category = category;
 	}
 
+	
 	
 
 }

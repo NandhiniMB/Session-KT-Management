@@ -21,7 +21,7 @@ public class Comment {
     private String comment;
 	
 	@Column
-	private Date  commented_on;
+	private Date  commentedOn;
 	
 	@ManyToOne
 	private User commentor;
@@ -29,12 +29,52 @@ public class Comment {
 	@ManyToOne
 	private Video  video;
 
-	public Comment(int id, String comment, Date commented_on, User commentor, Video video) {
+	public Comment(int id, String comment, Date commentedOn, User commentor, Video video) {
 		super();
 		this.id = id;
 		this.comment = comment;
-		this.commented_on = commented_on;
+		this.commentedOn = commentedOn;
 		this.commentor = commentor;
+		this.video = video;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Date getCommentedOn() {
+		return commentedOn;
+	}
+
+	public void setCommentedOn(Date commentedOn) {
+		this.commentedOn = commentedOn;
+	}
+
+	public User getCommentor() {
+		return commentor;
+	}
+
+	public void setCommentor(User commentor) {
+		this.commentor = commentor;
+	}
+
+	public Video getVideo() {
+		return video;
+	}
+
+	public void setVideo(Video video) {
 		this.video = video;
 	}
 	

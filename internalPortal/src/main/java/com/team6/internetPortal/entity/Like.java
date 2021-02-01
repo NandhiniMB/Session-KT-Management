@@ -20,19 +20,60 @@ public class Like {
 
 	
 	@Column
-	private Date  liked_at;
+	private Date  likedAt;
 	
 	@ManyToOne
-	private User liked_user;
+	private User likedUser;
 	
 	@ManyToOne
 	private Video video;
 	
-	public Like(long id, User liked_user, Video video, Date liked_at) {
+	
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public Date getLikedAt() {
+		return likedAt;
+	}
+
+
+	public void setLikedAt(Date likedAt) {
+		this.likedAt = likedAt;
+	}
+
+
+	public User getLikedUser() {
+		return likedUser;
+	}
+
+
+	public void setLikedUser(User likedUser) {
+		this.likedUser = likedUser;
+	}
+
+
+	public Video getVideo() {
+		return video;
+	}
+
+
+	public void setVideo(Video video) {
+		this.video = video;
+	}
+
+
+	public Like(long id, User likedUser, Video video, Date likedAt) {
 		super();
 		this.id = id;
-		this.liked_user = liked_user;
+		this.likedUser = likedUser;
 		this.video = video;
-		this.liked_at = liked_at;
+		this.likedAt = likedAt;
 	}
 }

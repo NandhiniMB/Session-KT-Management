@@ -12,7 +12,7 @@ import com.team6.internetPortal.entity.Notification;
 public interface INotificationRepository extends JpaRepository<Notification, Integer> {
 	
 	
-	 @Query(value= "select * from notification  where user_id= ?1 and is_read = ?2",  nativeQuery = true)
+	 @Query(value= "select * from notification  where user_id= ?1 and isRead = ?2",  nativeQuery = true)
 	 public List<Notification> findByUserIdAndIs_read(long user_id,boolean state);
 	 
 }

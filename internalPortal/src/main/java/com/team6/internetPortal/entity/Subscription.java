@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,6 +26,30 @@ public class Subscription {
 		super();
 		this.id = id;
 		this.category = category;
+		this.subscriber = subscriber;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public User getSubscriber() {
+		return subscriber;
+	}
+
+	public void setSubscriber(User subscriber) {
 		this.subscriber = subscriber;
 	}
 	

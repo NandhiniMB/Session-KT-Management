@@ -57,4 +57,74 @@ public class Video {
 		this.category = category;
 	}
 
+	public Video() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public boolean isIs_archived() {
+		return is_archived;
+	}
+
+	public void setIs_archived(boolean is_archived) {
+		this.is_archived = is_archived;
+	}
+
+	public Date getCreated_on() {
+		return created_on;
+	}
+
+	public void setCreated_on(Date created_on) {
+		this.created_on = created_on;
+	}
+
+	public Date getLast_modified_on() {
+		return last_modified_on;
+	}
+
+	public void setLast_modified_on(Date last_modified_on) {
+		this.last_modified_on = last_modified_on;
+	}
+
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	
+
 }

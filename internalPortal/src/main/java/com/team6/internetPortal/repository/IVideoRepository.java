@@ -10,14 +10,14 @@ public interface IVideoRepository extends JpaRepository<Video,Long> {
 
 //	public List<Video> findAllVideoByCategory(int id);
 
-	@Query(value = "SELECT * FROM video v WHERE v.category_id  = ?1 ", nativeQuery = true)
-	public List<Video> findbyCategory_Id(int id);
+	//@Query(value = "SELECT * FROM video v WHERE v.category_id  = ?1 ", nativeQuery = true)
+	public List<Video> findByCategoryId(int id);
 	
-	@Query(value = "SELECT * FROM video v WHERE v.creator_id  = :id ", nativeQuery = true)
-	public List<Video> findbyCreator_Id(@Param("id")int id);
+	//@Query(value = "SELECT * FROM video v WHERE v.creator_id  = :id ", nativeQuery = true)
+	public List<Video> findByCreatorId(long id);
 
 	@Query(value = "SELECT * FROM video v join subscription s on v.category_id  = s.category_id where s.subscriber_id=:id ", nativeQuery = true)
-	public List<Video> findbySubscription(int id);
+	public List<Video> findBySubscription(long id);
 
 	
 	

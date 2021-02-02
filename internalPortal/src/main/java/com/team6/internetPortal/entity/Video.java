@@ -6,16 +6,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "video")
 public class Video {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@Lob
+    private byte[] data;
+
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
 
 	@Column
 	private String title;
@@ -40,23 +51,28 @@ public class Video {
 
 	@ManyToOne
 	private Category category;
-	
-	
 
-	public Video(String title, String description, boolean is_archived, Date created_on, Date last_modified_on,
-			User creator, Category category) {
-
+	public Video(byte[] data, String title, String description, boolean isArchived, Date createdOn, Date lastModifiedOn,
+			String status, User creator, Category category) {
+		super();
+		this.data = data;
 		this.title = title;
 		this.description = description;
-		this.isArchived = is_archived;
-		this.createdOn = created_on;
-		this.lastModifiedOn = last_modified_on;
+		this.isArchived = isArchived;
+		this.createdOn = createdOn;
+		this.lastModifiedOn = lastModifiedOn;
+		this.status = status;
 		this.creator = creator;
 		this.category = category;
 	}
 
 	public Video() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Video(byte[] data) {
+		// TODO Auto-generated constructor stub
+		this.data=data;
 	}
 
 	public long getId() {

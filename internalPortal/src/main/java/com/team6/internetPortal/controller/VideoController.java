@@ -1,17 +1,22 @@
 package com.team6.internetPortal.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.team6.internalPortal.payload.UploadFileResponse;
 import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.service.IVideoService;
 
@@ -59,4 +64,29 @@ public class VideoController {
 	{
 		return videoService.getVideoBySubscription(subscriber_id);
 	}
+	
+    @PostMapping("/saveVideoData")
+    @CrossOrigin(origins="http://localhost:4200")
+    public int UploadVideoData(@RequestBody Video dbfile) {
+    	dbfile.setCreatedOn(new Date(System.currentTimeMillis()));
+    	dbfile.setLastModifiedOn(new Date(System.currentTimeMillis()));
+    	System.out.println(dbfile);
+    	int rows=videoService.savefile(dbfile);
+    	return rows;
+    }
+    
+    @PostMapping("/uploadFile")
+    @CrossOrigin(origins="http://localhost:4200")
+    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+      Video dbFile = videoService.storeFile(file);
+      System.out.println("========================="+file.getSize()+"=======================");
+//      String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//              .path("/downloadFile/")
+//              .path(""+dbFile.getId())
+//              .toUriString();        
+//      return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
+//              file.getContentType(), file.getSize());        
+      return new UploadFileResponse(dbFile.getTitle(),dbFile.getDescription(),dbFile.getId());
+//      return dbFile.getTitle()+" "+dbFile.getDescription();
+  }
 }

@@ -3,11 +3,13 @@ package com.team6.internetPortal.service.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.team6.internetPortal.entity.Comment;
 import com.team6.internetPortal.repository.ICommentRepository;
 import com.team6.internetPortal.service.ICommentService;
 
+@Service
 public class CommentService implements ICommentService {
 
 	    @Autowired
@@ -22,7 +24,6 @@ public class CommentService implements ICommentService {
 	    public Optional<Comment> getComment(Long vid){
 	        return userCommentsRepository.findByVideoId(vid);
 	    }
-	    
 
 		@Override
 		public Optional<Comment> findByCommentId(Long id) {

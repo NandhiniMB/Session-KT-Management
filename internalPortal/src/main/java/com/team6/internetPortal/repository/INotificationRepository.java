@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.team6.internetPortal.entity.Notification;
 
 @Repository
-public interface INotificationRepository extends JpaRepository<Notification, Integer> {
+public interface INotificationRepository extends JpaRepository<Notification, Long> {
 	
 	
 	 @Query(value= "select * from notification  where user_id= ?1 and isRead = ?2",  nativeQuery = true)

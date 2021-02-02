@@ -1,4 +1,4 @@
-package com.team6.internalPortal.payload;
+package com.team6.internetPortal.payload;
 
 public class UploadFileResponse {
 	private String title;

@@ -1,4 +1,4 @@
-package com.team6.internalPortal.exception;
+package com.team6.internetPortal.exception;
 
 public class FileStorageException extends RuntimeException {
     public FileStorageException(String message) {

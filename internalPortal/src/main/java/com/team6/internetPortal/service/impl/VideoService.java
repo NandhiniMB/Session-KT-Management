@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.team6.internalPortal.exception.FileStorageException;
-import com.team6.internalPortal.exception.MyFileNotFoundException;
+import com.team6.internetPortal.exception.FileStorageException;
+import com.team6.internetPortal.exception.MyFileNotFoundException;
 import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.repository.IVideoRepository;
 import com.team6.internetPortal.service.IVideoService;

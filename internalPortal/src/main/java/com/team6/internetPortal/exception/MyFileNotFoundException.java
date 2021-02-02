@@ -1,4 +1,4 @@
-package com.team6.internalPortal.exception;
+package com.team6.internetPortal.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

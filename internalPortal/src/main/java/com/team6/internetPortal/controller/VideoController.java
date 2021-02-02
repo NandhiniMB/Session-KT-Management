@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.team6.internalPortal.payload.UploadFileResponse;
+import com.team6.internetPortal.payload.UploadFileResponse;
 import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.service.IVideoService;
 

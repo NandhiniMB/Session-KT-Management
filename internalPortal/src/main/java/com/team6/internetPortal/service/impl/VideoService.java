@@ -6,16 +6,22 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.team6.internalPortal.exception.FileStorageException;
+import com.team6.internalPortal.exception.MyFileNotFoundException;
 import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.repository.IVideoRepository;
 import com.team6.internetPortal.service.IVideoService;
+
 
 @Service
 public class VideoService implements IVideoService{
 	
 	@Autowired
 	private IVideoRepository videoRepository;
+	
 	public List<Video> getVideoByCategory(int id){
 		//return videoRepository.findbyCategoryId(id);
 		return videoRepository.findByCategoryId(id);
@@ -53,4 +59,30 @@ public class VideoService implements IVideoService{
 
 		return videoRepository.findById(id);
 	};
+	
+	public Video storeFile(MultipartFile file) {
+        // Normalize file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file's name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+            }
+            Video dbfile = new Video(file.getBytes());
+            return videoRepository.save(dbfile);
+        } catch (Exception ex) {
+            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+}
+    
+    public int savefile(Video dbfile) {
+    	System.out.println(dbfile);
+    	return videoRepository.update(dbfile.getId(),dbfile.getTitle(),dbfile.getDescription(),dbfile.getCreatedOn(),dbfile.getLastModifiedOn());
+    }
+
+    public Video getFile(long fileId) {
+        return videoRepository.findById(fileId)
+                .orElseThrow(() -> new MyFileNotFoundException("File not found with id " + fileId));
+    }
 }

@@ -1,1 +1,72 @@
-<p>play-video works!</p>
+<p>view works!</p>
+<!-- <br/> -->
+
+<!-- <input type="file" accept="video/*" (change)="onSelectedFile($event)"> -->
+<!-- 
+<video 
+  *ngIf="prev_url" 
+  [src]="prev_url" 
+  style="width:300px; height:300px;" 
+  controls>
+</video> -->
+
+<div class="center">
+    
+    <div>
+    
+	<video id="my_video_1" class="video-js vjs-default-skin" *ngIf="prev_url" 
+        [src]="prev_url"  width="750px" height="450px" controls autoplay preload="none"
+		poster=''
+        data-setup='{"aspectRatio":"750:450"}'>
+    </video>
+    <br/>
+    <br>
+<strong class = "title">Title: {{ videoDTO.title }}</strong>
+    <br>
+    <br>
+    <div>   
+	<button mat-stroked-button (click)="playPause()">Play/Pause</button>
+	<button mat-stroked-button (click)="makeBig()">Big</button>
+	<button mat-stroked-button (click)="makeSmall()">Small</button>
+	<button mat-stroked-button (click)="makeNormal()">Normal</button>
+	<button mat-stroked-button (click)="restart();">Restart</button>
+	<button mat-stroked-button (click)="skip(-10)">Rewind</button>
+    <button mat-stroked-button (click)="skip(10)">Fastforward</button>
+   
+    </div>
+
+    <button mat-raised-button color="primary" style="margin:1em" (click)="like()">Like</button>
+
+    <mat-form-field class="example-full-width" class="center">
+        <mat-label>Leave a comment</mat-label>
+        <textarea matInput placeholder="" [(ngModel)]="comment_text" ></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" style="margin:1em" (click)="comment()">Submit comment</button>
+</div>
+<span>
+<strong>Description: </strong>{{ videoDTO.description }}
+</span>
+</div> 
+
+
+
+
+
+
+
+<!-- <mat-video title="My Tutorial Title" [autoplay]="true" [preload]="true" [fullscreen]="true" [download]="false" color="accent" spinner="spin" poster="https://www.google.com/search?q=elon+musk&tbm=isch&source=iu&ictx=1&fir=E7BGk_A6xUNhWM%252CjdoFIDSmojwfYM%252C%252Fm%252F03nzf1&vet=1&usg=AI4_-kQblVaceMukPP9rbjFkJ1ERzzW3yw&sa=X&ved=2ahUKEwinn6eH08ruAhXN4zgGHZ4pB9oQ_B16BAgtEAE#imgrc=E7BGk_A6xUNhWM">
+    <source matVideoSource src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+    <source src="tutorial.webm" type="https://vjs.zencdn.net/v/oceans.webm">
+    <track matVideoTrack src="subtitles_en.vtt" kind="subtitles" srclang="en" label="English">
+    <track src="subtitles_no.vtt" kind="subtitles" srclang="no" label="Norwegian">
+  </mat-video>
+ -->
+
+<!-- 
+<div class="video">
+	<video controls (click)="toggleVideo()" #videoPlayer>
+		<source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
+		Browser not supported
+	</video>
+</div> -->

@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   user: User = new User();
   
   message: String = '';
-
+  email: String;
   constructor(private service: RegistrationService, private router: Router) { }
 
   ngOnInit(): void {
@@ -34,10 +34,13 @@ export class LoginComponent implements OnInit {
 
   loginUser() {
     // if(this.user.email !== '' || this.user.password !== ''){
+      // console.log(this.user);
       this.service.loginUserFromRemote(this.user).subscribe(
         data => { 
           console.log("Response Received");
-          this.router.navigate(['/home']);
+          this.email = this.user.email;
+          console.log(this.email);
+          this.router.navigate(['/home', this.email]);
         },
         error => {
           this.message = "Bad Credentials! Please try again with correct credentials!";

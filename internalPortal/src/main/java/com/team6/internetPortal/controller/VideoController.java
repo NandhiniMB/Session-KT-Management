@@ -1,10 +1,16 @@
 package com.team6.internetPortal.controller;
 
+import java.net.MalformedURLException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import com.team6.internetPortal.dto.VideoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,18 +26,26 @@ import com.team6.internetPortal.payload.UploadFileResponse;
 import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.service.IVideoService;
 
+import javax.swing.text.html.Option;
+
 @RestController
-@RequestMapping("video")
+@RequestMapping(value = "video")
 public class VideoController {
 
 	@Autowired
 	private IVideoService videoService;
 	
 	
-	@GetMapping("/{id}") 
-	public Optional<Video> getVideo(@PathVariable long id)
-	{
+	@GetMapping("/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public VideoDTO getVideo(@PathVariable long id) throws MalformedURLException {
 		return videoService.getVideo(id);
+	}
+
+	@GetMapping("/getAll")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Video> getAll(){
+		return videoService.findAll();
 	}
 	
 	@PostMapping("/{id}") 

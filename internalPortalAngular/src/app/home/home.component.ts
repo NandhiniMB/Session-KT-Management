@@ -15,6 +15,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { DomSanitizer } from '@angular/platform-browser';
 import { VideoDTO } from '../Models/VideoDTO';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit{
 
   prev_url: any;
 
-  constructor(private router: Router, private videoService: VideoDetailsService, private sanitizer : DomSanitizer) { }
+  constructor(private router: Router, private videoService: VideoDetailsService, private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.videoService.getAll().subscribe(resp => {
@@ -51,6 +52,9 @@ export class HomeComponent implements OnInit{
       console.log(resp);
       this.prev_url = "data:video/mp4;base64," + videoDTO.data;
       console.log("hi");
+      // this.sharedService.setPrevUrl(this.prev_url);
+      this.sharedService.setVideoDTO(videoDTO);
+      this.router.navigate(['/playVideo',id]);
       
     });
     // this.router.navigate(['/playVideo',id]);

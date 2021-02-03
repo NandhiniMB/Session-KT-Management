@@ -7,6 +7,7 @@ import { User } from '../Models/User';
 import {Admin} from '../Models/Admin';
 // import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-login',
@@ -28,10 +29,12 @@ export class LoginComponent implements OnInit {
   user: User = new User();
  
   message: String = '';
+
 // <<<<<<< HEAD
  
+// =======================================================================
 
-  constructor(private Regservice: RegistrationService,private router: Router) { }
+  constructor(private Regservice: RegistrationService,private router: Router, private sharedService: SharedService) { }
 // =======
 //   email: String;
 //   constructor(private service: RegistrationService, private router: Router) { }
@@ -48,6 +51,7 @@ export class LoginComponent implements OnInit {
           this.user=data;
           console.log("Response Received"+this.user.email);
           console.log("Response Received"+this.user.id);
+          this.sharedService.setUserId(this.user.id);
           this.Regservice.setUser(this.user);
           this.router.navigate(['/home']);
 // =======

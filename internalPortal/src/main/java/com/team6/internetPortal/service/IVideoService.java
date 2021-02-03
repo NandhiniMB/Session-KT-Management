@@ -34,4 +34,8 @@ public interface IVideoService{
 	
 	public Video getFile(long fileId);
 
+	public List<Video> getReportedVideo();
+
+	public List<Video> getPendingVideos();
+
 }

@@ -1,8 +1,10 @@
 package com.team6.internetPortal.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.team6.internetPortal.entity.Report;
+import com.team6.internetPortal.entity.Video;
 
 public interface IReportService {
 
@@ -18,4 +20,8 @@ public interface IReportService {
 	    public Report getByUserId(Long id);
 	    //get by vid id
 	    public Optional<Report> getByVid(Long id);
+	    
+	    public List<Report> getReportedVideo();
+
+		public void deleteVideo(long id);
 }

@@ -18,7 +18,7 @@
           <mat-select>
             <!-- <mat-option *ngFor="let food of foods" [value]="food.value"> {{food.viewValue}}</mat-option> -->
             <mat-option>My Profile</mat-option>
-            <mat-option (click) = "loginUser()">Log Out</mat-option>
+            <mat-option (click) = "logoutUser()">Log Out</mat-option>
           </mat-select>
         </mat-select-trigger>
       </div>
@@ -81,7 +81,7 @@
       <!-- <a *ngIf="(user.isAdmin == 1)"mat-list-item [routerLink]="'/'">Manage Videos </a>
       <a *ngIf="(user.isAdmin == 1)"mat-list-item [routerLink]="'/'"> Reported Videos </a> -->
      
-      <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item (click)="sidenav.toggle()">Close</a>
+      <!-- <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item (click)="sidenav.toggle()">Close</a> -->
 
     </mat-nav-list>
   </mat-sidenav>

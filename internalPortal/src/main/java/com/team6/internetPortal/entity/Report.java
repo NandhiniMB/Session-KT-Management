@@ -26,14 +26,8 @@ public class Report {
 	@ManyToOne
 	private User user;
 
-	public Report(int id, Comment comment, Video video, User user) {
-		super();
-		this.id = id;
-		this.comment = comment;
-		this.video = video;
-		this.user = user;
-	}
-
+	
+	
 	public long getId() {
 		return id;
 	}
@@ -65,6 +59,20 @@ public class Report {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public Report(int id, Comment comment, Video video, User user) {
+		super();
+		this.id = id;
+		this.comment = comment;
+		this.video = video;
+		this.user = user;
+	}
+
+	public Report() {
+		
+	}
+
+	
 	
 
 }

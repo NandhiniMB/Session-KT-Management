@@ -113,4 +113,16 @@ public class VideoService implements IVideoService{
         return videoRepository.findById(fileId)
                 .orElseThrow(() -> new MyFileNotFoundException("File not found with id " + fileId));
     }
+
+	@Override
+	public List<Video> getReportedVideo() {
+		
+		return videoRepository.findReportedVideos();
+	}
+
+	@Override
+	public List<Video> getPendingVideos() {
+		// TODO Auto-generated method stub
+		return videoRepository.findPendingVideos("PENDING");
+	}
 }

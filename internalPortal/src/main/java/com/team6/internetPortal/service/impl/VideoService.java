@@ -1,9 +1,11 @@
 package com.team6.internetPortal.service.impl;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.team6.internetPortal.dto.VideoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -21,7 +23,15 @@ public class VideoService implements IVideoService{
 	
 	@Autowired
 	private IVideoRepository videoRepository;
-	
+
+	@Autowired
+	private DocumentServiceImpl documentService;
+
+	@Override
+	public List<Video> findAll() {
+		return videoRepository.findAll();
+	}
+
 	public List<Video> getVideoByCategory(int id){
 		//return videoRepository.findbyCategoryId(id);
 		return videoRepository.findByCategoryId(id);
@@ -54,11 +64,26 @@ public class VideoService implements IVideoService{
 		
 		videoRepository.deleteById(id);
 	}
-	@Override
-	public Optional<Video> getVideo(long id) {
 
-		return videoRepository.findById(id);
-	};
+	@Override
+	public VideoDTO getVideo(long id) {
+
+		Optional<Video> optional = videoRepository.findById(id);
+		if(optional.isPresent()){
+			Video video = optional.get();
+			byte[] bytes = documentService.retrieveFile(video.getPath());
+			String data = Base64.getEncoder().encodeToString(bytes);
+			return new VideoDTO(video, data);
+		}
+		return null;
+	}
+
+//	@Override
+//	public Video getVideo(long id){
+//		return videoRepository.findById(id).get();
+//	}
+
+
 	
 	public Video storeFile(MultipartFile file) {
         // Normalize file name
@@ -69,7 +94,10 @@ public class VideoService implements IVideoService{
             if(fileName.contains("..")) {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
-            Video dbfile = new Video(file.getBytes());
+            String path = documentService.saveFile(file, file.getOriginalFilename());
+            Video dbfile = new Video();
+            dbfile.setPath(path);
+			System.out.println(path);
             return videoRepository.save(dbfile);
         } catch (Exception ex) {
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);

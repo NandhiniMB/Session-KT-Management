@@ -2,5 +2,13 @@
     "/admin/": {
       "target": "http://localhost:8080/",
       "secure": false
+    },
+    "/category/":{
+        "target" : "http://localhost:8080",
+        "secure" : false
+    },
+    "/uploadFile/":{
+        "target" : "http://localhost:8080",
+        "secure" : false
     }
-  }
+}

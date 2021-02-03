@@ -17,16 +17,19 @@ public class Video {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Lob
-    private byte[] data;
+//	@Lob
+//    private byte[] data;
 
-	public byte[] getData() {
-		return data;
-	}
+	@Column
+	private String path;
 
-	public void setData(byte[] data) {
-		this.data = data;
-	}
+//	public byte[] getData() {
+//		return data;
+//	}
+//
+//	public void setData(byte[] data) {
+//		this.data = data;
+//	}
 
 	@Column
 	private String title;
@@ -52,10 +55,10 @@ public class Video {
 	@ManyToOne
 	private Category category;
 
-	public Video(byte[] data, String title, String description, boolean isArchived, Date createdOn, Date lastModifiedOn,
+	public Video(String path, String title, String description, boolean isArchived, Date createdOn, Date lastModifiedOn,
 			String status, User creator, Category category) {
 		super();
-		this.data = data;
+		this.path = path;
 		this.title = title;
 		this.description = description;
 		this.isArchived = isArchived;
@@ -70,9 +73,9 @@ public class Video {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Video(byte[] data) {
+	public Video(String path) {
 		// TODO Auto-generated constructor stub
-		this.data=data;
+		this.path=path;
 	}
 
 	public long getId() {
@@ -146,7 +149,12 @@ public class Video {
 		this.category = category;
 	}
 
-	
-	
 
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
 }

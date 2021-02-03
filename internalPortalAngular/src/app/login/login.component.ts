@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           console.log("Response Received"+this.user.email);
           console.log("Response Received"+this.user.id);
           this.Regservice.setUser(this.user);
-          this.router.navigate(['/home',this.user.email]);
+          this.router.navigate(['/home']);
 // =======
 //       // console.log(this.user);
 //       this.service.loginUserFromRemote(this.user).subscribe(

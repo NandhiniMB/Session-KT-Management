@@ -59,6 +59,7 @@ public class UserController {
 	                throw new Exception("Your Email Id is not registered :(");
 	            }
 	        }
+	        System.out.println("+++++++++++"+userCheck.getId());
 	        return userCheck;
 	    }
 

@@ -1,0 +1,100 @@
+<div class="menu">
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon  (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <h1>  Internal Portal</h1>
+     <mat-form-field  floatLabel="never" style="left: 80px; width: 60%;"> 
+      <input matInput placeholder="Search"><i class="material-icons">search</i>
+    </mat-form-field>
+
+    <div class = "notify_icon">
+        <mat-icon  matBadge="20" matBadgeColor="white">circle_notifications</mat-icon>
+    </div>
+    <div class="user_icon">
+        <mat-select-trigger>
+          <mat-icon>account_circle</mat-icon>
+          <mat-select>
+            <!-- <mat-option *ngFor="let food of foods" [value]="food.value"> {{food.viewValue}}</mat-option> -->
+            <mat-option>My Profile</mat-option>
+            <mat-option (click) = "loginUser()">Log Out</mat-option>
+          </mat-select>
+        </mat-select-trigger>
+      </div>
+  </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+
+     
+
+<mat-nav-list class="list-container">
+  <a mat-list-item routerLink="/home" routerLinkActive="active-link" (click)="sidenav.toggle()">
+    <span class="material-icons">home</span>
+    <a mat-list-item> Home </a>
+  </a> 
+</mat-nav-list>
+<mat-nav-list class="list-container">
+  <a mat-list-item [routerLink]="'/subs'" (click)="sidenav.toggle()" >
+    <span class="material-icons">subscriptions</span>
+    <a mat-list-item > My Subscriptions </a>
+  </a> 
+</mat-nav-list>
+<mat-nav-list class="list-container">
+  <a mat-list-item [routerLink]="'/videos'" (click)="sidenav.toggle()">
+    <span class="material-icons">video_library</span>
+    <a mat-list-item > My Videos </a>
+  </a> 
+</mat-nav-list>
+<mat-nav-list class="list-container">
+  <a mat-list-item  [routerLink]="['/home/categories']" (click)="sidenav.toggle()">
+    <span class="material-icons">category</span>
+    <a mat-list-item> Categories </a>
+  </a> 
+</mat-nav-list>
+<mat-nav-list class="list-container">
+  <a mat-list-item  [routerLink]="['/home/upload']" (click)="sidenav.toggle()" routerLinkActive="active-link">
+    <span class="material-icons">publish</span>
+    <a mat-list-item > Upload Video </a>
+  </a> 
+</mat-nav-list>
+
+      
+      
+     
+
+      <ng-container *ngFor="let admin of admins; index as i; first as isFirst">
+          <mat-nav-list *ngIf="(user.id == admin.user.id)" class="list-container">
+          <a mat-list-item  [routerLink]="['/home/maintain']" (click)="sidenav.toggle()">
+            <span class="material-icons">video_settings</span>
+            <a mat-list-item > Manage Video </a>
+          </a> 
+        </mat-nav-list>
+      </ng-container>
+      <!-- <a mat-list-item [routerLink]="'/create-activity'"> Create Activity </a> -->
+
+      <!-- <a *ngIf="(user.isAdmin == 1)"mat-list-item [routerLink]="'/'">Manage Videos </a>
+      <a *ngIf="(user.isAdmin == 1)"mat-list-item [routerLink]="'/'"> Reported Videos </a> -->
+     
+      <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item (click)="sidenav.toggle()">Close</a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  
+  <mat-sidenav-content style="height: 88vh;">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-content>
+ 
+</mat-sidenav-container>
+<!-- 
+<div fxLayout="row" fxFlex="100">
+ <app-sidebar fxLayout="column" fxFlex="300px"></app-sidebar>
+ 
+</div> -->

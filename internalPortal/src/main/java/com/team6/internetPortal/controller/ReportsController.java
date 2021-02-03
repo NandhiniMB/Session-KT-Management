@@ -1,25 +1,43 @@
 package com.team6.internetPortal.controller;
 
 
+import java.net.MalformedURLException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team6.internetPortal.entity.Report;
+import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.service.IReportService;
 
 @RestController
+@RequestMapping(value = "report")
 public class ReportsController
 {
     @Autowired
     IReportService reportsService;
 
+    
+    @DeleteMapping("/{id}")
+	public void deleteVideo(@PathVariable long id)
+	{
+    	reportsService.deleteVideo(id);
+		return ;
+	}
 
+    @GetMapping("/video")
+	public List<Report> getReportedVideos() throws MalformedURLException {
+		return reportsService.getReportedVideo();
+	}
+	
     @PostMapping("/reports")
     public Report saveReport(@RequestBody Report report){
 

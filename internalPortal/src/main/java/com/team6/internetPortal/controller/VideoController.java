@@ -42,10 +42,17 @@ public class VideoController {
 		return videoService.getVideo(id);
 	}
 
+	
 	@GetMapping("/getAll")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public List<Video> getAll(){
 		return videoService.findAll();
+	}
+	
+	
+	@GetMapping("/pending")
+	public List<Video> getPendingVideos(){
+		return videoService.getPendingVideos();
 	}
 	
 	@PostMapping("/{id}") 

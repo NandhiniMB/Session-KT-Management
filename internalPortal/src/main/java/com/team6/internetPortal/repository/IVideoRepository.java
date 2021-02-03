@@ -31,6 +31,17 @@ public interface IVideoRepository extends JpaRepository<Video,Long> {
 	@Query("update Video db set db.title=:title,db.description=:description, db.createdOn=:created_on, db.lastModifiedOn=:last_modified_on where db.id=:id")
 	public int update(@Param("id") Long id,@Param("title") String title,@Param("description") String description, 
 			 @Param("created_on") Date created_on,@Param("last_modified_on") Date last_modified_on);
+
+	
+	
+	@Query(value = "SELECT * FROM video v  join report r on r.video_id = v.id", nativeQuery = true)
+	public List<Video> findReportedVideos();
+
+	
+	@Query(value = "SELECT * FROM video v  where v.status = :status" ,nativeQuery = true)
+	public List<Video> findPendingVideos(@Param("status") String status);
+
+
 	
 	
 

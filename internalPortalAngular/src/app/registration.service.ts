@@ -18,9 +18,14 @@ export class RegistrationService {
   public setUser(user:User){
     
     this.user = user;
+    localStorage.setItem('user',JSON.stringify(this.user));
   }
   public getUser(){
-    return this.user;
+    return localStorage.getItem('user');
+  }
+
+  public removeUser(){
+    localStorage.removeItem('user');
   }
   public loginUserFromRemote(user: User): Observable<any>{
     // console.log("remote" + user.email + user.password);

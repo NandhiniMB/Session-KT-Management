@@ -1,11 +1,13 @@
 package com.team6.internetPortal.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team6.internetPortal.entity.Report;
+import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.repository.IReportsRepository;
 import com.team6.internetPortal.service.IReportService;
 
@@ -42,7 +44,17 @@ public class ReportsService implements IReportService
         return reportsRepository.findByVideoId(id);
     }
 
+    @Override
+	public List<Report> getReportedVideo() {
+		
+		return reportsRepository.findReportedVideos();
+	}
 
+	@Override
+	public void deleteVideo(long id) {
+		this.reportsRepository.deleteById(id);
+		
+	}
 
 
 

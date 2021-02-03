@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
   admins : Array<Admin>;
   user  : User = new User()
   ngOnInit(): void {
-  this.user = this.RegService.getUser()
+  this.user = JSON.parse(this.RegService.getUser());
   console.log(this.user.id);
   console.log(this.user.email);
   this.AdminService.getAdminList().subscribe(admins => {
@@ -26,7 +26,9 @@ export class MenuComponent implements OnInit {
     }
 )
   }
-  public loginUser() {
+  public logoutUser() {
+
+    this.RegService.removeUser();
     this.router.navigate(['/login']);
     console.log("navigated to login page");
    

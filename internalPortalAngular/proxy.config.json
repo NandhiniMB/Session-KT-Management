@@ -10,5 +10,17 @@
     "/uploadFile/":{
         "target" : "http://localhost:8080",
         "secure" : false
+    },
+    "/report/video":{
+        "target" : "http://localhost:8080/",
+        "secure" : false
+    },
+    "/video/":{
+        "target" : "http://localhost:8080/",
+        "secure" : false
+    },
+    "/report/":{
+        "target" : "http://localhost:8080/",
+        "secure" : false
     }
 }

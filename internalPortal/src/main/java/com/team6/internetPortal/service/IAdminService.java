@@ -1,11 +1,9 @@
 package com.team6.internetPortal.service;
 
-import java.util.List;
-
-import com.team6.internetPortal.entity.Admin;
+import java.util.Set;
 
 public interface IAdminService {
 
 	
-	public List<Admin> getAllAdmin();
+	public Set<String> getAllAdmin();
 }

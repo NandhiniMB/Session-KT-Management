@@ -5,9 +5,9 @@
       <mat-icon  (click)="sidenav.toggle()">menu</mat-icon>
     </button>
     <h1>  Internal Portal</h1>
-     <mat-form-field  floatLabel="never" style="left: 80px; width: 60%;"> 
+     <!-- <mat-form-field  floatLabel="never" style="left: 80px; width: 60%;"> 
       <input matInput placeholder="Search"><i class="material-icons">search</i>
-    </mat-form-field>
+    </mat-form-field> -->
 
     <div class = "notify_icon">
         <mat-icon  matBadge="20" matBadgeColor="white">circle_notifications</mat-icon>
@@ -69,7 +69,7 @@
      
 
       <ng-container *ngFor="let admin of admins; index as i; first as isFirst">
-          <mat-nav-list *ngIf="(user.id == admin.user.id)" class="list-container">
+          <mat-nav-list *ngIf="(user.email == admin)" class="list-container">
           <a mat-list-item  [routerLink]="['/home/maintain']" (click)="sidenav.toggle()">
             <span class="material-icons">video_settings</span>
             <a mat-list-item > Manage Video </a>

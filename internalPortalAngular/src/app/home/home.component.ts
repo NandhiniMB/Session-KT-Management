@@ -13,9 +13,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginUser() {
-    this.router.navigate(['/login']);
-    console.log("navigated to login page");
-  }
+  // loginUser() {
+  //   this.router.navigate(['/login']);
+  //   console.log("navigated to login page");
+  // }
 
 }

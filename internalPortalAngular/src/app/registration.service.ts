@@ -11,12 +11,20 @@ export class RegistrationService {
 
   LOGIN = "/login";
   REGISTER = "/register";
-
+  
   constructor(private http: HttpClient) { }
+  user:User = new User();
 
+  public setUser(user:User){
+    
+    this.user = user;
+  }
+  public getUser(){
+    return this.user;
+  }
   public loginUserFromRemote(user: User): Observable<any>{
     // console.log("remote" + user.email + user.password);
-    return this.http.post("http://localhost:8080" + this.LOGIN, user);
+   return this.http.post("http://localhost:8080" + this.LOGIN, user);
   }
 
   public registerUserFromRemote(user: User): Observable<any> {

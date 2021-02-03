@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { RegistrationService } from '../registration.service';
+import {AdminService} from '../service/admin.service';
 import { User } from '../Models/User';
+import {Admin} from '../Models/Admin';
 // import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 
@@ -24,19 +26,23 @@ export class LoginComponent implements OnInit {
   ]);
 
   user: User = new User();
-  
+ 
   message: String = '';
+ 
 
-  constructor(private service: RegistrationService, private router: Router) { }
+  constructor(private Regservice: RegistrationService,private router: Router) { }
 
   ngOnInit(): void {
   }
 
   loginUser() {
     // if(this.user.email !== '' || this.user.password !== ''){
-      this.service.loginUserFromRemote(this.user).subscribe(
+      this.Regservice.loginUserFromRemote(this.user).subscribe(
         data => { 
-          console.log("Response Received");
+          this.user=data;
+          console.log("Response Received"+this.user.email);
+          console.log("Response Received"+this.user.id);
+          this.Regservice.setUser(this.user);
           this.router.navigate(['/home']);
         },
         error => {
@@ -44,7 +50,8 @@ export class LoginComponent implements OnInit {
           console.log("Exception Occurred");
         }
       );
-    // }
+
+
   }
 
   registerUser(){

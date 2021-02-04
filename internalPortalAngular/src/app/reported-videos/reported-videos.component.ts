@@ -63,7 +63,7 @@ export class ReportedVideosComponent implements OnInit {
    console.log(this.report);
   }
 
-  displayedColumns: String[] = ['id', 'title','description', 'category', 'uploadTime','creator','reporter', 'play' ,'edit', 'delete'];
+  displayedColumns: String[] = ['id', 'title','description', 'category', 'uploadTime','creator', 'play' , 'delete'];
   //displayedColumns: String[] = ['id', 'title','description', 'category', 'uploadTime','uploadBy','reportBy', 'play'];
   dataSource = this.report;
   }

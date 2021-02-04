@@ -13,6 +13,7 @@ export class VideoDetailsService {
   GET_ALL_WORDS = '/getAll';
   GET_VIDEO = '/getVideo';
   BASE_URL='http://localhost:8080/video';
+  GET_CATEGORY='/category/';
 
   file:File;
 
@@ -28,6 +29,10 @@ export class VideoDetailsService {
 
   getAll(): Observable<any> {
     return this.http.get(this.BASE_URL + this.GET_ALL_WORDS);
+  }
+
+  getAllCategory(): Observable<any>{
+    return this.http.get('http://localhost:8080'+this.GET_CATEGORY);
   }
 
   public getVideo(id: Number): Observable<Object>{

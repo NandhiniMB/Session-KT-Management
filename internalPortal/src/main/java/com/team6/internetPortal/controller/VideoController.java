@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import com.team6.internetPortal.constants.Constants.status;
 import com.team6.internetPortal.dto.VideoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.UrlResource;
@@ -84,6 +85,7 @@ public class VideoController {
     public int UploadVideoData(@RequestBody Video dbfile) {
     	dbfile.setCreatedOn(new Date(System.currentTimeMillis()));
     	dbfile.setLastModifiedOn(new Date(System.currentTimeMillis()));
+    	dbfile.setStatus(status.PENDING.toString());
     	System.out.println(dbfile);
     	int rows=videoService.savefile(dbfile);
     	return rows;

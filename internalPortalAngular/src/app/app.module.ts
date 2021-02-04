@@ -19,6 +19,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginSuccessComponent } from './login-success/login-success.component';
 import { HomeComponent } from './home/home.component';
 import { UploadVideoComponent } from './upload-video/upload-video.component';
+import { VideoStatusComponent } from './video-status/video-status.component';
+import { ReportedVideosComponent } from './reported-videos/reported-videos.component';
+import { CategoryComponent } from './category/category.component';
+import { PlayVideoComponent } from './play-video/play-video.component';
 
 import { MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -28,11 +32,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MainComponent } from './main/main.component';
 import { ManageVideoComponent } from './manage-video/manage-video.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import { VideoStatusComponent } from './video-status/video-status.component';
-import { ReportedVideosComponent } from './reported-videos/reported-videos.component';
-import { CategoryComponent } from './category/category.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { MatExpansionModule } from '@angular/material//expansion';
+import { FlexLayoutModule } from '@angular/flex-layout'
 
-import { PlayVideoComponent } from './play-video/play-video.component';
 // import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
@@ -71,7 +75,12 @@ import {MatTableDataSource} from '@angular/material/table';
     MatBadgeModule,
     MatSelectModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule,
+    MatGridListModule,
+    MatExpansionModule,
+    FlexLayoutModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent],

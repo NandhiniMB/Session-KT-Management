@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
-import {MenuComponent} from './menu/menu.component';
+import {MenuComponent, NotificationDialog} from './menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -33,10 +33,12 @@ import {MatListModule} from '@angular/material/list';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MatSelectModule } from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
+
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material//expansion';
-import { FlexLayoutModule } from '@angular/flex-layout';
+//import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 // import {AfterViewInit, Component, ViewChild} from '@angular/core';
@@ -59,7 +61,8 @@ import {MatTableDataSource} from '@angular/material/table';
     VideoStatusComponent,
     ReportedVideosComponent,
     CategoryComponent,
-    PlayVideoComponent
+    PlayVideoComponent,
+    NotificationDialog
   ],
   imports: [
     BrowserModule,
@@ -78,12 +81,13 @@ import {MatTableDataSource} from '@angular/material/table';
     MatSelectModule,
     MatTabsModule,
     MatTableModule,
+
+    MatDialogModule,
     MatCardModule,
     MatGridListModule,
     MatExpansionModule,
-    FlexLayoutModule,
     MatPaginatorModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

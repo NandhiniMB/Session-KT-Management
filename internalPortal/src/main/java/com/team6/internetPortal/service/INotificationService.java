@@ -8,6 +8,8 @@ public interface INotificationService {
 
 	public List<Notification> getUserUnreadNotification(long user_id,boolean state);
 
+	public Object markNotificationRead(Notification notificationRead);
+
 	
 
 	//public List<Notification> getNotification();

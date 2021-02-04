@@ -1,0 +1,39 @@
+.example-card {
+    max-width: 300px;
+    margin-bottom: 50px;
+    float: left;
+}
+// .table{
+//     z-index:4;
+// }
+
+.table {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: 60%;
+    height:100%;
+    overflow-y:scroll;
+    float:left;
+    margin-right: 15px;
+}
+tr.mat-row{
+    height:100px !important;
+}
+
+.second{
+    // margin-left: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    width:48%;
+    height:fit-content;
+    // display:inline;
+    float:right;
+}
+
+.one tr.mat-row{
+height: auto !important;
+}

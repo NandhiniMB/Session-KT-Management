@@ -19,6 +19,7 @@ export class VideoDetailsService {
   UPDATE_STATUS = '/video/updatestat';
   SEND_MAIL='/subs/sendmail';
   BASE_URL='http://localhost:8080/video';
+  GET_CATEGORY='/category/';
 
   file:File;
 
@@ -35,6 +36,15 @@ export class VideoDetailsService {
   public getAll(): Observable<any> {
     return this.http.get(this.BASE_URL + this.GET_ALL_VIDEOS);
   }
+
+  getAllCategory(): Observable<any>{
+    return this.http.get('http://localhost:8080'+this.GET_CATEGORY);
+  }
+
+  
+  // public getPending(): Observable<any> {
+  //   return this.http.get(this.GET_PENDING_VIDEOS);
+  // }
 
   public getAllApproved(): Observable<any> {
     return this.http.get(this.GET_APPROVED_VIDEOS);

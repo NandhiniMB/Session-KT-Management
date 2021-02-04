@@ -1,32 +1,26 @@
 package com.team6.internetPortal.controller;
 
 import java.net.MalformedURLException;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.logging.Logger;
 
-import com.team6.internetPortal.dto.VideoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.team6.internetPortal.payload.UploadFileResponse;
+import com.team6.internetPortal.dto.VideoDTO;
 import com.team6.internetPortal.entity.Video;
+import com.team6.internetPortal.payload.UploadFileResponse;
 import com.team6.internetPortal.service.IVideoService;
-
-import javax.swing.text.html.Option;
 
 @RestController
 @RequestMapping(value = "video")
@@ -50,9 +44,9 @@ public class VideoController {
 	}
 	
 	
-	@GetMapping("/pending")
-	public List<Video> getPendingVideos(){
-		return videoService.getPendingVideos();
+	@GetMapping("/approved")
+	public List<Video> getApprrovedVideos(){
+		return videoService.getApprovedVideos();
 	}
 	
 	@PostMapping("/{id}") 
@@ -110,4 +104,10 @@ public class VideoController {
       return new UploadFileResponse(dbFile.getTitle(),dbFile.getDescription(),dbFile.getId());
 //      return dbFile.getTitle()+" "+dbFile.getDescription();
   }
+    
+    @PutMapping("/updatestat")
+    public Video UpdateStatus(@RequestBody Video video) {
+    	
+    	return videoService.updateStatus(video);
+    }
 }

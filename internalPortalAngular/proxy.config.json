@@ -22,5 +22,9 @@
     "/report/":{
         "target" : "http://localhost:8080/",
         "secure" : false
+    },
+    "/subs/sendmail":{
+        "target" : "http://localhost:8080/",
+        "secure" : false
     }
 }

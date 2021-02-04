@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoDetailsService } from '../video-details.service';
 import { DBFile } from '../Models/dbfile';
-import { Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
-import { VideoDTO } from '../Models/VideoDTO';
-import { ReportService } from '../service/report.service';
+import {Category} from '../Models/Category';
+
 @Component({
   selector: 'app-video-status',
   templateUrl: './video-status.component.html',
@@ -17,7 +15,7 @@ export class VideoStatusComponent implements OnInit {
   video: Array<DBFile> = [];
   ngOnInit(): void {
 
-    this.VideoService.getPending().subscribe(resp => {
+    this.VideoService.getAll().subscribe(resp => {
       console.log(resp);
       this.video = resp;
     })
@@ -25,22 +23,29 @@ export class VideoStatusComponent implements OnInit {
     
   }
 
-  onApprove(id:Number)
+  onApprove(video:DBFile,category:Category)
   {
-    console.log(id);
-    //  this.VideoService.approveVideo(id).subscribe(resp => {
+    video.status="APPROVED";
+    video.category=new Category();
+    video.category.id=1;
+    this.VideoService.UpdateStatus(video).subscribe(resp => {
+      console.log(resp);
+    })
+    //Working mail
+    // this.VideoService.sendSubscriptionMail(video,category).subscribe(resp => { //send mail done need to get  category here
     //   console.log(resp);
-    //   this.video = resp;
     // })
+    
   }
-  onReject(id:Number){
-    console.log(id);
-    // this.VideoService.rejectVideo(id).subscribe(resp => {
-    //   console.log(resp);
-    //   this.video = resp;
-    // })
+
+  onReject(video:DBFile){
+    video.status="REJECTED";
+    this.VideoService.UpdateStatus(video).subscribe(resp => {
+      console.log(resp);
+    })
+    
   }
-  displayedColumns: String[] = ['id', 'title','description', 'category', 'uploadBy', 'uploadTime', 'play', 'status'];
+  displayedColumns: String[] = ['id', 'title','description', 'category', 'uploadBy', 'uploadTime', 'play', 'status', 'editStatus'];
   dataSource = this.video;
 
   

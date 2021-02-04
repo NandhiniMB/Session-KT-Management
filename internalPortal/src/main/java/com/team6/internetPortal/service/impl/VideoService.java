@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,10 +15,12 @@ import com.team6.internetPortal.dto.VideoDTO;
 import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.exception.FileStorageException;
 import com.team6.internetPortal.exception.MyFileNotFoundException;
+import com.team6.internetPortal.repository.INotificationRepository;
+import com.team6.internetPortal.repository.ISubscriptionRepository;
 import com.team6.internetPortal.repository.IVideoRepository;
 import com.team6.internetPortal.service.IVideoService;
 
-
+@Transactional
 @Service
 public class VideoService implements IVideoService{
 	
@@ -26,11 +29,17 @@ public class VideoService implements IVideoService{
 
 	@Autowired
 	private DocumentServiceImpl documentService;
+	
+	@Autowired
+	private INotificationRepository notificationRepository;
+	
+	@Autowired
+	private ISubscriptionRepository subscriptionRepository;
 
 	Constants c= new Constants();
 	@Override
 	public List<Video> findAll() {
-		return videoRepository.findApprovedVideos(c.status.APPROVED);
+		return videoRepository.findAll();
 	}
 
 	public List<Video> getVideoByCategory(int id){
@@ -122,8 +131,31 @@ public class VideoService implements IVideoService{
 	}
 
 	@Override
-	public List<Video> getPendingVideos() {
+	public List<Video> getApprovedVideos() {
 		// TODO Auto-generated method stub
-		return videoRepository.findPendingVideos(c.status.PENDING);
+		return videoRepository.findApprovedVideos(c.status.APPROVED);
+	}
+
+	@Override
+	public Video updateStatus(Video video) {
+		// TODO Auto-generated method stub
+		Video v = videoRepository.save(video);
+		System.out.println(v);
+		if(v.getStatus()==c.status.APPROVED)
+		{
+			
+			int[] subscribed_users_id = subscriptionRepository.findAllUserByCategory(v.getCategory().getId());
+			System.out.println("suser"+subscribed_users_id);
+			String description = "New Video "+v.getTitle()+"Published";
+			for(int i=0;i<subscribed_users_id.length;i++)
+			       {
+				
+				System.out.println(subscribed_users_id[i]);
+				     notificationRepository.postNotifications(subscribed_users_id[i],description);
+			    
+          		}
+		
+	}
+	return v;
 	}
 }

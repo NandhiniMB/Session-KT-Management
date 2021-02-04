@@ -21,6 +21,8 @@ public class NotificationService implements INotificationService {
 		return notificationRepository.findByUserIdAndIs_read(user_id,state);
 	}
 
+	
+
 //	@Override
 //	public List<Notification> getNotification() {
 //		return notificationRepository.findAll();

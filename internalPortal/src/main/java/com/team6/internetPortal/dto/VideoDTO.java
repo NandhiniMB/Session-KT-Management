@@ -36,6 +36,7 @@ public class VideoDTO {
     }
 
     public VideoDTO(Video video, String data) {
+        this.id = video.getId();
         this.category = video.getCategory();
         this.creator = video.getCreator();
         this.status = video.getStatus();

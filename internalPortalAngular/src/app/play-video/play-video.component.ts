@@ -4,6 +4,11 @@ import { ViewChild, ElementRef } from "@angular/core";
 import { DomSanitizer } from '@angular/platform-browser';
 import { SharedService } from '../shared.service';
 import { VideoDTO } from '../Models/VideoDTO';
+import { User } from '../Models/User';
+import { Like } from '../Models/like';
+import { RegistrationService } from '../registration.service';
+import { Comment } from '../Models/comment';
+import { PlayVideoService } from '../play-video.service';
 
 @Component({
   selector: 'app-play-video',
@@ -15,17 +20,23 @@ export class PlayVideoComponent implements OnInit {
   video: Blob = null;
   comment_text:string="";
   likeCount:number=0;
-  videoDTO: VideoDTO;
+  videoDTO: VideoDTO  = null;
   prev_url: any;
-  userId: Number;
+  user: User = null;
+  likedVid: Like;
+  commentedVid: Comment = null;
 
-  constructor( private videoService: VideoDetailsService, private sharedService: SharedService) { }
+  constructor( private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { }
 
   ngOnInit(): void {
     // this.prev_url = this.sharedService.getPrevUrl();
     this.videoDTO = this.sharedService.getVideoDTO();
     this.prev_url = "data:video/mp4;base64," + this.videoDTO.data;
-    this.userId = this.sharedService.getUserId();
+    // this.userId = this.sharedService.getUserId();
+    console.log(this.regservice.getUser());
+    this.user = JSON.parse(this.regservice.getUser());
+    console.log(this.user);
+    this.likedVid = new Like(this.videoDTO, this.user);
 
   }
 
@@ -69,13 +80,19 @@ export class PlayVideoComponent implements OnInit {
   }
 
   like(){
-    this.likeCount++;
-    
-    console.log(this.likeCount);
+    console.log(this.likedVid);
+    this.playVideoService.likeVideoFromRemote(this.likedVid).subscribe(resp => {
+      this.likeCount++;
+      console.log(this.likeCount);
+    })
   }
 
   comment(){
     console.log(this.comment_text);
+    this.commentedVid = new Comment(this.comment_text, this.user, this.videoDTO);
+    this.playVideoService.commentVideoFromRemote(this.commentedVid).subscribe(resp => {
+      console.log(this.commentedVid);
+    })
     this.comment_text="";
   }
 

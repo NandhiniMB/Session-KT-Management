@@ -1,6 +1,6 @@
-<h1 mat-dialog-title><mat-icon style=" font-size: 30px; color: indigo;">
-    mark_email_unread
-   </mat-icon>  My Notifications</h1>
+<h1 mat-dialog-title> My Notifications <span style="margin-left: 100px;  cursor: pointer;" mat-dialog-close class="material-icons">
+  close
+  </span></h1>
 <div mat-dialog-content>
     
   <!-- {{notifications}} -->
@@ -15,10 +15,10 @@
     </li> -->
    
         <ng-container *ngFor="let notification of notifications;" > 
-            <mat-nav-list> {{notification.description}}</mat-nav-list>
+            <mat-nav-list> {{notification.description}} <button style="margin-top: 20px; color:green" color="primary" (click)="OnNotificationsRead(notification)"> Mark as Read</button></mat-nav-list>
         </ng-container>
 
-        <button style="margin-top: 20px; color:green" color="primary">Mark as Read</button>
+       
         
 
 

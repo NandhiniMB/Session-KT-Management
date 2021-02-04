@@ -85,8 +85,16 @@ export class NotificationDialog {
       this.notifications = notification;
     })
 
-    
-   
-
   }
+   public OnNotificationsRead(notification:any){
+
+    let notify_id=notification.id;
+    this.NotificationService.ReadNotifications(notification).subscribe(notification => {
+      console.log(notification);
+      this.notifications = this.notifications.filter(notification=> !( notification.id== notify_id));
+    })
+  
+   }
+
+  
 }

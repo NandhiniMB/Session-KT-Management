@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.team6.internetPortal.constants.Constants.status;
 import com.team6.internetPortal.entity.Category;
 import com.team6.internetPortal.entity.Video;
 
@@ -38,8 +39,11 @@ public interface IVideoRepository extends JpaRepository<Video,Long> {
 	public List<Video> findReportedVideos();
 
 	
-	@Query(value = "SELECT * FROM video v  where v.status = :status" ,nativeQuery = true)
-	public List<Video> findPendingVideos(@Param("status") String status);
+	@Query(value = "SELECT * FROM video v  where v.status = 'PENDING'" ,nativeQuery = true)
+	public List<Video> findPendingVideos(@Param("pending") status pending);
+
+	@Query(value = "SELECT * FROM video v  where v.status = 'APPROVED'" ,nativeQuery = true)
+	public List<Video> findApprovedVideos(@Param("approved") status approved);
 
 
 	

@@ -1,15 +1,11 @@
 package com.team6.internetPortal.dto;
 
+import java.util.Date;
+
+import com.team6.internetPortal.constants.Constants.status;
 import com.team6.internetPortal.entity.Category;
 import com.team6.internetPortal.entity.User;
 import com.team6.internetPortal.entity.Video;
-
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.sql.rowset.serial.SerialBlob;
-import java.sql.Blob;
-import java.sql.SQLException;
-import java.util.Date;
 
 public class VideoDTO {
 
@@ -29,7 +25,7 @@ public class VideoDTO {
 
     private Date lastModifiedOn;
 
-    private String status;
+    private status status;
 
     private User creator;
 
@@ -116,11 +112,11 @@ public class VideoDTO {
         this.lastModifiedOn = lastModifiedOn;
     }
 
-    public String getStatus() {
+    public status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(com.team6.internetPortal.constants.Constants.status status) {
         this.status = status;
     }
 

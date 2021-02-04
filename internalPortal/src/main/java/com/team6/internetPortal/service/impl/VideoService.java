@@ -1,19 +1,19 @@
 package com.team6.internetPortal.service.impl;
 
 import java.util.Base64;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import com.team6.internetPortal.dto.VideoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.team6.internetPortal.constants.Constants;
+import com.team6.internetPortal.dto.VideoDTO;
+import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.exception.FileStorageException;
 import com.team6.internetPortal.exception.MyFileNotFoundException;
-import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.repository.IVideoRepository;
 import com.team6.internetPortal.service.IVideoService;
 
@@ -27,9 +27,10 @@ public class VideoService implements IVideoService{
 	@Autowired
 	private DocumentServiceImpl documentService;
 
+	Constants c= new Constants();
 	@Override
 	public List<Video> findAll() {
-		return videoRepository.findAll();
+		return videoRepository.findApprovedVideos(c.status.APPROVED);
 	}
 
 	public List<Video> getVideoByCategory(int id){
@@ -123,6 +124,6 @@ public class VideoService implements IVideoService{
 	@Override
 	public List<Video> getPendingVideos() {
 		// TODO Auto-generated method stub
-		return videoRepository.findPendingVideos("PENDING");
+		return videoRepository.findPendingVideos(c.status.PENDING);
 	}
 }

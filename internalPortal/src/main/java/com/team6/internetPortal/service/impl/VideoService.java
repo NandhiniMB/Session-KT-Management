@@ -116,7 +116,7 @@ public class VideoService implements IVideoService{
     
     public int savefile(Video dbfile) {
     	System.out.println(dbfile);
-    	return videoRepository.update(dbfile.getId(),dbfile.getTitle(),dbfile.getDescription(),dbfile.getCreatedOn(),dbfile.getLastModifiedOn());
+    	return videoRepository.update(dbfile.getId(),dbfile.getTitle(),dbfile.getDescription(),dbfile.getCreatedOn(),dbfile.getLastModifiedOn(),dbfile.getCategory(),dbfile.getStatus());
     }
 
     public Video getFile(long fileId) {

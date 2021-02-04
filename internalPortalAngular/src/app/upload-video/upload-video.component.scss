@@ -1,0 +1,86 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.example-form {
+    min-width: 250px;
+    max-width: 400px;
+    width: 100%;
+  }
+
+.example-full-width {
+width: 100%;
+}
+
+// :host {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//   }
+
+.head{
+    font-weight: bolder;
+}
+
+// .fileInput{
+//     color:white;
+// }
+
+// .onlyThis{
+//     height: auto !important;
+//     width: 300px;
+// }
+// .mat-form-field {
+//     // margin: 40px 0;
+//     width: 500px !important;
+// }
+
+.mat-toolbar-single-row button {
+    width: 200px;
+}
+
+// .mat-form-field {
+//     width: 100%;
+// }
+.fileSelect{
+    height:max-content;
+    cursor: pointer;
+}
+.onlyThis{
+    margin-top: 20px;
+    height: auto !important;
+    cursor: pointer;
+    // width: 300px;
+}
+
+#uploadFile {
+    // top:47%;
+    // left: 55%;
+    // right:58%;
+    width: 25%;    
+    z-index: 9;
+    opacity: 0;
+    height: 5%;
+    cursor: pointer;
+    position: absolute;
+}
+
+.btn{
+cursor: pointer;
+}
+
+.submit{
+    width: 150px;
+    background-color: #3F51B5;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.padd{
+    padding-top: 10px;
+}

@@ -44,10 +44,10 @@
     <td mat-cell *matCellDef="let element">{{element.video.creator}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="reporter">
+  <!-- <ng-container matColumnDef="reporter">
     <th mat-header-cell *matHeaderCellDef><strong> Reported By </strong></th>
     <td mat-cell *matCellDef="let element">{{element.user.name}} </td>
-  </ng-container>
+  </ng-container> -->
 
   <!-- <ng-container matColumnDef="ReportBy">
     <th mat-header-cell *matHeaderCellDef><strong> Reported By </strong></th>
@@ -62,13 +62,13 @@
       </span> Play</button> </td>
   </ng-container>
 
-  <ng-container matColumnDef="edit">
+  <!-- <ng-container matColumnDef="edit">
     <th mat-header-cell *matHeaderCellDef><strong>Edit</strong></th>
     <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click) = "onEdit(element.video.id)">
       <span class="material-icons">
        edit
       </span> </button> </td>
-  </ng-container>
+  </ng-container> -->
 
   <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef><strong>Delete</strong></th>

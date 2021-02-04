@@ -12,35 +12,35 @@
     <!-- <div *ngIf = "element1.status == 'approved'">  -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef><strong> No. </strong> </th>
-    <td mat-cell *matCellDef="let element; let i = index;"> <strong><div *ngIf = "element.status == 'approved'">{{i+1}}  </div></strong></td>
+    <td mat-cell *matCellDef="let element; let i = index;"> <strong><div *ngIf = "element.status == 'APPROVED'">{{i+1}}  </div></strong></td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef><strong> Title </strong></th>
-    <td mat-cell *matCellDef="let element"> <div *ngIf = "element.status == 'approved'">{{element.title}} </div> </td>
+    <td mat-cell *matCellDef="let element"> <div *ngIf = "element.status == 'APPROVED'">{{element.title}} </div> </td>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="category">
     <th mat-header-cell *matHeaderCellDef><strong> Category </strong></th>
-    <td mat-cell *matCellDef="let element"> <div *ngIf = "element.status == 'approved'">{{element.category}} </div> </td>
+    <td mat-cell *matCellDef="let element"> <div *ngIf = "element.status == 'APPROVED'">{{element.category}} </div> </td>
   </ng-container>
 
   <ng-container matColumnDef="description">
     <th mat-header-cell *matHeaderCellDef><strong> Description </strong></th>
-    <td mat-cell *matCellDef="let element"> <div *ngIf = "element.status == 'approved'">{{element.description}} </div> </td>
+    <td mat-cell *matCellDef="let element"> <div *ngIf = "element.status == 'APPROVED'">{{element.description}} </div> </td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="uploadTime">
     <th mat-header-cell *matHeaderCellDef><strong> Uploaded On </strong></th>
-    <td mat-cell *matCellDef="let element"> <div *ngIf = "element.status == 'approved'">{{element.createdOn | date}} </div> </td>
+    <td mat-cell *matCellDef="let element"> <div *ngIf = "element.status == 'APPROVED'">{{element.createdOn | date}} </div> </td>
   </ng-container>
 
   <ng-container matColumnDef="play">
     <th mat-header-cell *matHeaderCellDef><strong> Play Video </strong></th>
-    <td mat-cell *matCellDef="let element"> <div *ngIf = "element.status == 'approved'"> <button mat-raised-button color="warn" (click) = "onPlay(element.id)">
+    <td mat-cell *matCellDef="let element"> <div *ngIf = "element.status == 'APPROVED'"> <button mat-raised-button color="warn" (click) = "onPlay(element.id)">
       <span class="material-icons">
       play_circle
       </span> Play</button> </div> </td>

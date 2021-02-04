@@ -1,14 +1,18 @@
 package com.team6.internetPortal.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.team6.internetPortal.constants.Constants.status;
 
 @Entity
 @Table(name = "video")
@@ -46,8 +50,8 @@ public class Video {
 	@Column
 	private Date lastModifiedOn;
 	
-	@Column
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private status status;
 
 	@ManyToOne
 	private User creator;
@@ -56,7 +60,7 @@ public class Video {
 	private Category category;
 
 	public Video(String path, String title, String description, boolean isArchived, Date createdOn, Date lastModifiedOn,
-			String status, User creator, Category category) {
+			status status, User creator, Category category) {
 		super();
 		this.path = path;
 		this.title = title;
@@ -126,11 +130,11 @@ public class Video {
 		this.lastModifiedOn = lastModifiedOn;
 	}
 
-	public String getStatus() {
+	public status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(com.team6.internetPortal.constants.Constants.status status) {
 		this.status = status;
 	}
 	public User getCreator() {

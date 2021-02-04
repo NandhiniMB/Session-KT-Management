@@ -4,11 +4,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.team6.internetPortal.entity.Comment;
 import com.team6.internetPortal.service.ICommentService;
@@ -21,9 +17,11 @@ public class CommentController
 
     //save
     @PostMapping("/comments")
+    @CrossOrigin(origins="http://localhost:4200")
     public Comment saveComment(@RequestBody Comment user_comments){
 
         user_comments.setCommentedOn(new Date(System.currentTimeMillis()));
+        System.out.println(user_comments.getComment());
         return userCommentsService.saveComment(user_comments);
     }
 

@@ -1,0 +1,32 @@
+<h1 mat-dialog-title><mat-icon style=" font-size: 30px; color: indigo;">
+    mark_email_unread
+   </mat-icon>  My Notifications</h1>
+<div mat-dialog-content>
+    
+  <!-- {{notifications}} -->
+    <!-- <li>
+      <span *ngIf=".animal === 'panda'">&#10003;</span> Panda
+    </li>
+    <li>
+      <span *ngIf="data.animal === 'unicorn'">&#10003;</span> Unicorn
+    </li>
+    <li>
+      <span *ngIf="data.animal === 'lion'">&#10003;</span> Lion
+    </li> -->
+   
+        <ng-container *ngFor="let notification of notifications;" > 
+            <mat-nav-list> {{notification.description}}</mat-nav-list>
+        </ng-container>
+
+        <button style="margin-top: 20px; color:green" color="primary">Mark as Read</button>
+        
+
+
+
+  
+</div>
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

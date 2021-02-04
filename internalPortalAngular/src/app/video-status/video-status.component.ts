@@ -31,7 +31,6 @@ export class VideoStatusComponent implements OnInit {
     this.VideoService.UpdateStatus(video).subscribe(resp => {
       console.log(resp);
     })
-    //Working mail
     // this.VideoService.sendSubscriptionMail(video,category).subscribe(resp => { //send mail done need to get  category here
     //   console.log(resp);
     // })

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
-import {MenuComponent} from './menu/menu.component';
+import {MenuComponent, NotificationDialog} from './menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -31,8 +31,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { VideoStatusComponent } from './video-status/video-status.component';
 import { ReportedVideosComponent } from './reported-videos/reported-videos.component';
 import { CategoryComponent } from './category/category.component';
-
+import {MatDialogModule} from '@angular/material/dialog';
 import { PlayVideoComponent } from './play-video/play-video.component';
+// import {NotificationDialog} from './menu/menu.component';
 // import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
@@ -53,7 +54,8 @@ import {MatTableDataSource} from '@angular/material/table';
     VideoStatusComponent,
     ReportedVideosComponent,
     CategoryComponent,
-    PlayVideoComponent
+    PlayVideoComponent,
+    NotificationDialog
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,8 @@ import {MatTableDataSource} from '@angular/material/table';
     MatBadgeModule,
     MatSelectModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

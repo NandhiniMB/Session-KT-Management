@@ -4,6 +4,7 @@ import {AdminService} from '../service/admin.service';
 import {Admin} from '../Models/Admin';
 import { User } from '../Models/User';
 import { RegistrationService } from '../registration.service';
+import {NotificationService} from '../service/notification.service';
 
 @Component({
   selector: 'app-menu',
@@ -13,7 +14,7 @@ import { RegistrationService } from '../registration.service';
 export class MenuComponent implements OnInit {
 
  
-  constructor(private router: Router,private AdminService: AdminService,private RegService : RegistrationService ) { }
+  constructor(private router: Router,private AdminService: AdminService,private RegService : RegistrationService,private NotificationService:NotificationService ) { }
   admins : Array<Admin>;
   user  : User = new User()
   ngOnInit(): void {
@@ -24,7 +25,11 @@ export class MenuComponent implements OnInit {
       this.admins = admins;  
       console.log("Admin"+JSON.stringify(this.admins));
     }
-)
+  )
+  this.NotificationService.getNotifications(this.user.id).subscribe(notification => {
+    console.log(notification);
+  })
+
   }
   public logoutUser() {
 

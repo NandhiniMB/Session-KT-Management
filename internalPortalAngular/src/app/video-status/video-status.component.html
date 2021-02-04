@@ -53,10 +53,17 @@
 
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef><strong>Status</strong></th>
-    <td mat-cell *matCellDef="let element">{{element.status}}
-         <!-- <button mat-icon-button color="primary" (click) ="onApprove(element.id)" > <span class="material-icons">thumb_up_alt</span></button> 
-         <button mat-icon-button color="warn" (click) ="onReject(element.id)"> <span class="material-icons">thumb_down_alt</span></button>  --></td>
+    <td mat-cell *matCellDef="let element">{{element.status}}</td>
+         <!-- <button mat-icon-button color="primary" (click) ="onApprove(element,element.category)" > <span class="material-icons">thumb_up_alt</span></button> 
+         <button mat-icon-button color="warn" (click) ="onReject(element)"> <span class="material-icons">thumb_down_alt</span></button>  -->
   </ng-container> -->
+
+  <ng-container matColumnDef="editStatus">
+  <th mat-header-cell *matHeaderCellDef><strong>Edit Status</strong></th>
+  <td mat-cell *matCellDef="let element">
+  <button mat-icon-button color="primary" (click) ="onApprove(element,element.category)" > <span class="material-icons">library_add_check</span></button> 
+  <button mat-icon-button color="warn" (click) ="onReject(element)"> <span class="material-icons">unpublished</span></button> </td> 
+</ng-container> -->
 
   
 

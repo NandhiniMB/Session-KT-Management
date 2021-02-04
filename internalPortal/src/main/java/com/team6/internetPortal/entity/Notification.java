@@ -66,6 +66,11 @@ public class Notification {
 	}
 
 
+	public Notification() {
+		
+	}
+
+
 	public Notification(long id, User user, String description, boolean isRead) {
 		super();
 		this.id = id;

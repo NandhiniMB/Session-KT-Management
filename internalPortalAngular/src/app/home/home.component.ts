@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit{
   constructor(private router: Router, private videoService: VideoDetailsService, private sharedService: SharedService) { }
 
   ngOnInit(): void {
-    this.videoService.getAll().subscribe(resp => {
+    this.videoService.getAllApproved().subscribe(resp => {
       console.log(resp);
       this.video = resp;
     })

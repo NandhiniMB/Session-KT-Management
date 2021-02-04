@@ -36,6 +36,8 @@ public interface IVideoService{
 
 	public List<Video> getReportedVideo();
 
-	public List<Video> getPendingVideos();
+	public List<Video> getApprovedVideos();
+
+	public Video updateStatus(Video video);
 
 }

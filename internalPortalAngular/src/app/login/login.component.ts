@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
           this.user=data;
           console.log("Response Received"+this.user.email);
           console.log("Response Received"+this.user.id);
-          this.sharedService.setUserId(this.user.id);
+          // this.sharedService.setUserId(this.user.id);
           this.Regservice.setUser(this.user);
           this.router.navigate(['/home']);
 // =======

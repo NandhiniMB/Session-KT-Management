@@ -26,5 +26,9 @@
     "/subs/sendmail":{
         "target" : "http://localhost:8080/",
         "secure" : false
+    },
+    "/notify":{
+        "target" : "http://localhost:8080/",
+        "secure" : false
     }
 }

@@ -21,6 +21,12 @@ public class NotificationService implements INotificationService {
 		return notificationRepository.findByUserIdAndIs_read(user_id,state);
 	}
 
+	@Override
+	public Notification markNotificationRead(Notification notificationRead) {
+		notificationRead.setRead(true);
+		return notificationRepository.save(notificationRead);
+	}
+
 	
 
 //	@Override

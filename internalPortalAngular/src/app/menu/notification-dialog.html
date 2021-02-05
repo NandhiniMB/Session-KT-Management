@@ -1,0 +1,33 @@
+<h1 mat-dialog-title> My Notifications <span style="float: right;  cursor: pointer;" mat-dialog-close class="material-icons">
+  close
+  </span></h1>
+<div mat-dialog-content>
+    
+  <!-- {{notifications}} -->
+    <!-- <li>
+      <span *ngIf=".animal === 'panda'">&#10003;</span> Panda
+    </li>
+    <li>
+      <span *ngIf="data.animal === 'unicorn'">&#10003;</span> Unicorn
+    </li>
+    <li>
+      <span *ngIf="data.animal === 'lion'">&#10003;</span> Lion
+    </li> -->
+   
+        <ng-container *ngFor="let notification of notifications;" > 
+            <mat-nav-list> {{notification.description}} <button style=" float: right; color:green" color="primary" (click)="OnNotificationsRead(notification)"> Mark as Read</button></mat-nav-list>
+        </ng-container>
+        <ng-container *ngIf = "(notifications_count ==0)"><h5>No New Notifications</h5></ng-container>
+
+       
+        
+
+
+
+  
+</div>
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

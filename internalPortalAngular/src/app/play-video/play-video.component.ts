@@ -8,7 +8,10 @@ import { User } from '../Models/User';
 import { Like } from '../Models/like';
 import { RegistrationService } from '../registration.service';
 import { Comment } from '../Models/comment';
+import { ReceiveComments } from '../Models/ReceiveComments';
+
 import { PlayVideoService } from '../play-video.service';
+
 
 @Component({
   selector: 'app-play-video',
@@ -25,6 +28,8 @@ export class PlayVideoComponent implements OnInit {
   user: User = null;
   likedVid: Like;
   commentedVid: Comment = null;
+  comments:Array<ReceiveComments>;
+  vid:Number;
 
   constructor( private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { }
 
@@ -37,6 +42,16 @@ export class PlayVideoComponent implements OnInit {
     this.user = JSON.parse(this.regservice.getUser());
     console.log(this.user);
     this.likedVid = new Like(this.videoDTO, this.user);
+
+    this.vid=this.sharedService.getVid();
+
+    this.videoService.getNumberOfComments(this.vid).subscribe(resp => {
+      this.comments=resp;
+      console.log(this.comments);
+    })
+
+    
+    
 
   }
 
@@ -88,13 +103,17 @@ export class PlayVideoComponent implements OnInit {
   }
 
   comment(){
+    console.log(this.comments);
     console.log(this.comment_text);
     this.commentedVid = new Comment(this.comment_text, this.user, this.videoDTO);
     this.playVideoService.commentVideoFromRemote(this.commentedVid).subscribe(resp => {
       console.log(this.commentedVid);
     })
     this.comment_text="";
+
+    
   }
+
 
 
 

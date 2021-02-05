@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { VideoDetailsService } from '../video-details.service';
 import { DBFile } from '../Models/dbfile';
 import {Category} from '../Models/Category';
-
+import {SharedService} from '../shared.service';
+import { Router } from '@angular/router';
+import { VideoDTO } from '../Models/VideoDTO';
 @Component({
   selector: 'app-video-status',
   templateUrl: './video-status.component.html',
@@ -10,9 +12,10 @@ import {Category} from '../Models/Category';
 })
 export class VideoStatusComponent implements OnInit {
 
-  constructor(private VideoService : VideoDetailsService) { }
+  constructor(private router: Router,private VideoService : VideoDetailsService,private sharedService: SharedService,) { }
 
   video: Array<DBFile> = [];
+  prev_url: any;
   ngOnInit(): void {
 
     this.VideoService.getAll().subscribe(resp => {
@@ -26,18 +29,28 @@ export class VideoStatusComponent implements OnInit {
   onApprove(video:DBFile,category:Category)
   {
     video.status="APPROVED";
-    video.category=new Category();
-    video.category.id=1;
     this.VideoService.UpdateStatus(video).subscribe(resp => {
       console.log(resp);
     })
-    //Working mail
     // this.VideoService.sendSubscriptionMail(video,category).subscribe(resp => { //send mail done need to get  category here
     //   console.log(resp);
     // })
     
   }
 
+  onPlay(id: Number) {
+    console.log(id);
+    this.VideoService.getVideo(id).subscribe(resp => {
+      const videoDTO: VideoDTO = resp as VideoDTO;
+      console.log(resp);
+      this.prev_url = "data:video/mp4;base64," + videoDTO.data;
+      console.log("hi");
+      // this.sharedService.setPrevUrl(this.prev_url);
+      this.sharedService.setVideoDTO(videoDTO);
+      this.router.navigate(['/playVideo',id]);
+      
+    });
+  }
   onReject(video:DBFile){
     video.status="REJECTED";
     this.VideoService.UpdateStatus(video).subscribe(resp => {

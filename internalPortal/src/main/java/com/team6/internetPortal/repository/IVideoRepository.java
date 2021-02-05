@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.team6.internetPortal.constants.Constants.status;
 import com.team6.internetPortal.entity.Category;
+import com.team6.internetPortal.entity.User;
 import com.team6.internetPortal.entity.Video;
 
 @Repository
@@ -29,9 +30,9 @@ public interface IVideoRepository extends JpaRepository<Video,Long> {
 
 	@Modifying
 	@Transactional
-	@Query("update Video db set db.title=:title,db.description=:description, db.createdOn=:created_on, db.lastModifiedOn=:last_modified_on where db.id=:id")
+	@Query("update Video db set db.title=:title,db.description=:description,db.creator=:creator, db.createdOn=:created_on, db.lastModifiedOn=:last_modified_on, db.category=:category, db.status=:status where db.id=:id")
 	public int update(@Param("id") Long id,@Param("title") String title,@Param("description") String description, 
-			 @Param("created_on") Date created_on,@Param("last_modified_on") Date last_modified_on);
+			@Param("creator") User creator, @Param("created_on") Date created_on,@Param("last_modified_on") Date last_modified_on, @Param("category") Category category, @Param("status") status status);
 
 	
 	

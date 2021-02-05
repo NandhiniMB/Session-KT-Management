@@ -21,6 +21,9 @@ export class VideoDetailsService {
   BASE_URL='http://localhost:8080/video';
   COMMENTS='/comments';
 
+  GET_CATEGORY='/category/';
+  GET_SUBSCRIBED_VIDEOS='/video/subs'
+
   file:File;
 
   constructor(private http:HttpClient) { }
@@ -36,6 +39,15 @@ export class VideoDetailsService {
   public getAll(): Observable<any> {
     return this.http.get(this.BASE_URL + this.GET_ALL_VIDEOS);
   }
+
+  getAllCategory(): Observable<any>{
+    return this.http.get('http://localhost:8080'+this.GET_CATEGORY);
+  }
+
+  
+  // public getPending(): Observable<any> {
+  //   return this.http.get(this.GET_PENDING_VIDEOS);
+  // }
 
   public getAllApproved(): Observable<any> {
     return this.http.get(this.GET_APPROVED_VIDEOS);
@@ -71,7 +83,6 @@ export class VideoDetailsService {
   }
 
 
-  //========
 
   public getNumberOfComments(vid:Number): Observable<any>{
 
@@ -80,8 +91,10 @@ export class VideoDetailsService {
   }
 
 
-  //========
 
   
+  public getSubscribedVideos(id:Number):Observable<any>{
+    return this.http.get(this.GET_SUBSCRIBED_VIDEOS+'/'+id);
+  }
 
 }

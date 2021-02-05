@@ -9,15 +9,19 @@
       <input matInput placeholder="Search"><i class="material-icons">search</i>
     </mat-form-field> -->
 
+    
     <div class = "notify_icon">
-        <mat-icon  matBadge="20" matBadgeColor="white">circle_notifications</mat-icon>
+        <button mat-button  (click)="openNotificationDialog()">
+           <mat-icon  [matBadge]="notifications_count" matBadgeColor="white" >circle_notifications</mat-icon>
+          </button>
+       
     </div>
     <div class="user_icon">
         <mat-select-trigger>
           <mat-icon>account_circle</mat-icon>
           <mat-select>
             <!-- <mat-option *ngFor="let food of foods" [value]="food.value"> {{food.viewValue}}</mat-option> -->
-            <mat-option>My Profile</mat-option>
+            <mat-option>{{user.email}}</mat-option>
             <mat-option (click) = "logoutUser()">Log Out</mat-option>
           </mat-select>
         </mat-select-trigger>
@@ -40,7 +44,7 @@
   </a> 
 </mat-nav-list>
 <mat-nav-list class="list-container">
-  <a mat-list-item [routerLink]="'/subs'" (click)="sidenav.toggle()" >
+  <a mat-list-item routerLink="/home" routerLinkActive="active-link" (click)="sidenav.toggle()">
     <span class="material-icons">subscriptions</span>
     <a mat-list-item > My Subscriptions </a>
   </a> 

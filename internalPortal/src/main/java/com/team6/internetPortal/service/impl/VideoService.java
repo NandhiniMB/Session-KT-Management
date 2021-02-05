@@ -36,6 +36,9 @@ public class VideoService implements IVideoService{
 	@Autowired
 	private ISubscriptionRepository subscriptionRepository;
 
+	@Autowired
+	private SendMailService  sendmailService;
+	
 	Constants c= new Constants();
 	@Override
 	public List<Video> findAll() {
@@ -116,7 +119,7 @@ public class VideoService implements IVideoService{
     
     public int savefile(Video dbfile) {
     	System.out.println(dbfile);
-    	return videoRepository.update(dbfile.getId(),dbfile.getTitle(),dbfile.getDescription(),dbfile.getCreatedOn(),dbfile.getLastModifiedOn());
+    	return videoRepository.update(dbfile.getId(),dbfile.getTitle(),dbfile.getDescription(),dbfile.getCreator(),dbfile.getCreatedOn(),dbfile.getLastModifiedOn(),dbfile.getCategory(),dbfile.getStatus());
     }
 
     public Video getFile(long fileId) {
@@ -139,23 +142,32 @@ public class VideoService implements IVideoService{
 	@Override
 	public Video updateStatus(Video video) {
 		// TODO Auto-generated method stub
+		System.out.println(video);
 		Video v = videoRepository.save(video);
 		System.out.println(v);
+		String[] user = new String[1];
+		user[0]=video.getCreator().getEmail();
 		if(v.getStatus()==c.status.APPROVED)
 		{
 			
+			String content = "Greetings of the day!, \n\nYour New Video in the Category "+video.getCategory().getCategoryName() +" titled "+video.getTitle()+" is Approved!.\n\n Regards,\nInternal Portal Team";
+			sendmailService.sendEmail(user,content);
 			int[] subscribed_users_id = subscriptionRepository.findAllUserByCategory(v.getCategory().getId());
 			System.out.println("suser"+subscribed_users_id);
-			String description = "New Video "+v.getTitle()+"Published";
+			String description = "New Video "+v.getTitle()+" Published";
 			for(int i=0;i<subscribed_users_id.length;i++)
 			       {
 				
-				System.out.println(subscribed_users_id[i]);
+				     System.out.println(subscribed_users_id[i]);
 				     notificationRepository.postNotifications(subscribed_users_id[i],description);
 			    
           		}
 		
 	}
+		if(v.getStatus()==c.status.REJECTED) {
+			String content = "Greetings of the day!, \n\nYour New Video in the Category "+video.getCategory().getCategoryName() +" titled "+video.getTitle()+" is Rejected!.\n\n Regards,\nInternal Portal Team";
+			sendmailService.sendEmail(user,content);
+		}
 	return v;
 	}
 }

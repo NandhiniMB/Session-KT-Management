@@ -1,32 +1,53 @@
-<div class="container row">
-    <div class="col-md-12">
-        <h1>Upload Video</h1>
+<div class="container" align = "center">
+  <br><br>
+
+<h1 class="head">Upload Video</h1>
+<form class="example-form" #uploadform="ngForm">
+  <mat-form-field class="example-full-width">
+    <mat-label>Title</mat-label>
+    <input type="text" matInput placeholder="Enter Title..." name="title" [(ngModel)]='dbfile.title' required>
+    
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Description</mat-label>
+    <input type="text" matInput placeholder="Enter Description..." name="description" [(ngModel)]='dbfile.description' required>
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Category</mat-label>
+    <mat-select name="category" [(ngModel)]="category_id" required>
+      <mat-option *ngFor="let c of categories" [value]="c.id">
+        {{c.categoryName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- <input type="file" name="file1" class="fileInput" (change)="onFileChanged($event)"> -->
+    <div class="fileSelect">
+      <mat-toolbar class="onlyThis">
+        <!-- Browse Button -->
+        <button mat-flat-button color="primary" class="btn">
+          Browse File
+        </button>
+        <!-- Fetch selected filed on change -->
+        <input type="file" #fileInput id="uploadFile" (change)="onFileChanged($event)" name="file1" required>
+        <!-- Display files names -->
+        <input matInput [(ngModel)]="fileAttr" readonly name="name" />
+      </mat-toolbar>
     </div>
-  </div>
-  <div class="container row">
-    <div class="col-md-6">
-        <input type="text" placeholder="Enter Title" name="title" [(ngModel)]='dbfile.title'>
-    </div>
-    <div class="col-md-6">
-      <input type="text" placeholder="Enter Description" name="description" [(ngModel)]='dbfile.description'>
-  </div>
-  <!-- <div class="col-md-6">
-    <input type="text" placeholder="Enter Category" name="category" [(ngModel)]='dbfile.category'>
-  </div> -->
+    <br><br>
+    <!-- <button mat-raised-button class="submit" color="primary" (click)="onUpload()" value="upload">Upload</button>
+    <br><br>
+    <button mat-raised-button class="submit" color="primary" (click)="onSaveData()" value="SAVE">Save</button> -->
   <div class="col-md-6">
-    <input type="file" name="file1" (change)="onFileChanged($event)">
-    <!-- <input type="file" name="file1" [(ngModel)]='dbfile.file1' observeFiles> -->
+      <input type="button" class="submit" (click)="onUpload()" value="UPLOAD">
   </div>
-    <div class="col-md-6">
-        <input type="button" (click)="onUpload()" value="upload">
-    </div>
-    <div class="col-md-6">
-        <input type="button" (click)="onSaveData()" value="SAVE">
-    </div>
+  <div class="col-md-6 padd">
+      <input type="button" class="submit" (click)="onSaveData()" value="SAVE">
   </div>
-  <hr />
   <div class="container row">
     <div class="col-md-12">
         <div *ngIf="message">{{message}}</div>
     </div>
   </div>
+</form>
+</div>

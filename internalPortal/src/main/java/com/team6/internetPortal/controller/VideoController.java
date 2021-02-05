@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.team6.internetPortal.constants.Constants;
 import com.team6.internetPortal.dto.VideoDTO;
 import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.payload.UploadFileResponse;
@@ -28,6 +29,8 @@ public class VideoController {
 
 	@Autowired
 	private IVideoService videoService;
+	
+	Constants constants = new Constants();
 	
 	
 	@GetMapping("/{id}")
@@ -85,7 +88,9 @@ public class VideoController {
     public int UploadVideoData(@RequestBody Video dbfile) {
     	dbfile.setCreatedOn(new Date(System.currentTimeMillis()));
     	dbfile.setLastModifiedOn(new Date(System.currentTimeMillis()));
-    	System.out.println(dbfile);
+    	dbfile.setStatus(constants.status.PENDING);
+    	dbfile.setCreator(dbfile.getCreator());
+    	System.out.println(dbfile.getCreator().getEmail());
     	int rows=videoService.savefile(dbfile);
     	return rows;
     }

@@ -42,6 +42,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 // import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { AllCategoriesComponent } from './all-categories/all-categories.component';
 
 
 
@@ -59,7 +60,8 @@ import {MatTableDataSource} from '@angular/material/table';
     VideoStatusComponent,
     ReportedVideosComponent,
     CategoryComponent,
-    PlayVideoComponent
+    PlayVideoComponent,
+    AllCategoriesComponent
   ],
   imports: [
     BrowserModule,

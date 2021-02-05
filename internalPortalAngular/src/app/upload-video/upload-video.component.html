@@ -6,14 +6,16 @@
   <mat-form-field class="example-full-width">
     <mat-label>Title</mat-label>
     <input type="text" matInput placeholder="Enter Title..." name="title" [(ngModel)]='dbfile.title' required>
+    
   </mat-form-field>
+
   <mat-form-field class="example-full-width">
     <mat-label>Description</mat-label>
     <input type="text" matInput placeholder="Enter Description..." name="description" [(ngModel)]='dbfile.description' required>
   </mat-form-field>
   <mat-form-field >
     <mat-label>Category</mat-label>
-    <mat-select name="category" [(ngModel)]="category_id">
+    <mat-select name="category" [(ngModel)]="category_id" required>
       <mat-option *ngFor="let c of categories" [value]="c.id">
         {{c.categoryName}}
       </mat-option>
@@ -27,7 +29,7 @@
           Browse File
         </button>
         <!-- Fetch selected filed on change -->
-        <input type="file" #fileInput id="uploadFile" (change)="onFileChanged($event)" name="file1"/>
+        <input type="file" #fileInput id="uploadFile" (change)="onFileChanged($event)" name="file1" required>
         <!-- Display files names -->
         <input matInput [(ngModel)]="fileAttr" readonly name="name" />
       </mat-toolbar>

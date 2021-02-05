@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit {
 
 
   notifications : Array<any> ;
-
+  notifications_count : Number;
   constructor(public dialog: MatDialog,private router: Router,private AdminService: AdminService,private RegService : RegistrationService,private NotificationService:NotificationService ) { }
   admins : Array<Admin>;
   user  : User = new User()
@@ -39,6 +39,7 @@ export class MenuComponent implements OnInit {
   this.NotificationService.getNotifications(this.user.id).subscribe(notification => {
     console.log(notification);
     this.notifications = notification;
+    this.notifications_count = this.notifications.length;
   })
 
   }
@@ -76,6 +77,7 @@ export class NotificationDialog {
   notifications : Array<any> ;
 
   user  : User = new User()
+  notifications_count : Number;
   ngOnInit(): void {
 
     this.user = JSON.parse(this.RegService.getUser());
@@ -83,6 +85,8 @@ export class NotificationDialog {
     this.NotificationService.getNotifications(this.user.id).subscribe(notification => {
       console.log(notification);
       this.notifications = notification;
+      this.notifications_count = this.notifications.length;
+      console.log("******************"+this.notifications_count);
     })
 
   }
@@ -92,6 +96,7 @@ export class NotificationDialog {
     this.NotificationService.ReadNotifications(notification).subscribe(notification => {
       console.log(notification);
       this.notifications = this.notifications.filter(notification=> !( notification.id== notify_id));
+      this.notifications_count = this.notifications.length;
     })
   
    }

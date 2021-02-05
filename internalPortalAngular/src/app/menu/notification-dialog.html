@@ -1,4 +1,4 @@
-<h1 mat-dialog-title> My Notifications <span style="margin-left: 100px;  cursor: pointer;" mat-dialog-close class="material-icons">
+<h1 mat-dialog-title> My Notifications <span style="float: right;  cursor: pointer;" mat-dialog-close class="material-icons">
   close
   </span></h1>
 <div mat-dialog-content>
@@ -15,8 +15,9 @@
     </li> -->
    
         <ng-container *ngFor="let notification of notifications;" > 
-            <mat-nav-list> {{notification.description}} <button style="margin-top: 20px; color:green" color="primary" (click)="OnNotificationsRead(notification)"> Mark as Read</button></mat-nav-list>
+            <mat-nav-list> {{notification.description}} <button style=" float: right; color:green" color="primary" (click)="OnNotificationsRead(notification)"> Mark as Read</button></mat-nav-list>
         </ng-container>
+        <ng-container *ngIf = "(notifications_count ==0)"><h5>No New Notifications</h5></ng-container>
 
        
         

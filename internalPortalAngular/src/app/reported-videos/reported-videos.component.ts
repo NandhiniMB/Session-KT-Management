@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { VideoDTO } from '../Models/VideoDTO';
 import { ReportService } from '../service/report.service';
+import {SharedService} from '../shared.service';
 @Component({
   selector: 'app-reported-videos',
   templateUrl: './reported-videos.component.html',
@@ -19,7 +20,7 @@ export class ReportedVideosComponent implements OnInit {
 
   prev_url: any;
 
-  constructor(private router: Router, private VideoService: VideoDetailsService, private sanitizer : DomSanitizer,private ReportService: ReportService) { }
+  constructor(private router: Router,private sharedService: SharedService, private VideoService: VideoDetailsService, private sanitizer : DomSanitizer,private ReportService: ReportService) { }
 
 
   ngOnInit(): void {
@@ -41,6 +42,19 @@ export class ReportedVideosComponent implements OnInit {
    // });
   }
 
+  onPlay(id: Number) {
+    console.log(id);
+    this.VideoService.getVideo(id).subscribe(resp => {
+      const videoDTO: VideoDTO = resp as VideoDTO;
+      console.log(resp);
+      this.prev_url = "data:video/mp4;base64," + videoDTO.data;
+      console.log("hi");
+      // this.sharedService.setPrevUrl(this.prev_url);
+      this.sharedService.setVideoDTO(videoDTO);
+      this.router.navigate(['/playVideo',id]);
+      
+    });
+  }
   onDelete(Video_id: Number,Report_id:Number) {
   
   

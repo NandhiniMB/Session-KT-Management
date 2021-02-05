@@ -12,7 +12,7 @@
     
     <div class = "notify_icon">
         <button mat-button  (click)="openNotificationDialog()">
-           <mat-icon  matBadge="20" matBadgeColor="white" >circle_notifications</mat-icon>
+           <mat-icon  [matBadge]="notifications_count" matBadgeColor="white" >circle_notifications</mat-icon>
           </button>
        
     </div>
@@ -21,7 +21,7 @@
           <mat-icon>account_circle</mat-icon>
           <mat-select>
             <!-- <mat-option *ngFor="let food of foods" [value]="food.value"> {{food.viewValue}}</mat-option> -->
-            <mat-option>My Profile</mat-option>
+            <mat-option>{{user.email}}</mat-option>
             <mat-option (click) = "logoutUser()">Log Out</mat-option>
           </mat-select>
         </mat-select-trigger>

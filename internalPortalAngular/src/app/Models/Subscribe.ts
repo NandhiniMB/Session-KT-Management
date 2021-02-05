@@ -5,5 +5,8 @@ export class Subscribe{
     id:Number;
     category:Category;
     subscriber:User;
-    constructor(){}
+    constructor(category:Category,subscriber:User){
+        this.category=category;
+        this.subscriber=subscriber;
+    }
 }

@@ -33,7 +33,8 @@
    
     </div>
 
-    <button mat-raised-button color="primary" style="margin:1em" (click)="like()">Like</button>
+    <button mat-raised-button color="primary" style="margin:1em" *ngIf = "!liked" (click)="like()">Like</button>
+    <button mat-raised-button color="primary" style="margin:1em" *ngIf = "liked" (click)="unlike()">Unlike</button>
 
     <mat-form-field class="example-full-width" class="center">
         <mat-label>Leave a comment</mat-label>

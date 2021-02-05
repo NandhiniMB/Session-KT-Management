@@ -30,8 +30,23 @@ export class PlayVideoComponent implements OnInit {
   commentedVid: Comment = null;
   comments:Array<ReceiveComments>;
   vid:Number;
+  liked = false;
+  Likes: Array<Like>;
 
-  constructor( private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { }
+  constructor( private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { 
+    this.playVideoService.getAllLikes().subscribe(
+      resp => {
+               this.Likes = resp;   
+               console.log(this.Likes);
+              //  this.liked = true;
+              for (let i=0; i<this.Likes.length; i++){
+                if(this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id){
+                  this.liked = true;
+                }
+              }
+      }
+    );
+  }
 
   ngOnInit(): void {
     // this.prev_url = this.sharedService.getPrevUrl();
@@ -42,6 +57,7 @@ export class PlayVideoComponent implements OnInit {
     this.user = JSON.parse(this.regservice.getUser());
     console.log(this.user);
     this.likedVid = new Like(this.videoDTO, this.user);
+    this.liked = this.likedVid.liked;
 
     this.vid=this.sharedService.getVid();
 
@@ -99,7 +115,30 @@ export class PlayVideoComponent implements OnInit {
     this.playVideoService.likeVideoFromRemote(this.likedVid).subscribe(resp => {
       this.likeCount++;
       console.log(this.likeCount);
+      this.likedVid.liked = true;
+      this.liked = true;
     })
+  }
+
+  unlike() {
+    // this.playVideoService.deleteLikeFromRemote(this.likedVid.likedUser.id, this.)
+    this.playVideoService.getAllLikes().subscribe(
+      resp => {
+               this.Likes = resp;   
+               console.log(this.Likes);
+              //  this.liked = true;
+              for (let i=0; i<this.Likes.length; i++){
+                if(this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id){
+                  this.liked = false;
+                  console.log(this.Likes[i].id);
+                  this.playVideoService.deleteLike(this.Likes[i].id).subscribe(resp => {
+                    console.log(resp);
+                  })
+                }
+              }
+      }
+    );
+  
   }
 
   comment(){

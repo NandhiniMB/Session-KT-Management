@@ -13,6 +13,8 @@ export class PlayVideoService {
 
   LIKED_VIDEO = "likes";
   COMMENTED_VIDEO = "comments";
+  GET_LIKES = "getLikes";
+  DELETE_LIKE = "deleteLike/";
 
   constructor(private http:HttpClient) { }
 
@@ -24,6 +26,14 @@ export class PlayVideoService {
   public commentVideoFromRemote(comment: Comment):Observable<any>{
     console.log(comment);
     return this.http.post(this.BASE_URL + this.COMMENTED_VIDEO,comment);
+  }
+
+  public getAllLikes(): Observable<any>{
+    return this.http.get(this.BASE_URL + this.GET_LIKES);
+  }
+
+  public deleteLike(id: Number){
+    return this.http.delete(this.BASE_URL + this.DELETE_LIKE + id);
   }
   
 }

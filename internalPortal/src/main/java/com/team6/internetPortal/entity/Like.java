@@ -68,6 +68,7 @@ public class Like {
 		this.video = video;
 	}
 
+	public Like() {}
 
 	public Like(long id, User likedUser, Video video, Date likedAt) {
 		super();

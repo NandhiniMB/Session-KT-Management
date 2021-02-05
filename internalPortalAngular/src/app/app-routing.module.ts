@@ -10,6 +10,7 @@ import {MenuComponent} from './menu/menu.component';
 import {MainComponent} from './main/main.component';
 import { ManageVideoComponent } from './manage-video/manage-video.component';
 import {CategoryComponent} from './category/category.component';
+import {AllCategoriesComponent} from './all-categories/all-categories.component';
 import { ManageCategoryComponent } from './manage-category/manage-category.component';
 const routes: Routes = [
   {path: '', pathMatch: "full", component:LoginComponent},
@@ -18,7 +19,7 @@ const routes: Routes = [
    children:[{path: '', pathMatch: "full", component:HomeComponent},
    {path:'upload',component:UploadVideoComponent}, {path: 'maintain',
     pathMatch: "full", component: ManageVideoComponent},
-    {path: 'subs', pathMatch: "full", component: CategoryComponent},
+    {path: 'subs', pathMatch: "full", component: AllCategoriesComponent},
     {path: 'categories',  component: ManageCategoryComponent}]},
  // {path: 'home', pathMatch: "full", component: MainComponent, children:[{path:'upload',component:UploadVideoComponent}]},
   {path: 'register', pathMatch: "full", component: RegistrationComponent},

@@ -12,6 +12,11 @@ import javax.persistence.Table;
 @Table(name = "subscription")
 public class Subscription {
 
+	public Subscription() {
+//		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;

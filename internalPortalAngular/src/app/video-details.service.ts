@@ -19,6 +19,8 @@ export class VideoDetailsService {
   UPDATE_STATUS = '/video/updatestat';
   SEND_MAIL='/subs/sendmail';
   BASE_URL='http://localhost:8080/video';
+  COMMENTS='/comments';
+
   GET_CATEGORY='/category/';
   GET_SUBSCRIBED_VIDEOS='/video/subs';
   UPDATE_CATEGORY='/category/';
@@ -82,6 +84,17 @@ export class VideoDetailsService {
     return this.http.post(this.SEND_MAIL,{video,category});
   }
 
+
+
+  public getNumberOfComments(vid:Number): Observable<any>{
+
+    console.log(vid);
+    return this.http.get('http://localhost:8080'+this.COMMENTS+'/'+vid);
+  }
+
+
+
+  
   public getSubscribedVideos(id:Number):Observable<any>{
     return this.http.get(this.GET_SUBSCRIBED_VIDEOS+'/'+id);
   }

@@ -20,6 +20,7 @@ export class VideoDetailsService {
   SEND_MAIL='/subs/sendmail';
   BASE_URL='http://localhost:8080/video';
   GET_CATEGORY='/category/';
+  GET_SUBSCRIBED_VIDEOS='/video/subs'
 
   file:File;
 
@@ -79,6 +80,8 @@ export class VideoDetailsService {
     return this.http.post(this.SEND_MAIL,{video,category});
   }
 
-  
+  public getSubscribedVideos(id:Number):Observable<any>{
+    return this.http.get(this.GET_SUBSCRIBED_VIDEOS+'/'+id);
+  }
 
 }

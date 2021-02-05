@@ -26,8 +26,8 @@ public class SubscriptionService implements ISubscriptionService{
 	public void send_mail(MailRequest mailrequest) throws MessagingException {
 		String[] email =subscriptionRepository.findAllEmailByCategory(mailrequest.getCategory().getId());
 		System.out.println(email);
-		
-		sendmailService.sendEmail(email,mailrequest.getCategory().getCategoryName() , mailrequest.getVideo().getTitle());
+		String content = "Greetings of the day!, \n\nNew Video is published in the Category "+mailrequest.getCategory().getCategoryName() +" titled "+mailrequest.getVideo().getTitle()+"!.\n\n Regards,\nInternal Portal Team";
+		sendmailService.sendEmail(email,content );
             //sendEmailWithAttachment();
 
         System.out.println("Done");

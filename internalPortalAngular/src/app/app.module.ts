@@ -22,7 +22,7 @@ import { VideoStatusComponent } from './video-status/video-status.component';
 import { ReportedVideosComponent } from './reported-videos/reported-videos.component';
 import { CategoryComponent } from './category/category.component';
 import { PlayVideoComponent } from './play-video/play-video.component';
-
+import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -33,7 +33,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MatSelectModule } from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -81,13 +81,14 @@ import {MatTableDataSource} from '@angular/material/table';
     MatSelectModule,
     MatTabsModule,
     MatTableModule,
-
+    MatCheckboxModule,
     MatDialogModule,
     MatCardModule,
     MatGridListModule,
     MatExpansionModule,
     MatPaginatorModule,
     MatButtonToggleModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent],

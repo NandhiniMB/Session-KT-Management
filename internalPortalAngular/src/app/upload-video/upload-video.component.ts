@@ -4,6 +4,7 @@ import { DBFile } from '../Models/dbfile';
 import { VideoDetailsService } from '../video-details.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Category } from '../Models/category';
+import { RegistrationService } from '../registration.service';
 
 @Component({
   selector: 'app-upload-video',
@@ -21,7 +22,7 @@ export class UploadVideoComponent implements OnInit {
   formDoc: any;
   fileAttr = 'Choose File';
   // id:Number;
-  constructor(private service:VideoDetailsService,private httpClient: HttpClient, private _fb: FormBuilder) { }
+  constructor(private service:VideoDetailsService,private httpClient: HttpClient, private _fb: FormBuilder,private RegService : RegistrationService) { }
 
   ngOnInit(): void {
     this.service.getAllCategory().subscribe(categories=>{
@@ -68,11 +69,14 @@ export class UploadVideoComponent implements OnInit {
   }
 
   onSaveData(){
+  
     this.categories.forEach(category=>{
       if(category.id===this.category_id){
         this.dbfile.category=category;
       }
     });
+    this.dbfile.creator = JSON.parse(this.RegService.getUser());
+    console.log(this.dbfile);
     this.service.upLoadDataFromRemote(this.dbfile).subscribe(resp=>{
       this.message="Data Successfully Uploaded";
     },

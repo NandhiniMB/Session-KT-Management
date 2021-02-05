@@ -46,7 +46,7 @@ export class AllCategoriesComponent implements OnInit {
   }
   displayedColumns: String[] = ['id', 'category', 'uploadTime','button'];
 
-  subscribe(id:Number,index:Number){
+  subscribe(id:Number,index:number){
     console.log(index);
     this.categories.forEach(category=>{
       if(category.id===id){
@@ -57,7 +57,7 @@ export class AllCategoriesComponent implements OnInit {
     console.log(this.subscribedCategory);
     this.subscribeService.subscribeCategoryFromRemote(this.subscribedCategory).subscribe(resp=>{
       console.log(resp);
-      // this.isDisabled[index]=false;
+      this.isDisabled[index]=false;
       console.log(typeof index);
       console.log(this.isDisabled);
     })

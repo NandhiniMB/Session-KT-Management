@@ -1,12 +1,15 @@
 package com.team6.internetPortal.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,7 +26,16 @@ public class Category {
 	@Column
 	private Date createdOn;
 
-	
+	@OneToMany(mappedBy="category",fetch=FetchType.LAZY)
+	private List<Subscription> subscriptions;
+
+//	public List<Subscription> getSubscriptions() {
+//		return subscriptions;
+//	}
+//
+//	public void setSubscriptions(List<Subscription> subscriptions) {
+//		this.subscriptions = subscriptions;
+//	}
 
 	public int getId() {
 		return id;
@@ -54,7 +66,6 @@ public class Category {
 	}
 
 	public Category(String categoryName, Date date) {
-
 		this.categoryName = categoryName;
 		this.createdOn = date;
 	}

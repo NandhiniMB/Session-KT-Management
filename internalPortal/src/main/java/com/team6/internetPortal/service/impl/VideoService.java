@@ -146,7 +146,7 @@ public class VideoService implements IVideoService{
 			
 			int[] subscribed_users_id = subscriptionRepository.findAllUserByCategory(v.getCategory().getId());
 			System.out.println("suser"+subscribed_users_id);
-			String description = "New Video "+v.getTitle()+"Published";
+			String description = "New Video "+v.getTitle()+" Published";
 			for(int i=0;i<subscribed_users_id.length;i++)
 			       {
 				

@@ -11,10 +11,10 @@ import com.team6.internetPortal.entity.User;
 
 public interface ISubscriptionRepository  extends JpaRepository<Subscription, Long> {
 
-	@Query(value = "SELECT u.email FROM subscription s join user u on s.category_id = :id and s.subscriber_id=u.id", nativeQuery = true)
+	@Query(value = "SELECT u.email FROM subscription s join user u on s.subscriber_id=u.id where s.category_id =:id where s.subscriber_id=u.id", nativeQuery = true)
 	String[] findAllEmailByCategory(@Param("id") int id);
 
-	@Query(value = "SELECT u.id FROM subscription s join user u on s.category_id = :id and s.subscriber_id=u.id ", nativeQuery = true)
+	@Query(value = "SELECT u.id FROM subscription s join user u on s.subscriber_id=u.id where s.category_id = :id ", nativeQuery = true)
 	int[] findAllUserByCategory(@Param("id") int id);
 	
 }

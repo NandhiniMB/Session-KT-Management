@@ -34,6 +34,10 @@
     "/notify":{
         "target" : "http://localhost:8080/",
         "secure" : false
+    },
+    "/category":{
+        "target" : "http://localhost:8080",
+        "secure" : false
     }
     
 

@@ -13,10 +13,20 @@ export class SharedService {
 
   user: User;
 
+  vid:Number;
+
   constructor() { }
 
   setVideoDTO(videoDTO){
     this.videoDTO = videoDTO;
+  }
+
+  setVid(vid){
+    this.vid = vid;
+  }
+
+  getVid(){
+    return this.vid;
   }
 
   getVideoDTO(){
@@ -32,3 +42,4 @@ export class SharedService {
   }
   
 }
+

@@ -8,7 +8,10 @@ import { User } from '../Models/User';
 import { Like } from '../Models/like';
 import { RegistrationService } from '../registration.service';
 import { Comment } from '../Models/comment';
+import { ReceiveComments } from '../Models/ReceiveComments';
+
 import { PlayVideoService } from '../play-video.service';
+
 
 @Component({
   selector: 'app-play-video',
@@ -25,8 +28,25 @@ export class PlayVideoComponent implements OnInit {
   user: User = null;
   likedVid: Like;
   commentedVid: Comment = null;
+  comments:Array<ReceiveComments>;
+  vid:Number;
+  liked = false;
+  Likes: Array<Like>;
 
-  constructor( private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { }
+  constructor( private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { 
+    this.playVideoService.getAllLikes().subscribe(
+      resp => {
+               this.Likes = resp;   
+               console.log(this.Likes);
+              //  this.liked = true;
+              for (let i=0; i<this.Likes.length; i++){
+                if(this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id){
+                  this.liked = true;
+                }
+              }
+      }
+    );
+  }
 
   ngOnInit(): void {
     // this.prev_url = this.sharedService.getPrevUrl();
@@ -37,6 +57,17 @@ export class PlayVideoComponent implements OnInit {
     this.user = JSON.parse(this.regservice.getUser());
     console.log(this.user);
     this.likedVid = new Like(this.videoDTO, this.user);
+    this.liked = this.likedVid.liked;
+
+    this.vid=this.sharedService.getVid();
+
+    this.videoService.getNumberOfComments(this.vid).subscribe(resp => {
+      this.comments=resp;
+      console.log(this.comments);
+    })
+
+    
+    
 
   }
 
@@ -84,17 +115,44 @@ export class PlayVideoComponent implements OnInit {
     this.playVideoService.likeVideoFromRemote(this.likedVid).subscribe(resp => {
       this.likeCount++;
       console.log(this.likeCount);
+      this.likedVid.liked = true;
+      this.liked = true;
     })
   }
 
+  unlike() {
+    // this.playVideoService.deleteLikeFromRemote(this.likedVid.likedUser.id, this.)
+    this.playVideoService.getAllLikes().subscribe(
+      resp => {
+               this.Likes = resp;   
+               console.log(this.Likes);
+              //  this.liked = true;
+              for (let i=0; i<this.Likes.length; i++){
+                if(this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id){
+                  this.liked = false;
+                  console.log(this.Likes[i].id);
+                  this.playVideoService.deleteLike(this.Likes[i].id).subscribe(resp => {
+                    console.log(resp);
+                  })
+                }
+              }
+      }
+    );
+  
+  }
+
   comment(){
+    console.log(this.comments);
     console.log(this.comment_text);
     this.commentedVid = new Comment(this.comment_text, this.user, this.videoDTO);
     this.playVideoService.commentVideoFromRemote(this.commentedVid).subscribe(resp => {
       console.log(this.commentedVid);
     })
     this.comment_text="";
+
+    
   }
+
 
 
 

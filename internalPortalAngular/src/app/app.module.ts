@@ -83,6 +83,7 @@ import { AllCategoriesComponent } from './all-categories/all-categories.componen
     MatSelectModule,
     MatTabsModule,
     MatTableModule,
+    MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
     MatCardModule,

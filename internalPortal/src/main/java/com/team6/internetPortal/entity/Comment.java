@@ -29,6 +29,11 @@ public class Comment {
 	@ManyToOne
 	private Video  video;
 
+	public Comment()
+	{
+		super();
+	}
+
 	public Comment(int id, String comment, Date commentedOn, User commentor, Video video) {
 		super();
 		this.id = id;

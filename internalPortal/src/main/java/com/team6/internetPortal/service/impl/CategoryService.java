@@ -32,5 +32,18 @@ public class CategoryService implements ICategoryService {
 		category.setCreatedOn( new Date(System.currentTimeMillis()));
 		return categoryRepository.save(category);
 	}
+
+	@Override
+	public Category updateCategory(Category category) {
+		// TODO Auto-generated method stub
+		return categoryRepository.save(category);
+	}
+
+	@Override
+	public void deleteCategory(int id) {
+		// TODO Auto-generated method stub
+		categoryRepository.deleteById(id);
+		
+	}
 	
 }

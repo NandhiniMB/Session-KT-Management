@@ -25,7 +25,7 @@ public interface IVideoRepository extends JpaRepository<Video,Long> {
 	//@Query(value = "SELECT * FROM video v WHERE v.creator_id  = :id ", nativeQuery = true)
 	public List<Video> findByCreatorId(long id);
 
-	@Query(value = "SELECT * FROM video v join subscription s on v.category_id  = s.category_id where s.subscriber_id=:id ", nativeQuery = true)
+	@Query(value = "SELECT * FROM video v join subscription s on v.category_id  = s.category_id where s.subscriber_id=:id and v.status='APPROVED'", nativeQuery = true)
 	public List<Video> findBySubscription(long id);
 
 	@Modifying

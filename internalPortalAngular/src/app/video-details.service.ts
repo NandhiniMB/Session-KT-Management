@@ -20,8 +20,10 @@ export class VideoDetailsService {
   SEND_MAIL='/subs/sendmail';
   BASE_URL='http://localhost:8080/video';
   GET_CATEGORY='/category/';
-  GET_SUBSCRIBED_VIDEOS='/video/subs'
-
+  GET_SUBSCRIBED_VIDEOS='/video/subs';
+  UPDATE_CATEGORY='/category/';
+  ADD_CATEGORY='/category/';
+  DELETE_CATEGORY = '/category'
   file:File;
 
   constructor(private http:HttpClient) { }
@@ -84,4 +86,15 @@ export class VideoDetailsService {
     return this.http.get(this.GET_SUBSCRIBED_VIDEOS+'/'+id);
   }
 
+  public addCategory(category:Category):Observable<any>{
+    return this.http.post(this.ADD_CATEGORY,category)
+  }
+
+  public updateCategory(category:Category):Observable<any>{
+    return this.http.post(this.UPDATE_CATEGORY,category)
+  }
+
+  public deleteCategory(id:Number):Observable<any>{
+    return this.http.delete(this.DELETE_CATEGORY+'/'+id);
+  }
 }

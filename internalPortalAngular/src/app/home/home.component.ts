@@ -55,6 +55,9 @@ export class HomeComponent implements OnInit{
       // this.sharedService.setPrevUrl(this.prev_url);
       this.sharedService.setVideoDTO(videoDTO);
       this.router.navigate(['/playVideo',id]);
+
+      this.sharedService.setVid(id);
+
       
     });
     // this.router.navigate(['/playVideo',id]);

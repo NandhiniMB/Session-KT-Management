@@ -1,5 +1,6 @@
 package com.team6.internetPortal.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,9 @@ public class CommentService implements ICommentService {
 	    }
 
 	    //get by vid
-	    public Optional<Comment> getComment(Long vid){
+	    public List<Comment> getComment(Long vid)
+		{
+			System.out.println("HELLo");
 	        return userCommentsRepository.findByVideoId(vid);
 	    }
 

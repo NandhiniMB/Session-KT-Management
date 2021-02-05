@@ -5,11 +5,11 @@ export class Like {
     id: Number;
     likedAt: Date;
     video: VideoDTO;
-    user: User;
+    likedUser: User;
 
     constructor(video: VideoDTO, user: User) {
         this.video = video;
-        this.user = user;
+        this.likedUser = user;
     }
 
 }   

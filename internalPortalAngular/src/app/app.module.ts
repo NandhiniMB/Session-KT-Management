@@ -33,6 +33,7 @@ import { ReportedVideosComponent } from './reported-videos/reported-videos.compo
 import { CategoryComponent } from './category/category.component';
 
 import { PlayVideoComponent } from './play-video/play-video.component';
+import {MatCardModule} from '@angular/material/card';
 // import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
@@ -71,7 +72,8 @@ import {MatTableDataSource} from '@angular/material/table';
     MatBadgeModule,
     MatSelectModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

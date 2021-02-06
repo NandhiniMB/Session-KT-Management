@@ -17,11 +17,13 @@ const routes: Routes = [
   {path: '', pathMatch: "full", component:LoginComponent},
 // <<<<<<< HEAD
   {path: 'home', component: MainComponent,
-   children:[{path: '', pathMatch: "full", component:HomeComponent},
-   {path:'upload',component:UploadVideoComponent}, {path: 'maintain',
-    pathMatch: "full", component: ManageVideoComponent},
-    {path: 'subs', pathMatch: "full", component: AllCategoriesComponent},
+   children:[
+    {path: '', pathMatch: "full", component:HomeComponent},
+    {path:'upload',component:UploadVideoComponent}, 
+    {path: 'maintain',pathMatch: "full", component: ManageVideoComponent},
+    {path: 'subs', pathMatch: "full", component: CategoryComponent},
     {path: 'categories',  component: ManageCategoryComponent},
+  
     {path: 'videos', component: MyVideosComponent}]},
  // {path: 'home', pathMatch: "full", component: MainComponent, children:[{path:'upload',component:UploadVideoComponent}]},
   {path: 'register', pathMatch: "full", component: RegistrationComponent},

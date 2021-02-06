@@ -1,20 +1,105 @@
-<p>view works!</p>
-<!-- <br/> -->
+<div class="menu">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <button mat-icon-button (click)=back()>
+          <mat-icon>keyboard_backspace</mat-icon>
+        </button>
+        <h1>  Internal Portal</h1>
+         <!-- <mat-form-field  floatLabel="never" style="left: 80px; width: 60%;"> 
+          <input matInput placeholder="Search"><i class="material-icons">search</i>
+        </mat-form-field> -->
+        <button mat-raised-button color="warn" style="margin-left: 1000px" (click)="report()"><span class="material-icons">
+            report 
+            </span>Report Video</button>
+        
+     </mat-toolbar-row>
+      </mat-toolbar>
+    </div>
+    <mat-card class="example-card">
+    <mat-card-title style="text-align: center;">{{ videoDTO.title }}</mat-card-title>
+    <mat-card-subtitle><strong>Description: </strong>{{ videoDTO.description }} </mat-card-subtitle> 
+    <mat-card-subtitle><strong>Category: </strong>{{ videoDTO.category.categoryName}}<span style="margin-left: 500px;"></span><strong> Creator: </strong>{{ videoDTO.creator.name}} </mat-card-subtitle>  
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        <video id="my_video_1" class="video-js vjs-default-skin" *ngIf="prev_url" 
+        [src]="prev_url"  width="750px" height="450px" controls autoplay preload="none"
+		poster=''
+        data-setup='{"aspectRatio":"750:450"}'>
+       </video>
+        <div style="justify-content: center; text-align: center;">
+
+            <button mat-stroked-button (click)="playPause()">Play/Pause</button>
+            <button mat-stroked-button (click)="makeBig()">Big</button>
+            <button mat-stroked-button (click)="makeSmall()">Small</button>
+            <button mat-stroked-button (click)="makeNormal()">Normal</button>
+            <button mat-stroked-button (click)="restart();">Restart</button>
+            <button mat-stroked-button (click)="skip(-10)">Rewind</button>
+            <button mat-stroked-button (click)="skip(10)">Fastforward</button>
+        </div>
+      
+       </div> 
+          
+    </mat-card-header>
+   
+    <mat-card-actions style="text-align: center; justify-content: center;">
+       
+        <button mat-raised-button color="primary">Likes: {{likeCount}}</button>
+        <button mat-raised-button color="primary" style="margin:1em" *ngIf = "!liked" (click)="like()">Like</button>
+        <button mat-raised-button color="primary" style="margin:1em" *ngIf = "liked" (click)="unlike()">Unlike</button>
+        <mat-form-field class="example-full-width" class="center">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput placeholder="" [(ngModel)]="comment_text" ></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" style="margin:1em" (click)="comment()">Submit comment</button>
+       
+    </mat-card-actions>
+    
+    <div class="comm">
+        <h1>Comments</h1>
+        <!-- <mat-card-content> -->
+        <mat-list role="list" *ngFor="let comment of comments; let i = index">
+            <mat-list-item role="listitem">
+                <mat-card class="comment" style="height:50px; width:750px">
+                       
+                            <!-- <td>{{i+1}}</td>
+                            <td>  {{comment.comment}}</td>
+                            <td>{{comment.commentedOn | date}}</td> -->
+                    
+                            <table>
+                                <tr>
+                                  <th>{{i+1}}</th>
+                                  <th>{{comment.comment}}</th>
+                                  <th>{{comment.commentor.name }}</th>
+                                  <!-- <th>{{comment.</th> -->
+                                  <th>{{comment.commentedOn | date}}</th>
+                                </tr>
+                            </table>
+                    
+                    <span class="example-spacer"></span>
+                    
+                </mat-card>
+            </mat-list-item>
+          </mat-list> 
+    
+        <!-- </mat-card-content> -->
+</div>
+
+    <!-- <br/>
+<hr> -->
+
+  </mat-card>
 
 
 
+<!-- 
 <div class="center">
     
     <div>
     
-	<video id="my_video_1" class="video-js vjs-default-skin" *ngIf="prev_url" 
-        [src]="prev_url"  width="750px" height="450px" controls autoplay preload="none"
-		poster=''
-        data-setup='{"aspectRatio":"750:450"}'>
-    </video>
+
     <br/>
     <br>
-<strong class = "title">Title: {{ videoDTO.title }}</strong>
+<strong class = "title"></strong>
 
 <br/>
 <br/>
@@ -22,50 +107,22 @@
 <strong>Description: </strong>{{ videoDTO.description }}
     <br>
     <br>
-    <div>   
-	<button mat-stroked-button (click)="playPause()">Play/Pause</button>
-	<button mat-stroked-button (click)="makeBig()">Big</button>
-	<button mat-stroked-button (click)="makeSmall()">Small</button>
-	<button mat-stroked-button (click)="makeNormal()">Normal</button>
-	<button mat-stroked-button (click)="restart();">Restart</button>
-	<button mat-stroked-button (click)="skip(-10)">Rewind</button>
-    <button mat-stroked-button (click)="skip(10)">Fastforward</button>
+    <div>    -->
+
+	
    
-    </div>
+    <!-- </div> -->
 
-    <button mat-raised-button color="primary" style="margin:1em" *ngIf = "!liked" (click)="like()">Like</button>
-    <button mat-raised-button color="primary" style="margin:1em" *ngIf = "liked" (click)="unlike()">Unlike</button>
+    
 
-    <mat-form-field class="example-full-width" class="center">
-        <mat-label>Leave a comment</mat-label>
-        <textarea matInput placeholder="" [(ngModel)]="comment_text" ></textarea>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" style="margin:1em" (click)="comment()">Submit comment</button>
-</div>
+    
+<!-- </div>
 <span>
 
 </span>
-</div> 
+</div>  -->
 
 
-<br/>
-<hr>
-<div class="comm">
-        <h1>Comments</h1>
-</div>
-<mat-list role="list" *ngFor="let comment of comments; let i = index">
-        <mat-list-item role="listitem">
-            <mat-card>
-                    <!-- {{i+1}} -->
-                {{comment.comment}}
-                 
-                
-                <span class="example-spacer"><b>{{comment.commentedOn | date}}</b></span>
-                
-            </mat-card>
-        </mat-list-item>
-      </mat-list>
 
 
 

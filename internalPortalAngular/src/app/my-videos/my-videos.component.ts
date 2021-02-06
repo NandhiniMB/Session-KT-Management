@@ -22,7 +22,7 @@ export class MyVideosComponent implements OnInit {
   video: Array<DBFile> = [];
   myVideos : Array<DBFile> = [];
   user: User;
-  displayedColumns: String[] = ['id', 'title','description', 'category', 'uploadTime', 'status', 'play', 'edit'];
+  displayedColumns: String[] = ['id', 'title','description', 'category', 'uploadTime', 'status', 'play', 'edit','delete'];
   prev_url: any;
 
 
@@ -78,6 +78,21 @@ openDialog(video): void {
     console.log('The dialog was closed');
     this.title = result;
   });
+}
+
+onDelete(Video_id: Number) {
+  
+  
+  this.videoService.deleteVideo(Video_id).subscribe(resp => {
+  //  const videoDTO: VideoDTO = resp as VideoDTO;
+    console.log(resp);
+    // this.prev_url = "data:video/mp4;base64," + videoDTO.data;
+    // console.log("hi");
+    this.myVideos = this.myVideos.filter(v => {return v.id!=Video_id})
+    
+ });
+
+ 
 }
 
 }

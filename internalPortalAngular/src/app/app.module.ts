@@ -48,6 +48,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { ManageCategoryComponent } from './manage-category/manage-category.component';
 
 import { AllCategoriesComponent } from './all-categories/all-categories.component';
+import { MyVideosComponent } from './my-videos/my-videos.component';
+import { EditComponent } from './edit/edit.component';
 
 
 
@@ -71,7 +73,9 @@ import { AllCategoriesComponent } from './all-categories/all-categories.componen
     ManageCategoryComponent,
 
     AllCategoriesComponent,
-    NotificationDialog
+    NotificationDialog,
+    MyVideosComponent,
+    EditComponent
 
   ],
   imports: [

@@ -1,0 +1,14 @@
+<form class="example-form" #uploadform="ngForm">
+    <mat-form-field class="example-full-width">
+      <mat-label>Title</mat-label>
+      <input type="text" matInput placeholder="Enter edited Title..." name="title" [(ngModel)]='dbfile.title' required>
+    </mat-form-field>
+    <br>
+  
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <input type="text" matInput placeholder="Enter edited Description..." name="description" [(ngModel)]='dbfile.description' required>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button type="submit" color="accent" (click) = "onEdit()">Edit</button>
+</form>

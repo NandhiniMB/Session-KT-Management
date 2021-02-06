@@ -12,6 +12,7 @@ import { ManageVideoComponent } from './manage-video/manage-video.component';
 import {CategoryComponent} from './category/category.component';
 import {AllCategoriesComponent} from './all-categories/all-categories.component';
 import { ManageCategoryComponent } from './manage-category/manage-category.component';
+import { MyVideosComponent } from './my-videos/my-videos.component';
 const routes: Routes = [
   {path: '', pathMatch: "full", component:LoginComponent},
 // <<<<<<< HEAD
@@ -20,7 +21,8 @@ const routes: Routes = [
    {path:'upload',component:UploadVideoComponent}, {path: 'maintain',
     pathMatch: "full", component: ManageVideoComponent},
     {path: 'subs', pathMatch: "full", component: AllCategoriesComponent},
-    {path: 'categories',  component: ManageCategoryComponent}]},
+    {path: 'categories',  component: ManageCategoryComponent},
+    {path: 'videos', component: MyVideosComponent}]},
  // {path: 'home', pathMatch: "full", component: MainComponent, children:[{path:'upload',component:UploadVideoComponent}]},
   {path: 'register', pathMatch: "full", component: RegistrationComponent},
   {path: 'login', pathMatch: "full", component: LoginComponent},

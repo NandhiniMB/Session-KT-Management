@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DBFile } from './Models/dbfile';
 import { User } from './Models/User';
 import { VideoDTO } from './Models/VideoDTO';
 
@@ -14,6 +15,8 @@ export class SharedService {
   user: User;
 
   vid:Number;
+
+  editVideo: DBFile;
 
   constructor() { }
 
@@ -39,6 +42,14 @@ export class SharedService {
 
   getUserId(){
     return this.id;
+  }
+
+  setEditVideo(video){
+    this.editVideo = video;
+  }
+
+  getEditVideo(){
+    return this.editVideo;
   }
   
 }

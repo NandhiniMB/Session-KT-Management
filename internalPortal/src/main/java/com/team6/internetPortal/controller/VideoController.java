@@ -115,4 +115,11 @@ public class VideoController {
     	
     	return videoService.updateStatus(video);
     }
+
+    @PutMapping("/editDetails")
+	@CrossOrigin(origins="http://localhost:4200")
+	public Video EditDetails(@RequestBody Video video){
+		return videoService.editDetails(video);
+	}
+
 }

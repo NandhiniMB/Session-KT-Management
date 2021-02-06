@@ -1,11 +1,12 @@
-.table {
-    // margin-top: 10px;
-    // margin-bottom: 10px;
+table {
+    margin-top: 10px;
     padding-left: 40px;
     padding-right: 40px;
     width: 100%;
-    height:100%;
-    // overflow-y:scroll;
-    // float:left;
-    margin-right: 15px;
 }
+mat-button-toggle{
+    color:white;
+    background-color: #3F51B5;
+    width:100px;
+}
+

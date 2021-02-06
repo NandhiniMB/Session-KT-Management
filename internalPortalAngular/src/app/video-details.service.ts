@@ -20,6 +20,7 @@ export class VideoDetailsService {
   SEND_MAIL='/subs/sendmail';
   BASE_URL='http://localhost:8080/video';
   COMMENTS='/comments';
+  EDIT_DETAILS = '/editDetails';
 
   GET_CATEGORY='/category/';
   GET_SUBSCRIBED_VIDEOS='/video/subs';
@@ -82,6 +83,10 @@ export class VideoDetailsService {
 
   public UpdateStatus(video:DBFile) : Observable<any>{
       return this.http.put(this.UPDATE_STATUS,video);
+    }
+
+    public EditDetails(video:DBFile) : Observable<any>{
+      return this.http.put(this.BASE_URL + this.EDIT_DETAILS,video);
     }
 
   public sendSubscriptionMail(video:DBFile,category:Category)

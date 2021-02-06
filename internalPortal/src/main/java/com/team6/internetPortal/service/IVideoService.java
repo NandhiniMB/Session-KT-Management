@@ -40,4 +40,6 @@ public interface IVideoService{
 
 	public Video updateStatus(Video video);
 
+	public Video editDetails(Video video);
+
 }

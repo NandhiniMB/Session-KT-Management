@@ -14,6 +14,10 @@ public interface ICategoryService {
 
 	public Category addCategory(Category category);
 
+	public Category updateCategory(Category category);
+
+	public void deleteCategory(int id);
+
 	
 
 }

@@ -9,7 +9,7 @@ import { Like } from '../Models/like';
 import { RegistrationService } from '../registration.service';
 import { Comment } from '../Models/comment';
 import { ReceiveComments } from '../Models/ReceiveComments';
-
+import {Location} from '@angular/common';
 import { PlayVideoService } from '../play-video.service';
 
 
@@ -33,13 +33,17 @@ export class PlayVideoComponent implements OnInit {
   liked = false;
   Likes: Array<Like>;
 
-  constructor( private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { 
+  constructor( private location: Location,private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { 
     this.playVideoService.getAllLikes().subscribe(
       resp => {
                this.Likes = resp;   
                console.log(this.Likes);
               //  this.liked = true;
               for (let i=0; i<this.Likes.length; i++){
+
+                if(this.Likes[i].video.id === this.videoDTO.id){
+                  this.likeCount=this.likeCount+1;
+                }
                 if(this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id){
                   this.liked = true;
                 }
@@ -69,6 +73,17 @@ export class PlayVideoComponent implements OnInit {
     
     
 
+  }
+
+  back(){
+    this.location.back();
+  }
+
+  report(){
+  this.videoService.reportVideo(this.videoDTO.id,this.user.id).subscribe(resp=>{
+
+    console.log(resp);
+  })
   }
 
   @ViewChild("videoPlayer", { static: false }) videoplayer: ElementRef;
@@ -136,6 +151,7 @@ export class PlayVideoComponent implements OnInit {
                   })
                 }
               }
+              this.likeCount--;
       }
     );
   
@@ -147,10 +163,11 @@ export class PlayVideoComponent implements OnInit {
     this.commentedVid = new Comment(this.comment_text, this.user, this.videoDTO);
     this.playVideoService.commentVideoFromRemote(this.commentedVid).subscribe(resp => {
       console.log(this.commentedVid);
+      this.comments.push(resp);
     })
     this.comment_text="";
 
-    
+   
   }
 
 

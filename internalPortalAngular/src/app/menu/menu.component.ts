@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,Inject } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, AfterViewInit,Input,Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import {AdminService} from '../service/admin.service';
 import {Admin} from '../Models/Admin';
@@ -7,10 +7,50 @@ import { RegistrationService } from '../registration.service';
 import {NotificationService} from '../service/notification.service';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
-import { BrowserModule } from '@angular/platform-browser'
-// export interface notification{
-//  notification:this.notif
-// }
+@Component({
+  selector: 'notification-dialog',
+  templateUrl: 'notification-dialog.html',
+})
+
+export class NotificationDialog {
+
+  constructor(private NotificationService:NotificationService , private RegService : RegistrationService) { 
+
+  }
+
+  notifications : Array<any> ;
+  notifications_count:number;
+  user  : User = new User()
+  //@Output() notifications_count : EventEmitter<any> = new EventEmitter();
+  //notifications_count : Number;
+  ngOnInit(): void {
+
+    this.user = JSON.parse(this.RegService.getUser());
+    console.log(this.user.id);
+    this.NotificationService.getNotifications(this.user.id).subscribe(notification => {
+      console.log(notification);
+      this.notifications = notification;
+      this.notifications_count = this.notifications.length;
+    })
+
+  }
+   public OnNotificationsRead(notification:any){
+
+    let notify_id=notification.id;
+    this.NotificationService.ReadNotifications(notification).subscribe(notification => {
+      console.log(notification);
+      this.notifications = this.notifications.filter(notification=> !( notification.id== notify_id));
+      this.notifications_count = this.notifications.length;
+    })
+  
+   }
+
+  
+}
+
+
+
+
 
 @Component({
   selector: 'app-menu',
@@ -19,9 +59,9 @@ import { BrowserModule } from '@angular/platform-browser'
 })
 
 
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit  {
 
-
+  // @ViewChild(NotificationDialog) child;
   notifications : Array<any> ;
   notifications_count : Number;
   constructor(public dialog: MatDialog,private router: Router,private AdminService: AdminService,private RegService : RegistrationService,private NotificationService:NotificationService ) { }
@@ -40,9 +80,15 @@ export class MenuComponent implements OnInit {
     console.log(notification);
     this.notifications = notification;
     this.notifications_count = this.notifications.length;
+   // alert(this.notifications_count);
   })
 
   }
+
+  // ngAfterViewInit() {
+  // //  alert(this.child.notifications_count);
+  //   this.notifications_count = this.child.notifications_count;
+  // }
 
   public openNotificationDialog() {
     const dialogRef = this.dialog.open(NotificationDialog);
@@ -61,45 +107,3 @@ export class MenuComponent implements OnInit {
  
 }
 
-@Component({
-  selector: 'notification-dialog',
-  templateUrl: 'notification-dialog.html',
-})
-// export class NotificationDialog {
-//   constructor(@Inject(MAT_DIALOG_DATA) public data: notifications) {}
-// }
-export class NotificationDialog {
-
-  constructor(private NotificationService:NotificationService , private RegService : RegistrationService) { 
-
-  }
-
-  notifications : Array<any> ;
-
-  user  : User = new User()
-  notifications_count : Number;
-  ngOnInit(): void {
-
-    this.user = JSON.parse(this.RegService.getUser());
-    console.log(this.user.id);
-    this.NotificationService.getNotifications(this.user.id).subscribe(notification => {
-      console.log(notification);
-      this.notifications = notification;
-      this.notifications_count = this.notifications.length;
-      console.log("******************"+this.notifications_count);
-    })
-
-  }
-   public OnNotificationsRead(notification:any){
-
-    let notify_id=notification.id;
-    this.NotificationService.ReadNotifications(notification).subscribe(notification => {
-      console.log(notification);
-      this.notifications = this.notifications.filter(notification=> !( notification.id== notify_id));
-      this.notifications_count = this.notifications.length;
-    })
-  
-   }
-
-  
-}

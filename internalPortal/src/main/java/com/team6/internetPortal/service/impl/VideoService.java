@@ -1,6 +1,7 @@
 package com.team6.internetPortal.service.impl;
 
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -150,12 +151,16 @@ public class VideoService implements IVideoService{
 		if(v.getStatus()==c.status.APPROVED)
 		{
 			
-			String content = "Greetings of the day!, \n\nYour New Video in the Category "+video.getCategory().getCategoryName() +" titled "+video.getTitle()+" is Approved!.\n\n Regards,\nInternal Portal Team";
+			//user approved notification
+			String content = "Your New Video in the Category "+video.getCategory().getCategoryName() +" titled "+video.getTitle()+" is Approved!.";
 			sendmailService.sendEmail(user,content);
+			notificationRepository.postNotifications(video.getCreator().getId(), content);
+			
+			//subscribers notification
 			int[] subscribed_users_id = subscriptionRepository.findAllUserByCategory(v.getCategory().getId());
 			System.out.println("suser"+subscribed_users_id);
 			String description = "New Video "+v.getTitle()+" Published";
-			for(int i=0;i<subscribed_users_id.length;i++)
+	    	for(int i=0;i<subscribed_users_id.length;i++)
 			       {
 				
 				     System.out.println(subscribed_users_id[i]);
@@ -165,9 +170,20 @@ public class VideoService implements IVideoService{
 		
 	}
 		if(v.getStatus()==c.status.REJECTED) {
-			String content = "Greetings of the day!, \n\nYour New Video in the Category "+video.getCategory().getCategoryName() +" titled "+video.getTitle()+" is Rejected!.\n\n Regards,\nInternal Portal Team";
+			//user video rejected notification
+			String content = "Your New Video in the Category "+video.getCategory().getCategoryName() +" titled "+video.getTitle()+" is Rejected!.";
+			notificationRepository.postNotifications(video.getCreator().getId(), content);
 			sendmailService.sendEmail(user,content);
 		}
 	return v;
+	}
+
+	@Override
+	public Video editDetails(Video video) {
+		System.out.println(video);
+		video.setLastModifiedOn(new Date(System.currentTimeMillis()));
+		Video v = videoRepository.save(video);
+		//System.out.println("Hellooooooooooooooo" + v);
+		return v;
 	}
 }

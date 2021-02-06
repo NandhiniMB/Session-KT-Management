@@ -17,7 +17,8 @@
     </div>
     <mat-card class="example-card">
     <mat-card-title style="text-align: center;">{{ videoDTO.title }}</mat-card-title>
-    <mat-card-subtitle><strong>Description: </strong>{{ videoDTO.description }} </mat-card-subtitle>  
+    <mat-card-subtitle><strong>Description: </strong>{{ videoDTO.description }} </mat-card-subtitle> 
+    <mat-card-subtitle><strong>Category: </strong>{{ videoDTO.category.categoryName}}<span class="example-spacer"></span><strong> Creator: </strong>{{ videoDTO.creator.name}} </mat-card-subtitle>  
     <mat-card-header>
       <div mat-card-avatar class="example-header-image">
         <video id="my_video_1" class="video-js vjs-default-skin" *ngIf="prev_url" 
@@ -41,6 +42,8 @@
     </mat-card-header>
    
     <mat-card-actions style="text-align: center; justify-content: center;">
+       
+        <button mat-raised-button color="primary">Likes: {{likeCount}}</button>
         <button mat-raised-button color="primary" style="margin:1em" *ngIf = "!liked" (click)="like()">Like</button>
         <button mat-raised-button color="primary" style="margin:1em" *ngIf = "liked" (click)="unlike()">Unlike</button>
         <mat-form-field class="example-full-width" class="center">

@@ -40,6 +40,10 @@ export class PlayVideoComponent implements OnInit {
                console.log(this.Likes);
               //  this.liked = true;
               for (let i=0; i<this.Likes.length; i++){
+
+                if(this.Likes[i].video.id === this.videoDTO.id){
+                  this.likeCount=this.likeCount+1;
+                }
                 if(this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id){
                   this.liked = true;
                 }
@@ -147,6 +151,7 @@ export class PlayVideoComponent implements OnInit {
                   })
                 }
               }
+              this.likeCount--;
       }
     );
   

@@ -62,6 +62,11 @@ public class UserController {
 	        System.out.println("+++++++++++"+userCheck.getId());
 	        return userCheck;
 	    }
+	    
+	    @GetMapping("/restricted")
+	    public String restricted() {
+	        return "if you see this you are logged in";
+	    }
 
 	
 

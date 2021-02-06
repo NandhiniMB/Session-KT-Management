@@ -39,8 +39,8 @@ export class AllCategoriesComponent implements OnInit {
       console.log(categories);
     });
     this.user=JSON.parse(this.regService.getUser());
-    this.subscribeService.getAllSubscriptions(this.user.id).subscribe(resp=>{
-      this.subscriptions=resp;
+    this.subscribeService.getAllSubscriptions(this.user.id).subscribe(async resp=>{
+      this.subscriptions=await resp;
       console.log(resp);
       this.length=this.categories.length;
       for(let i=0;i<this.length;i++){
@@ -95,6 +95,7 @@ export class AllCategoriesComponent implements OnInit {
     console.log(this.subscribedCategory);
     this.subscribeService.subscribeCategoryFromRemote(this.subscribedCategory).subscribe(resp=>{
       console.log(resp);
+      // this.subscriptions = this.subscriptions.filter(v => {return v.id!=});
       // this.subscribedCategory.isSubscribed=true;
       // this.isSubscribed=true;
       // this.subscribedCategory.isSubscribed[index]=true;
@@ -102,12 +103,14 @@ export class AllCategoriesComponent implements OnInit {
       // console.log(typeof index);
       // console.log(this.isDisabled);
     })
+    window.location.reload();
     // this.subscribedCategory=new Subscribe(this.categories.);
 }
 unSubscribe(id:Number){
 this.subscribeService.deleteSubscription(id,this.user.id).subscribe(resp=>{
   console.log(resp);
 });
+window.location.reload();
 }
 }
 

@@ -150,12 +150,16 @@ public class VideoService implements IVideoService{
 		if(v.getStatus()==c.status.APPROVED)
 		{
 			
+			//user approved notification
 			String content = "Greetings of the day!, \n\nYour New Video in the Category "+video.getCategory().getCategoryName() +" titled "+video.getTitle()+" is Approved!.\n\n Regards,\nInternal Portal Team";
 			sendmailService.sendEmail(user,content);
+			notificationRepository.postNotifications(video.getCreator().getId(), content);
+			
+			//subscribers notification
 			int[] subscribed_users_id = subscriptionRepository.findAllUserByCategory(v.getCategory().getId());
 			System.out.println("suser"+subscribed_users_id);
 			String description = "New Video "+v.getTitle()+" Published";
-			for(int i=0;i<subscribed_users_id.length;i++)
+	    	for(int i=0;i<subscribed_users_id.length;i++)
 			       {
 				
 				     System.out.println(subscribed_users_id[i]);
@@ -165,7 +169,9 @@ public class VideoService implements IVideoService{
 		
 	}
 		if(v.getStatus()==c.status.REJECTED) {
+			//user video rejected notification
 			String content = "Greetings of the day!, \n\nYour New Video in the Category "+video.getCategory().getCategoryName() +" titled "+video.getTitle()+" is Rejected!.\n\n Regards,\nInternal Portal Team";
+			notificationRepository.postNotifications(video.getCreator().getId(), content);
 			sendmailService.sendEmail(user,content);
 		}
 	return v;

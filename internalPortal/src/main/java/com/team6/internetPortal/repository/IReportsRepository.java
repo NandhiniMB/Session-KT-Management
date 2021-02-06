@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.team6.internetPortal.entity.Report;
-import com.team6.internetPortal.entity.Video;
 
 public interface IReportsRepository extends JpaRepository<Report, Long> {
 
@@ -27,4 +28,9 @@ public interface IReportsRepository extends JpaRepository<Report, Long> {
 		public List<Report> findReportedVideos();
 	    
 		public Optional<Report> findByVideoId(Long id);
+
+
+		 @Modifying
+		@Query(value = "insert into report(user_id,video_id) values(:user_id,:video_id) ", nativeQuery = true)
+		public void saveReport(@Param("video_id")long video_id, @Param("user_id") long user_id);
 }

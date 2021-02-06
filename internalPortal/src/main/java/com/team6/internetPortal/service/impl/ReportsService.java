@@ -1,18 +1,22 @@
 package com.team6.internetPortal.service.impl;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.team6.internetPortal.entity.Report;
-import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.repository.IReportsRepository;
 import com.team6.internetPortal.service.IReportService;
 
 
 @Service
+@Transactional
 public class ReportsService implements IReportService
 {
 
@@ -20,8 +24,8 @@ public class ReportsService implements IReportService
     private IReportsRepository reportsRepository;
 
     //save
-    public Report saveReport(Report report){
-        return reportsRepository.save(report);
+    public void saveReport(long video_id,long user_id){
+        reportsRepository.saveReport(video_id,user_id);
     }
 
     //get by report id
@@ -46,8 +50,20 @@ public class ReportsService implements IReportService
 
     @Override
 	public List<Report> getReportedVideo() {
+		List<Report> reports = reportsRepository.findReportedVideos();
 		
-		return reportsRepository.findReportedVideos();
+//		List<Report> unique_report = reports.stream()
+//                .collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparingInt(Report::getVideo().getId()))),
+//                                           ArrayList::new));
+		
+//		long numReports = reports.stream()
+//                .filter(r -> r.getVideo().getId().equals(c.name))
+//                .count();
+		Set<Long> video_set = new HashSet<>();
+		List<Report> unique_report  =reports.stream()
+        .filter(r -> video_set.add(r.getVideo().getId()))
+        .collect(Collectors.toList());
+		return unique_report;
 	}
 
 	@Override

@@ -25,7 +25,8 @@ export class VideoDetailsService {
   GET_SUBSCRIBED_VIDEOS='/video/subs';
   UPDATE_CATEGORY='/category/';
   ADD_CATEGORY='/category/';
-  DELETE_CATEGORY = '/category'
+  DELETE_CATEGORY = '/category';
+  REPORT_VIDEO = '/report/'
   file:File;
 
   constructor(private http:HttpClient) { }
@@ -65,6 +66,10 @@ export class VideoDetailsService {
 
   public deleteVideo(id:Number) : Observable<any>{
     return this.http.delete(this.DELETE_VIDEO+'/'+id);
+  }
+
+  public reportVideo(video_id:Number,user_id:Number):Observable<any>{
+    return this.http.get(this.REPORT_VIDEO+'/'+video_id+'/'+user_id);
   }
 
   // public approveVideo(id:Number) : Observable<any>{

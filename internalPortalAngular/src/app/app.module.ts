@@ -40,11 +40,13 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material//expansion';
 //import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 // import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { AllCategoriesComponent } from './all-categories/all-categories.component';
+import { SubscribedCategoriesComponent } from './subscribed-categories/subscribed-categories.component';
 
 
 
@@ -64,7 +66,8 @@ import { AllCategoriesComponent } from './all-categories/all-categories.componen
     CategoryComponent,
     PlayVideoComponent,
     AllCategoriesComponent,
-    NotificationDialog
+    NotificationDialog,
+    SubscribedCategoriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,7 +94,8 @@ import { AllCategoriesComponent } from './all-categories/all-categories.componen
     MatExpansionModule,
     MatPaginatorModule,
     MatButtonToggleModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent],

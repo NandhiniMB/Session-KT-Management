@@ -20,7 +20,7 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAllCategory().subscribe(categories=>{
       this.categories=categories;
-      console.log(categories);
+      // console.log(categories);
     });
   }
   

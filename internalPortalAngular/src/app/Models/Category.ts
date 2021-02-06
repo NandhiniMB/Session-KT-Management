@@ -1,5 +1,5 @@
 export class Category {
-    id:Number;
+    id:number;
     categoryName:String;
     createdOn:Date;
     constructor(){}

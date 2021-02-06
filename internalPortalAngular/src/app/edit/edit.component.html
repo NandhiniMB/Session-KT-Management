@@ -1,4 +1,6 @@
-<form class="example-form" #uploadform="ngForm">
+<form class="example-form" #uploadform="ngForm"><span style="float: right;  cursor: pointer;" mat-dialog-close class="material-icons">
+  close
+  </span>
     <mat-form-field class="example-full-width">
       <mat-label>Title</mat-label>
       <input type="text" matInput placeholder="Enter edited Title..." name="title" [(ngModel)]='dbfile.title' required>

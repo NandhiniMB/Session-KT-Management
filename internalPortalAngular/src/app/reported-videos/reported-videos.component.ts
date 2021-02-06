@@ -6,6 +6,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { VideoDTO } from '../Models/VideoDTO';
 import { ReportService } from '../service/report.service';
 import {SharedService} from '../shared.service';
+import { RegistrationService } from '../registration.service';
+import { User } from '../Models/User';
 @Component({
   selector: 'app-reported-videos',
   templateUrl: './reported-videos.component.html',
@@ -19,11 +21,13 @@ export class ReportedVideosComponent implements OnInit {
   imageToShow = null;
 
   prev_url: any;
+  user:User=new User();
+  constructor(private router: Router,private sharedService: SharedService,private regService:RegistrationService, private VideoService: VideoDetailsService, private sanitizer : DomSanitizer,private ReportService: ReportService) { }
 
-  constructor(private router: Router,private sharedService: SharedService, private VideoService: VideoDetailsService, private sanitizer : DomSanitizer,private ReportService: ReportService) { }
 
-
+ 
   ngOnInit(): void {
+    this.user=JSON.parse(this.regService.getUser());
     this.VideoService.getReportedVideo().subscribe(resp => {
       console.log(resp);
       this.report = resp;

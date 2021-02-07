@@ -110,7 +110,7 @@ onSelectMostViewed(){
 
   console.log("in most viwed")
   console.log(this.mostViews);
-  this.mostViews=this.mostViews.slice(0,2);
+  this.mostViews=this.mostViews.slice(0,5);
   this.dataSource=new MatTableDataSource(this.mostViews);
   console.log("mostView",this.dataSource);
   

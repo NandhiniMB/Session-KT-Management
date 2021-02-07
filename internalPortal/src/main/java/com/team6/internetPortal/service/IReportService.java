@@ -24,4 +24,8 @@ public interface IReportService {
 	    public List<Report> getReportedVideo();
 
 		public void deleteVideo(long id);
+
+		public void saveCommentReport(long comment_id, long user_id);
+
+		public List<Report> getReportedComments();
 }

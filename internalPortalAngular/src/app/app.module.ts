@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -8,7 +7,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import {MenuComponent, NotificationDialog} from './menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 // import {MatPaginator} from '@angular/material/paginator';
 // import {MatTableDataSource} from '@angular/material/table';
 
@@ -43,6 +42,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material//expansion';
 //import { FlexLayoutModule } from '@angular/flex-layout';
+
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
@@ -52,7 +52,12 @@ import {MatTableDataSource} from '@angular/material/table';
 
 import { MyVideosComponent } from './my-videos/my-videos.component';
 import { EditComponent } from './edit/edit.component';
+
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ReportedCommentsComponent } from './reported-comments/reported-comments.component';
+
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
 
 
 
@@ -79,6 +84,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     SubscribedCategoriesComponent,
     MyVideosComponent,
     EditComponent,
+    ConfirmationDialogComponent,
+    ReportedCommentsComponent,
     ForgotPasswordComponent
   ],
   imports: [
@@ -107,6 +114,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MatPaginatorModule,
     MatButtonToggleModule,
     MatRadioModule,
+    MatTooltipModule,
     MatSlideToggleModule
   ],
   providers: [],

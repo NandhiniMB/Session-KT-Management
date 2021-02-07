@@ -1,0 +1,122 @@
+
+
+
+
+<!-- <div class="mat-elevation-z8"> -->
+    <table mat-table [dataSource]="report" class="mat-elevation-z8" >
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <!-- <div *matCellDef="let element1">-->
+          <!-- <div *ngIf = "element1.status == 'approved'">  -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef><strong> No. </strong> </th>
+          <td mat-cell *matCellDef="let element; let i = index;"> <strong>{{i+1}}</strong></td>
+        </ng-container>
+
+        <ng-container matColumnDef="comment">
+            <th mat-header-cell *matHeaderCellDef><strong> Comment </strong></th>
+            <td mat-cell *matCellDef="let element"> <strong>{{element.comment.comment}} </strong></td>
+          </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef><strong> Title </strong></th>
+          <td mat-cell *matCellDef="let element"> <strong>{{element.comment.video.title}} </strong></td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        
+      
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef><strong> Description </strong></th>
+          <td mat-cell *matCellDef="let element">{{element.comment.video.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef><strong> Category </strong></th>
+            <td mat-cell *matCellDef="let element">{{element.comment.video.category.categoryName}}  </td>
+          </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="uploadTime">
+          <th mat-header-cell *matHeaderCellDef><strong> Uploaded On </strong></th>
+          <td mat-cell *matCellDef="let element">{{element.comment.video.createdOn | date}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="creator">
+          <th mat-header-cell *matHeaderCellDef><strong> Uploaded By </strong></th>
+          <td mat-cell *matCellDef="let element">{{element.comment.video.creator.name}} </td>
+        </ng-container>
+      
+        <!-- <ng-container matColumnDef="reporter">
+          <th mat-header-cell *matHeaderCellDef><strong> Reported By </strong></th>
+          <td mat-cell *matCellDef="let element">{{element.user.name}} </td>
+        </ng-container> -->
+      
+        <!-- <ng-container matColumnDef="ReportBy">
+          <th mat-header-cell *matHeaderCellDef><strong> Reported By </strong></th>
+          <td mat-cell *matCellDef="let element"> <div *ngIf = "element.status == 'approved'">{{element.createdOn | date}} </div> </td>
+        </ng-container> -->
+      
+        <ng-container matColumnDef="play">
+          <th mat-header-cell *matHeaderCellDef><strong> Play Video </strong></th>
+          <td mat-cell *matCellDef="let element"><button mat-raised-button color="accent" (click) = "onPlay(element.comment.video.id)">
+            <span class="material-icons">
+            play_circle
+            </span> Play</button> </td>
+        </ng-container>
+      
+        <!-- <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef><strong>Edit</strong></th>
+          <td mat-cell *matCellDef="let element"><button mat-raised-button color="primary" (click) = "onEdit(element.video.id)">
+            <span class="material-icons">
+             edit
+            </span> </button> </td>
+        </ng-container> -->
+      
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef><strong>Delete Comment</strong></th>
+          <td mat-cell *matCellDef="let element"><button mat-raised-button color="warn" (click)="openConfirmationDialog(element.comment.id,element.id)">
+            <span class="material-icons">
+             delete
+            </span></button> </td>
+        </ng-container>
+      
+        <!-- (click) = "onDelete(element.video.id,element.id)"
+      
+        <button (click)="openConfirmationDialog()">Delete me</button> -->
+      <!-- </div>
+      </div> -->
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      
+      <video 
+        *ngIf="prev_url" 
+        [src]="prev_url" 
+        style="width:300px; height:300px;" 
+        controls></video>
+      
+      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+      
+      <!-- </div> -->
+      <!-- <img [src]="imageToShow" alt="hi"> -->
+      
+      <!-- <ng-template ngFor let-word [ngForOf] = "video">
+        <div class="word">
+          <div class="meaning">
+            
+            {{ word | json }} -->
+            <!-- Word: {{word.id}}<br />
+            Part Of Speech: {{word.title}}<br />
+           Meaning: {{word.category}}<br /> -->
+            <!-- Example Sentence: {{word}}<br /> -->
+          <!-- </div>
+        </div>
+      </ng-template> -->
+      
+      

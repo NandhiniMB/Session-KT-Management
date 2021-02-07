@@ -11,7 +11,8 @@ import { Comment } from '../Models/comment';
 import { ReceiveComments } from '../Models/ReceiveComments';
 import {Location} from '@angular/common';
 import { PlayVideoService } from '../play-video.service';
-
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-play-video',
@@ -33,7 +34,30 @@ export class PlayVideoComponent implements OnInit {
   liked = false;
   Likes: Array<Like>;
 
-  constructor( private location: Location,private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { 
+  constructor(public dialog: MatDialog, private location: Location,private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { 
+    
+   
+
+  }
+
+  ngOnInit(): void {
+
+    this.videoDTO = this.sharedService.getVideoDTO();
+    this.prev_url = "data:video/mp4;base64," + this.videoDTO.data;
+    // this.userId = this.sharedService.getUserId();
+    console.log(this.regservice.getUser());
+    this.user = JSON.parse(this.regservice.getUser());
+    console.log(this.user);
+    this.likedVid = new Like(this.videoDTO, this.user);
+    this.liked = this.likedVid.liked;
+    this.vid=this.sharedService.getVid();
+    console.log(this.vid);
+    this.videoService.getNumberOfComments(this.vid).subscribe(resp => {
+      this.comments=resp;
+      console.log(this.comments);
+    })
+
+
     this.playVideoService.getAllLikes().subscribe(
       resp => {
                this.Likes = resp;   
@@ -50,29 +74,7 @@ export class PlayVideoComponent implements OnInit {
               }
       }
     );
-  }
-
-  ngOnInit(): void {
-    // this.prev_url = this.sharedService.getPrevUrl();
-    this.videoDTO = this.sharedService.getVideoDTO();
-    this.prev_url = "data:video/mp4;base64," + this.videoDTO.data;
-    // this.userId = this.sharedService.getUserId();
-    console.log(this.regservice.getUser());
-    this.user = JSON.parse(this.regservice.getUser());
-    console.log(this.user);
-    this.likedVid = new Like(this.videoDTO, this.user);
-    this.liked = this.likedVid.liked;
-
-    this.vid=this.sharedService.getVid();
-
-    this.videoService.getNumberOfComments(this.vid).subscribe(resp => {
-      this.comments=resp;
-      console.log(this.comments);
-    })
-
-    
-    
-
+   
   }
 
   back(){
@@ -170,7 +172,31 @@ export class PlayVideoComponent implements OnInit {
    
   }
 
+  reportComment(id:Number)
+  {
+    this.videoService.reportComment(id,this.user.id).subscribe(resp=>{
 
+      console.log(resp);
+    })
+  }
+
+
+  openConfirmationDialog(comment): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+    });
+  
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if(result){
+        if(comment == null)
+             this.report();
+        else
+        this.reportComment(comment);
+      }
+    });
+  }
 
 
 

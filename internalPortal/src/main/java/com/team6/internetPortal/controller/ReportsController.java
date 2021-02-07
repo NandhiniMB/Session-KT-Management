@@ -34,6 +34,11 @@ public class ReportsController
 	public List<Report> getReportedVideos() throws MalformedURLException {
 		return reportsService.getReportedVideo();
 	}
+    
+    @GetMapping("/getcomment")
+	public List<Report> getReportedComments() throws MalformedURLException {
+		return reportsService.getReportedComments();
+	}
 	
 //    @PostMapping("/reports")
 //    public Report saveReport(@RequestBody Report report){
@@ -45,6 +50,12 @@ public class ReportsController
     public void saveReport(@PathVariable Long video_id,@PathVariable Long user_id){
 
         reportsService.saveReport(video_id,user_id);
+    }
+    
+    @GetMapping("/comment/{comment_id}/{user_id}")
+    public void saveCommentReport(@PathVariable long comment_id,@PathVariable long user_id){
+
+        reportsService.saveCommentReport(comment_id,user_id);
     }
 
     @GetMapping("/reports/comment/{id}")

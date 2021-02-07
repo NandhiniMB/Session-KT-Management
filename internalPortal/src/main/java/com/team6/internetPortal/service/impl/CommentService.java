@@ -37,5 +37,12 @@ public class CommentService implements ICommentService {
 		public Comment findwithCommentrId(Long id) {
 			return userCommentsRepository.findByCommentorId(id);}
 
+		@Override
+		public void deleteComment(long id) {
+		
+			userCommentsRepository.deleteById(id);
+			
+		}
+
 
 }

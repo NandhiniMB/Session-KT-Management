@@ -1,3 +1,4 @@
+import { logging } from "protractor";
 import { Category } from "./Category";
 import { User } from "./User";
 
@@ -18,6 +19,7 @@ creator:User;
 
     lastModifiedOn: Date;
 
+    views:number;
      status: string;
 
     // private User creator;

@@ -42,4 +42,8 @@ public interface IVideoService{
 
 	public Video editDetails(Video video);
 
+	public long videoViewed(Video video);
+
+	public List<Video> mostViewedVideo();
+
 }

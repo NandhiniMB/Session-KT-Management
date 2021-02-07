@@ -121,5 +121,16 @@ public class VideoController {
 	public Video EditDetails(@RequestBody Video video){
 		return videoService.editDetails(video);
 	}
+    
+    @PostMapping("/view")
+    public long videoViewed(@RequestBody Video video) {
+    	return videoService.videoViewed(video);
+    }
 
+    
+    @GetMapping("/mostview")
+    public List<Video> mostViewedVideo(){
+    	
+    	return videoService.mostViewedVideo();
+    }
 }

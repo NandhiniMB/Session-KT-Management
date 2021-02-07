@@ -27,7 +27,7 @@
 
       <mat-form-field class="example-full-width">
         <mat-label>Name</mat-label>
-        <input type="text" matInput [formControl]="nameFormControl" placeholder="Ex. pat@example.com" name = "name" [(ngModel)] = "user.name" required>
+        <input type="text" matInput [formControl]="nameFormControl" placeholder="Name" name = "name" [(ngModel)] = "user.name" required>
         <!-- <mat-error *ngIf="usernameFormControl.hasError('username') && !usernameFormControl.hasError('required')">
           Please enter a valid email address
         </mat-error> -->
@@ -38,7 +38,7 @@
 
       <mat-form-field class="example-full-width">
         <mat-label>Username</mat-label>
-        <input type="text" matInput [formControl]="usernameFormControl" placeholder="Ex. pat@example.com" name = "username" [(ngModel)] = "user.username" required>
+        <input type="text" matInput [formControl]="usernameFormControl" placeholder="Username" name = "username" [(ngModel)] = "user.username" required>
         <!-- <mat-error *ngIf="usernameFormControl.hasError('username') && !usernameFormControl.hasError('required')">
           Please enter a valid email address
         </mat-error> -->

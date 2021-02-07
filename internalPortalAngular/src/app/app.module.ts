@@ -52,6 +52,7 @@ import {MatTableDataSource} from '@angular/material/table';
 
 import { MyVideosComponent } from './my-videos/my-videos.component';
 import { EditComponent } from './edit/edit.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
@@ -77,7 +78,8 @@ import { EditComponent } from './edit/edit.component';
     NotificationDialog,
     SubscribedCategoriesComponent,
     MyVideosComponent,
-    EditComponent
+    EditComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

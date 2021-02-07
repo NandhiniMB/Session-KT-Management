@@ -17,10 +17,13 @@ export class UploadVideoComponent implements OnInit {
   category_id:Number;
   dbfile:DBFile=new DBFile();
   message: String='';
+  instruction: String='';
   files: File;
   selectedValue:String;
   formDoc: any;
   fileAttr = 'Choose File';
+  flag:Boolean=false;
+  isVisible:Boolean=true;
   // id:Number;
   constructor(private service:VideoDetailsService,private httpClient: HttpClient, private _fb: FormBuilder,private RegService : RegistrationService) { }
 
@@ -42,6 +45,7 @@ export class UploadVideoComponent implements OnInit {
     this.fileAttr=this.files.name;
     console.log(this.files.name);
     console.log(this.files);
+    this.instruction='Click upload button to upload the video.';
   }
 
   onUpload(){
@@ -59,17 +63,20 @@ export class UploadVideoComponent implements OnInit {
         if (response.status === 200) {
           const body:any=response.body;
           this.dbfile.id=body.id;
-          this.message = 'Video uploaded successfully';
+          this.message = 'Video uploaded successfully now press the save button.';
         } else {
           this.dbfile.id=null;
           this.message = 'Video not uploaded successfully';
         }
       }
       );
+      this.flag=true;
+      this.isVisible=false;
+      this.instruction='Click the save button to save the video details.'
+      alert('Click the save button now to upload the data.');
   }
 
   onSaveData(){
-  
     this.categories.forEach(category=>{
       if(category.id===this.category_id){
         this.dbfile.category=category;
@@ -83,6 +90,7 @@ export class UploadVideoComponent implements OnInit {
     error=>{
       this.message="Error uploading data";
     });
+    window.location.reload();
   }
 
 }

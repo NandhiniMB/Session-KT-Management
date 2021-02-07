@@ -2,6 +2,11 @@
   <br><br>
 
 <button style="margin-left:10px; margin-top:3px; font-size: 1.5em;" mat-stroked-button color="primary">Upload Video</button>
+<div class="container row">
+  <div class="col-md-12">
+      <div *ngIf="instruction" class="instruction">{{instruction}}</div>
+  </div>
+</div>
 <form class="example-form" #uploadform="ngForm">
   <mat-form-field class="example-full-width">
     <mat-label>Title</mat-label>
@@ -39,14 +44,14 @@
     <br><br>
     <button mat-raised-button class="submit" color="primary" (click)="onSaveData()" value="SAVE">Save</button> -->
   <div class="col-md-6">
-      <input type="button" class="submit" (click)="onUpload()" value="UPLOAD">
+      <input type="button" class="submit" (click)="onUpload()" *ngIf="isVisible" value="UPLOAD" id="btn1">
   </div>
   <div class="col-md-6 padd">
-      <input type="button" class="submit" (click)="onSaveData()" value="SAVE">
+      <input type="button" class="submit" (click)="onSaveData()" *ngIf="!isVisible" value="SAVE" id="btn2">
   </div>
   <div class="container row">
     <div class="col-md-12">
-        <div *ngIf="message">{{message}}</div>
+        <div *ngIf="message" class="message">{{message}}</div>
     </div>
   </div>
 </form>

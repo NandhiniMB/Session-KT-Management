@@ -30,8 +30,8 @@ export class AllCategoriesComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.service.getAllCategory().subscribe(async categories=>{
-      this.categories=await categories;
+    this.service.getAllCategory().subscribe( categories=>{
+      this.categories= categories;
       // for(let i=0;i<this.categories.length;i++){
       //     // this.subscribedCategory.isSubscribed.push(false);
       // }
@@ -39,8 +39,8 @@ export class AllCategoriesComponent implements OnInit {
       console.log(categories);
     });
     this.user=JSON.parse(this.regService.getUser());
-    this.subscribeService.getAllSubscriptions(this.user.id).subscribe(async resp=>{
-      this.subscriptions=await resp;
+    this.subscribeService.getAllSubscriptions(this.user.id).subscribe( resp=>{
+      this.subscriptions= resp;
       console.log(resp);
       this.length=this.categories.length;
       for(let i=0;i<this.length;i++){

@@ -159,6 +159,13 @@ export class PlayVideoComponent implements OnInit {
   
   }
 
+  videoEnd(){
+    console.log("here");
+    this.videoService.videoViewed(this.videoDTO).subscribe(resp=>{
+      console.log(resp);
+      this.videoDTO.views = resp;
+    })
+  }
   comment(){
     console.log(this.comments);
     console.log(this.comment_text);

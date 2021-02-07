@@ -24,7 +24,7 @@
         <video id="my_video_1" class="video-js vjs-default-skin" *ngIf="prev_url" 
         [src]="prev_url"  width="750px" height="450px" controls autoplay preload="none"
 		poster=''
-        data-setup='{"aspectRatio":"750:450"}'>
+        data-setup='{"aspectRatio":"750:450"}' (ended)="videoEnd()">
        </video>
         <div style="justify-content: center; text-align: center;">
 

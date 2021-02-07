@@ -33,6 +33,8 @@ export class VideoDetailsService {
   GET_REPORTED_COMMENT='/report/getcomment';
   file:File;
 
+  VIEW_VIDEO = '/video/view'
+
   constructor(private http:HttpClient) { }
   
   public upLoadFromRemote(file:File):Observable<any>{
@@ -133,5 +135,9 @@ export class VideoDetailsService {
 
   public deleteCategory(id:Number):Observable<any>{
     return this.http.delete(this.DELETE_CATEGORY+'/'+id);
+  }
+
+  public videoViewed(video:VideoDTO):Observable<any>{
+    return this.http.post(this.VIEW_VIDEO,video);
   }
 }

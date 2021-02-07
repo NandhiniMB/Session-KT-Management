@@ -1,6 +1,7 @@
 package com.team6.internetPortal.service.impl;
 
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -185,5 +186,25 @@ public class VideoService implements IVideoService{
 		Video v = videoRepository.save(video);
 		//System.out.println("Hellooooooooooooooo" + v);
 		return v;
+	}
+
+	@Override
+	public long videoViewed(Video video) {
+		// TODO Auto-generated method stub
+		long count = video.getViews();
+		System.out.println("init"+count);
+		count++;
+		video.setViews(count);	
+		Video v=videoRepository.save(video);
+		System.out.println(v.getViews());
+		return v.getViews();
+	}
+
+	@Override
+	public List<Video> mostViewedVideo() {
+		// TODO Auto-generated method stub
+		List<Video> most_viewed_video = videoRepository.findAll();
+		return most_viewed_video;
+		
 	}
 }

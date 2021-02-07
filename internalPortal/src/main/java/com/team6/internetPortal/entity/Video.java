@@ -22,7 +22,7 @@ import com.team6.internetPortal.constants.Constants.status;
 
 @Entity
 @Table(name = "video")
-public class Video {
+public class Video  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -71,6 +71,16 @@ public class Video {
 
 	@OneToMany(mappedBy = "video", fetch = FetchType.LAZY)
 	private List<Comment> comments;
+	
+	private long views;
+
+	public long getViews() {
+		return views;
+	}
+
+	public void setViews(long views) {
+		this.views = views;
+	}
 
 	public Video(String path, String title, String description, boolean isArchived, Date createdOn, Date lastModifiedOn,
 			status status, User creator, Category category) {
@@ -174,4 +184,9 @@ public class Video {
 	public void setPath(String path) {
 		this.path = path;
 	}
+	
+//	 @Override
+//	    public int compareTo(Video v) {
+//	         return this.getViews() > v.getViews();
+//	    }
 }

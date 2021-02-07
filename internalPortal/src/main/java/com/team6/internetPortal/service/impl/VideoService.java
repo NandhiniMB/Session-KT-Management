@@ -75,7 +75,11 @@ public class VideoService implements IVideoService{
 	}
 	@Override
 	public void deleteVideo(long id) {
-		
+		videoRepository.deleteForeignLikes(id);
+		//Add for delete commentReports
+		videoRepository.deleteForeignCommentReports(id);
+		videoRepository.deleteForeignComments(id);
+		videoRepository.deleteForeignReports(id);
 		videoRepository.deleteById(id);
 	}
 
@@ -138,6 +142,12 @@ public class VideoService implements IVideoService{
 	public List<Video> getApprovedVideos() {
 		// TODO Auto-generated method stub
 		return videoRepository.findApprovedVideos(c.status.APPROVED);
+	}
+
+	@Override
+	public List<Video> getPendingVideos() {
+		// TODO Auto-generated method stub
+		return videoRepository.findPendingVideos(c.status.PENDING);
 	}
 
 	@Override

@@ -51,6 +51,12 @@ public class VideoController {
 	public List<Video> getApprrovedVideos(){
 		return videoService.getApprovedVideos();
 	}
+
+	@GetMapping("/pending")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Video> getPendingVideos(){
+		return videoService.getPendingVideos();
+	}
 	
 	@PostMapping("/{id}") 
 	public Video updateVideo(@RequestBody Video video)

@@ -1,11 +1,11 @@
-package com.team6.internetPortal.service.impl;
+package com.team6.internalPortal.service.impl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.team6.internetPortal.entity.Comment;
-import com.team6.internetPortal.entity.Notification;
+import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.repository.ICommentRepository;
-import com.team6.internetPortal.repository.INotificationRepository;
+import com.team6.internetPortal.repository.IVideoRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -30,35 +30,31 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class NotificationServiceTest {
+public class VideoServiceTest {
 
-    public NotificationServiceTest()
+    public VideoServiceTest()
     {
         super();
     }
 
-
-    @Qualifier("INotificationRepository")
+    @Qualifier("IVideoRepository")
     @Autowired
-    private INotificationRepository iNotificationRepository;
+    private IVideoRepository iVideoRepository;
+
 
     @Test
-    public void func()
+    public void func() throws Exception
     {
-        List<Notification> found = iNotificationRepository.findByUserIdAndIs_read(3,true);
-        assertThat(found.get(0).getDescription())
-                .isEqualTo("gg");
+        List<Video> found = iVideoRepository.findByCreatorId(3);
+        assertThat(found.get(0).getTitle())
+                .isEqualTo("xyz");
 
+        List<Video> found1 = iVideoRepository.findBySubscription(1);
+        assertThat(found.get(0).getId())
+                .isEqualTo(3);
 
-        Long x=new Long(4);
-        Long y=new Long(0);
-        Optional<Notification> found1 = iNotificationRepository.findById(x);
-        assertThat(found1.get().getDescription())
-                .isEqualTo("yes good");
-
-        System.out.println(found.size());
+        List<Video> found2 = iVideoRepository.findByCategoryId(2);
+        assertThat(found.get(0).getTitle())
+                .isEqualTo("xyz");
     }
-
-
-
 }

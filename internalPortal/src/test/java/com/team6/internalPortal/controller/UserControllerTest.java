@@ -1,14 +1,12 @@
-package com.team6.internetPortal.controller;
-
-import com.team6.internetPortal.entity.Report;
-import com.team6.internetPortal.entity.User;
-import com.team6.internetPortal.service.IReportService;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+package com.team6.internalPortal.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.team6.internetPortal.controller.UserController;
 import com.team6.internetPortal.entity.Comment;
+import com.team6.internetPortal.entity.User;
 import com.team6.internetPortal.service.ICommentService;
+import com.team6.internetPortal.service.IUserService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +21,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -33,43 +30,55 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class ReportsControllerTest {
+public class UserControllerTest {
 
-    public ReportsControllerTest()
-    {
+    public UserControllerTest(){
         super();
     }
 
     private MockMvc mockMvc;
 
     @Mock
-    private IReportService iReportService;
+    private IUserService iUserService;
 
     @InjectMocks
-    private  ReportsController  reportsController;
+    private  UserController  userController;
 
     @Before
     public void setUp() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(reportsController)
+        mockMvc = MockMvcBuilders.standaloneSetup(userController)
                 .build();
     }
-
 
     @Test
     public void func() throws Exception {
 
-        Report r=new Report();
-        Comment c=new Comment();
-        c.setComment("hi");
-        User u=new User();
-        u.setUserName("rohan");
-        r.setComment(c);
+        User user=new User();
+        user.setUserName("raj");
+        user.setEmail("sn@d.com");
+        user.setId(new Long(3));
+        user.setPassword("omg");
 
-        when(iReportService.getReport(new Long(3))).thenReturn(Optional.of(r));
+        Mockito.when(iUserService.fetchUserByEmailId("sn@d.com")).thenReturn(user);
+
 
         //get
-        Optional<Report> r1=iReportService.getReport(new Long(3));
-        assertEquals(r1.get().getComment().getComment(), "hi");
+        User returned=iUserService.fetchUserByEmailId("sn@d.com");
+        assertEquals(returned.getUserName(), "raj");
+        System.out.println(returned.getUserName());
+
+
+        User user1=new User();
+        user.setUserName("mohit");
+        user.setEmail("goa@panjim.com");
+        user.setId(new Long(5));
+        user.setPassword("omg");
+        Mockito.when(iUserService.saveUser(user)).thenReturn(user);
+
+        //post
+        User check=iUserService.saveUser(user);
+        assertEquals(check.getEmail(),"goa@panjim.com");
+        System.out.println(check.getEmail());
 
     }
 }

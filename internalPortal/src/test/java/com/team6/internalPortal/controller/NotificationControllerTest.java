@@ -1,10 +1,10 @@
-package com.team6.internetPortal.controller;
+package com.team6.internalPortal.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.team6.internetPortal.controller.NotificationController;
 import com.team6.internetPortal.entity.Comment;
-import com.team6.internetPortal.entity.User;
+import com.team6.internetPortal.entity.Notification;
 import com.team6.internetPortal.service.ICommentService;
-import com.team6.internetPortal.service.IUserService;
+import com.team6.internetPortal.service.INotificationService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,57 +26,49 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class UserControllerTest {
+public class NotificationControllerTest {
 
-    public UserControllerTest(){
+    public NotificationControllerTest() {
         super();
     }
 
     private MockMvc mockMvc;
 
     @Mock
-    private IUserService iUserService;
+    private INotificationService iNotificationService;
 
     @InjectMocks
-    private  UserController  userController;
+    private  NotificationController  notificationController;
 
     @Before
     public void setUp() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(userController)
+        mockMvc = MockMvcBuilders.standaloneSetup(notificationController)
                 .build();
     }
 
     @Test
     public void func() throws Exception {
 
-        User user=new User();
-        user.setUserName("raj");
-        user.setEmail("sn@d.com");
-        user.setId(new Long(3));
-        user.setPassword("omg");
+        Notification noti=new Notification();
+        noti.setDescription("wow");
+        noti.setId(2);
+        noti.setRead(true);
 
-        Mockito.when(iUserService.fetchUserByEmailId("sn@d.com")).thenReturn(user);
+        List<Notification> ls=new ArrayList<Notification>();
+        ls.add(noti);
 
+        Long x=new Long(2);
+
+        when(iNotificationService.getUserUnreadNotification(x,false)).thenReturn(ls);
 
         //get
-        User returned=iUserService.fetchUserByEmailId("sn@d.com");
-        assertEquals(returned.getUserName(), "raj");
-        System.out.println(returned.getUserName());
-
-
-        User user1=new User();
-        user.setUserName("mohit");
-        user.setEmail("goa@panjim.com");
-        user.setId(new Long(5));
-        user.setPassword("omg");
-        Mockito.when(iUserService.saveUser(user)).thenReturn(user);
-
-        //post
-        User check=iUserService.saveUser(user);
-        assertEquals(check.getEmail(),"goa@panjim.com");
-        System.out.println(check.getEmail());
+        List<Notification> l2=iNotificationService.getUserUnreadNotification(x,false);
+        assertEquals("wow", l2.get(0).getDescription());
 
     }
+
 }

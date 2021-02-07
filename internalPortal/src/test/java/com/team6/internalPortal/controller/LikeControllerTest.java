@@ -1,13 +1,10 @@
-package com.team6.internetPortal.controller;
-
-import com.team6.internetPortal.entity.Category;
-import com.team6.internetPortal.service.ICategoryService;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.junit.jupiter.api.Assertions.*;
+package com.team6.internalPortal.controller;
+import com.team6.internetPortal.controller.LikeController;
 import com.team6.internetPortal.entity.Comment;
+import com.team6.internetPortal.entity.Like;
+import com.team6.internetPortal.entity.User;
 import com.team6.internetPortal.service.ICommentService;
+import com.team6.internetPortal.service.ILikeService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +19,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -31,12 +27,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
+import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class CategoryControllerTest {
+public class LikeControllerTest {
 
-    public CategoryControllerTest()
+    public LikeControllerTest()
     {
         super();
     }
@@ -44,31 +40,31 @@ public class CategoryControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private ICategoryService iCategoryService;
+    private ILikeService iLikeService;
 
     @InjectMocks
-    private  CategoryController  categoryController;
+    private  LikeController  likeController;
 
     @Before
     public void setUp() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(categoryController)
+        mockMvc = MockMvcBuilders.standaloneSetup(likeController)
                 .build();
     }
 
     @Test
     public void func() throws Exception {
 
-        Integer cid=3;
-        Category c=new Category();
-        c.setCategoryName("boot");
-        c.setId(cid);
+        User user=new User();
+        user.setUserName("raj");
+        Like like=new Like();
+        like.setLikedUser(user);
+        like.setId(4);
 
-        Category l1=new Category();
+        Mockito.when(iLikeService.saveLike(like)).thenReturn(like);
 
-        when(categoryController.getCategory(cid)).thenReturn(Optional.of(l1));
-
-        //get
-        Optional l2=categoryController.getCategory(cid);
+        //save
+        Like ret_obj=iLikeService.saveLike(like);
+        assertEquals(like.getLikedUser().getName(), ret_obj.getLikedUser().getName());
 
     }
 }

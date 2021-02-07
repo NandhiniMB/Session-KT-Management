@@ -1,14 +1,14 @@
-package com.team6.internetPortal.controller;
+package com.team6.internalPortal.controller;
+
+import com.team6.internetPortal.controller.CategoryController;
+import com.team6.internetPortal.entity.Category;
+import com.team6.internetPortal.service.ICategoryService;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import com.team6.internetPortal.entity.Category;
 import com.team6.internetPortal.entity.Comment;
-import com.team6.internetPortal.entity.User;
-import com.team6.internetPortal.entity.Video;
-import com.team6.internetPortal.repository.IVideoRepository;
 import com.team6.internetPortal.service.ICommentService;
-import com.team6.internetPortal.service.IVideoService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -31,47 +32,44 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-public class VideoControllerTest {
 
-    public VideoControllerTest()
+
+@RunWith(SpringJUnit4ClassRunner.class)
+public class CategoryControllerTest {
+
+    public CategoryControllerTest()
     {
         super();
     }
 
+    private MockMvc mockMvc;
+
     @Mock
-    private IVideoService iVideoService;
+    private ICategoryService iCategoryService;
 
     @InjectMocks
-    private  VideoController  videoController;
+    private  CategoryController  categoryController;
 
     @Before
     public void setUp() throws Exception {
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(videoController)
+        mockMvc = MockMvcBuilders.standaloneSetup(categoryController)
                 .build();
     }
 
     @Test
     public void func() throws Exception {
 
-        Video video=new Video();
+        Integer cid=3;
         Category c=new Category();
-        c.setCategoryName("MVC");
-        c.setId(3);
-        User user=new User();
-        user.setUserName("Ram");
-        video.setId(3);
-        video.setCategory(c);
-        video.setCreator(user);
+        c.setCategoryName("boot");
+        c.setId(cid);
 
+        Category l1=new Category();
 
-        List<Video> ls=new ArrayList<Video>();
-        ls.add(video);
-
-        when(videoController.getVideoByCategory(2)).thenReturn(ls);
+        when(categoryController.getCategory(cid)).thenReturn(Optional.of(l1));
 
         //get
-        List<Video> v=videoController.getVideoByCategory(2);
-        assertEquals(v.get(0).getCategory(), c);
+        Optional l2=categoryController.getCategory(cid);
+
     }
 }

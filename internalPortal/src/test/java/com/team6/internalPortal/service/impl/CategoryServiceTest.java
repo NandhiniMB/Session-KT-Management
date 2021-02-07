@@ -1,13 +1,9 @@
-package com.team6.internetPortal.service.impl;
+package com.team6.internalPortal.service.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import com.team6.internetPortal.entity.Category;
 import com.team6.internetPortal.entity.Comment;
-import com.team6.internetPortal.entity.Notification;
-import com.team6.internetPortal.entity.User;
+import com.team6.internetPortal.repository.ICategoryRepository;
 import com.team6.internetPortal.repository.ICommentRepository;
-import com.team6.internetPortal.repository.INotificationRepository;
-import com.team6.internetPortal.repository.IUserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -28,34 +24,32 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class UserServiceTest {
+public class CategoryServiceTest {
 
-    public UserServiceTest()
+    public CategoryServiceTest()
     {
         super();
     }
 
-    @Qualifier("IUserRepository")
+    @Qualifier("ICategoryRepository")
     @Autowired
-    private IUserRepository iUserRepository;
+    private ICategoryRepository iCategoryRepository;
+
 
     @Test
-    public void func()
+    public void func() throws Exception
     {
-        //find by id
-        Optional<User> found = iUserRepository.findById(new Long(9));
-        assertThat(found.get().getName())
-                .isEqualTo("rohan");
+        Optional<Category> found = iCategoryRepository.findById(2);
+        System.out.println(found.get().getCategoryName());
 
-        //find by email
-        User found1 = iUserRepository.findByEmail("a@a.com");
-        assertThat(found1.getName())
-                .isEqualTo("yash");
 
+        assertThat(found.get().getCategoryName())
+                .isEqualTo("spring");
     }
 }

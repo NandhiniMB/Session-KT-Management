@@ -1,12 +1,19 @@
-package com.team6.internetPortal.service.impl;
+package com.team6.internalPortal.service.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.team6.internetPortal.entity.Like;
+import com.team6.internetPortal.entity.Notification;
+import com.team6.internetPortal.repository.ICommentRepository;
+import com.team6.internetPortal.repository.ILikeRepository;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.team6.internetPortal.entity.Comment;
-import com.team6.internetPortal.entity.Report;
-import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.repository.ICommentRepository;
-import com.team6.internetPortal.repository.IReportsRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -30,30 +37,23 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class ReportsServiceTest {
+public class LikeServiceTest {
 
-    public ReportsServiceTest()
+    public LikeServiceTest()
     {
         super();
     }
 
     @Autowired
-    private IReportsRepository iReportsRepository;
+    private ILikeRepository iLikeRepository;
 
     @Test
     public void func() throws Exception
     {
-        List<Report> found = iReportsRepository.findReportedVideos();
-        assertThat(found.get(0).getId())
-                .isEqualTo(1);
+        Optional<Like> found = iLikeRepository.findById(new Long(2));
+        System.out.println(found.get().getLikedUser());
 
-        Report found1 = iReportsRepository.findByCommentId(new Long(2));
-        assertThat(found1.getComment())
-                .isEqualTo("ok");
-
-
-        Report found2 = iReportsRepository.findByUserId(new Long(2));
-        assertThat(found2.getComment())
-                .isEqualTo("well");
+        assertThat(found.get().getLikedUser().getName())
+                .isEqualTo("yash");
     }
 }

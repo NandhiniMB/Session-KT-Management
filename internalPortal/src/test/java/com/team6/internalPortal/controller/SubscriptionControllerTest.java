@@ -1,9 +1,13 @@
-package com.team6.internetPortal.controller;
+package com.team6.internalPortal.controller;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import com.team6.internetPortal.controller.CommentController;
 import com.team6.internetPortal.entity.Comment;
-import com.team6.internetPortal.entity.Like;
+import com.team6.internetPortal.entity.Subscription;
 import com.team6.internetPortal.entity.User;
 import com.team6.internetPortal.service.ICommentService;
-import com.team6.internetPortal.service.ILikeService;
+import com.team6.internetPortal.service.ISubscriptionService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,12 +30,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-public class LikeControllerTest {
+public class SubscriptionControllerTest {
 
-    public LikeControllerTest()
+    public SubscriptionControllerTest()
     {
         super();
     }
@@ -39,31 +41,30 @@ public class LikeControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private ILikeService iLikeService;
+    private ISubscriptionService iSubscriptionService;
 
     @InjectMocks
-    private  LikeController  likeController;
+    private  CommentController  commentController;
 
     @Before
     public void setUp() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(likeController)
+        mockMvc = MockMvcBuilders.standaloneSetup(commentController)
                 .build();
     }
 
     @Test
     public void func() throws Exception {
 
-        User user=new User();
-        user.setUserName("raj");
-        Like like=new Like();
-        like.setLikedUser(user);
-        like.setId(4);
+        Subscription sc=new Subscription();
+        User u=new User();
+        u.setUserName("rahul");
+        sc.setId(3);
+        sc.setSubscriber(u);
 
-        Mockito.when(iLikeService.saveLike(like)).thenReturn(like);
+        when(iSubscriptionService.saveSubscription(sc)).thenReturn(sc);
 
-        //save
-        Like ret_obj=iLikeService.saveLike(like);
-        assertEquals(like.getLikedUser().getName(), ret_obj.getLikedUser().getName());
-
+        //post
+        Subscription sc2=iSubscriptionService.saveSubscription(sc);
+        assertEquals(sc, sc2);
     }
 }

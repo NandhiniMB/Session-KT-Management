@@ -1,9 +1,16 @@
-package com.team6.internetPortal.controller;
+package com.team6.internalPortal.controller;
 
+import com.team6.internetPortal.entity.Report;
+import com.team6.internetPortal.entity.User;
+import com.team6.internetPortal.service.IReportService;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import com.team6.internetPortal.controller.ReportsController;
 import com.team6.internetPortal.entity.Comment;
-import com.team6.internetPortal.entity.Notification;
 import com.team6.internetPortal.service.ICommentService;
-import com.team6.internetPortal.service.INotificationService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +25,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -25,49 +33,45 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.junit.jupiter.api.Assertions.*;
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class NotificationControllerTest {
+public class ReportsControllerTest {
 
-    public NotificationControllerTest() {
+    public ReportsControllerTest()
+    {
         super();
     }
 
     private MockMvc mockMvc;
 
     @Mock
-    private INotificationService iNotificationService;
+    private IReportService iReportService;
 
     @InjectMocks
-    private  NotificationController  notificationController;
+    private  ReportsController  reportsController;
 
     @Before
     public void setUp() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(notificationController)
+        mockMvc = MockMvcBuilders.standaloneSetup(reportsController)
                 .build();
     }
+
 
     @Test
     public void func() throws Exception {
 
-        Notification noti=new Notification();
-        noti.setDescription("wow");
-        noti.setId(2);
-        noti.setRead(true);
+        Report r=new Report();
+        Comment c=new Comment();
+        c.setComment("hi");
+        User u=new User();
+        u.setUserName("rohan");
+        r.setComment(c);
 
-        List<Notification> ls=new ArrayList<Notification>();
-        ls.add(noti);
-
-        Long x=new Long(2);
-
-        when(iNotificationService.getUserUnreadNotification(x,false)).thenReturn(ls);
+        when(iReportService.getReport(new Long(3))).thenReturn(Optional.of(r));
 
         //get
-        List<Notification> l2=iNotificationService.getUserUnreadNotification(x,false);
-        assertEquals("wow", l2.get(0).getDescription());
+        Optional<Report> r1=iReportService.getReport(new Long(3));
+        assertEquals(r1.get().getComment().getComment(), "hi");
 
     }
-
 }

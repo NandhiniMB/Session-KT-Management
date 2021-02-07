@@ -1,5 +1,6 @@
-package com.team6.internetPortal.controller;
+package com.team6.internalPortal.controller;
 
+import com.team6.internetPortal.controller.CommentController;
 import com.team6.internetPortal.entity.Comment;
 import com.team6.internetPortal.service.ICommentService;
 import org.hamcrest.Matchers;

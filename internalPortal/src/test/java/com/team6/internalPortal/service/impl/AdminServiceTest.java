@@ -1,14 +1,17 @@
-package com.team6.internetPortal.service.impl;
+package com.team6.internalPortal.service.impl;
 
-import com.team6.internetPortal.entity.Like;
+
+
+import com.team6.internetPortal.entity.Admin;
 import com.team6.internetPortal.entity.Notification;
-import com.team6.internetPortal.repository.ICommentRepository;
-import com.team6.internetPortal.repository.ILikeRepository;
+import com.team6.internetPortal.repository.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -34,26 +37,30 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 
+@SpringBootTest
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class LikeServiceTest {
+public class AdminServiceTest {
 
-    public LikeServiceTest()
+    public AdminServiceTest()
     {
         super();
     }
 
+    @Qualifier("IAdminRepository")
     @Autowired
-    private ILikeRepository iLikeRepository;
+    private IAdminRepository iAdminRepository;
 
     @Test
-    public void func() throws Exception
+    public void func()
     {
-        Optional<Like> found = iLikeRepository.findById(new Long(2));
-        System.out.println(found.get().getLikedUser());
+        List<Admin> found = iAdminRepository.findAll();
+        for(int i=0;i<found.size();i++)
+        {
+            System.out.println(found.get(i));
+        }
 
-        assertThat(found.get().getLikedUser().getName())
-                .isEqualTo("yash");
+        System.out.println(found.size());
     }
 }

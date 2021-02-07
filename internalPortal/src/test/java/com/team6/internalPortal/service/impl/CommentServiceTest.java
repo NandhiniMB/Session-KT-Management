@@ -1,4 +1,4 @@
-package com.team6.internetPortal.service.impl;
+package com.team6.internalPortal.service.impl;
 
 import com.team6.internetPortal.entity.Comment;
 import com.team6.internetPortal.repository.ICommentRepository;

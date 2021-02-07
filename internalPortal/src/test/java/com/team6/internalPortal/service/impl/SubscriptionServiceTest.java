@@ -1,21 +1,11 @@
-package com.team6.internetPortal.service.impl;
+package com.team6.internalPortal.service.impl;
 
-
-
-import com.team6.internetPortal.entity.Admin;
-import com.team6.internetPortal.entity.Notification;
-import com.team6.internetPortal.repository.*;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.team6.internetPortal.entity.Comment;
+import com.team6.internetPortal.entity.Subscription;
 import com.team6.internetPortal.repository.ICommentRepository;
+import com.team6.internetPortal.repository.ISubscriptionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -36,30 +26,26 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 
-
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class AdminServiceTest {
+public class SubscriptionServiceTest {
 
-    public AdminServiceTest()
+    public SubscriptionServiceTest()
     {
         super();
     }
 
-    @Qualifier("IAdminRepository")
     @Autowired
-    private IAdminRepository iAdminRepository;
+    private ISubscriptionRepository iSubscriptionRepository;
 
     @Test
-    public void func()
+    public void func() throws Exception
     {
-        List<Admin> found = iAdminRepository.findAll();
-        for(int i=0;i<found.size();i++)
-        {
-            System.out.println(found.get(i));
-        }
+        String found[] = iSubscriptionRepository.findAllEmailByCategory(2);
+        assertThat(found[0])
+                .isEqualTo("a@a.com");
 
-        System.out.println(found.size());
+        iSubscriptionRepository.findAllUserByCategory(2);
     }
 }

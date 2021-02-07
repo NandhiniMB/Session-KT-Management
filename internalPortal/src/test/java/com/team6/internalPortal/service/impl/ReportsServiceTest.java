@@ -1,16 +1,16 @@
-package com.team6.internetPortal.service.impl;
+package com.team6.internalPortal.service.impl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.team6.internetPortal.entity.Comment;
+import com.team6.internetPortal.entity.Report;
 import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.repository.ICommentRepository;
-import com.team6.internetPortal.repository.IVideoRepository;
+import com.team6.internetPortal.repository.IReportsRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -30,31 +30,30 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class VideoServiceTest {
+public class ReportsServiceTest {
 
-    public VideoServiceTest()
+    public ReportsServiceTest()
     {
         super();
     }
 
-    @Qualifier("IVideoRepository")
     @Autowired
-    private IVideoRepository iVideoRepository;
-
+    private IReportsRepository iReportsRepository;
 
     @Test
     public void func() throws Exception
     {
-        List<Video> found = iVideoRepository.findByCreatorId(3);
-        assertThat(found.get(0).getTitle())
-                .isEqualTo("xyz");
-
-        List<Video> found1 = iVideoRepository.findBySubscription(1);
+        List<Report> found = iReportsRepository.findReportedVideos();
         assertThat(found.get(0).getId())
-                .isEqualTo(3);
+                .isEqualTo(1);
 
-        List<Video> found2 = iVideoRepository.findByCategoryId(2);
-        assertThat(found.get(0).getTitle())
-                .isEqualTo("xyz");
+        Report found1 = iReportsRepository.findByCommentId(new Long(2));
+        assertThat(found1.getComment())
+                .isEqualTo("ok");
+
+
+        Report found2 = iReportsRepository.findByUserId(new Long(2));
+        assertThat(found2.getComment())
+                .isEqualTo("well");
     }
 }

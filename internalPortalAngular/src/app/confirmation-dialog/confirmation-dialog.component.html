@@ -1,0 +1,11 @@
+<h1 md-dialog-title>Confirm <span style="float: right;  cursor: pointer;" mat-dialog-close class="material-icons">
+  close
+  </span></h1>
+<div md-dialog-content> <p>Are  you sure you want to Perform this action?</p></div>
+<div md-dialog-actions>
+ 
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Confirm</button>
+  </mat-dialog-actions>
+</div>

@@ -33,4 +33,15 @@ public interface IReportsRepository extends JpaRepository<Report, Long> {
 		 @Modifying
 		@Query(value = "insert into report(user_id,video_id) values(:user_id,:video_id) ", nativeQuery = true)
 		public void saveReport(@Param("video_id")long video_id, @Param("user_id") long user_id);
+
+
+
+		 @Modifying
+		@Query(value = "insert into report(user_id,comment_id) values(:user_id,:comment_id) ", nativeQuery = true)
+		public void saveCommentReport(@Param("comment_id")long comment_id, @Param("user_id")long user_id);
+
+
+
+		 @Query(value = "SELECT * FROM report r join comment c on r.comment_id = c.id", nativeQuery = true)
+		public List<Report> getReportedComments();
 }

@@ -61,11 +61,11 @@ export class HomeComponent implements OnInit{
       console.log(resp);
       this.prev_url = "data:video/mp4;base64," + videoDTO.data;
       console.log("hi");
-      // this.sharedService.setPrevUrl(this.prev_url);
       this.sharedService.setVideoDTO(videoDTO);
+      this.sharedService.setVid(id);
       this.router.navigate(['/playVideo',id]);
 
-      this.sharedService.setVid(id);
+     
 
       
     });

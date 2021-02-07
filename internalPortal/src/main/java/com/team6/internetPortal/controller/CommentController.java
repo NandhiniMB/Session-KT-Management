@@ -57,6 +57,12 @@ public class CommentController
         System.out.println(id);
         return userCommentsService.findwithCommentrId(id);
     }
+    
+    
+    @DeleteMapping("/comment/{id}")
+    public void deleteComment(@PathVariable long id) {
+    	userCommentsService.deleteComment(id);
+    }
 
 
 

@@ -8,6 +8,7 @@ import { SharedService } from '../shared.service';
 import { VideoDetailsService } from '../video-details.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { EditComponent } from '../edit/edit.component';
+import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-my-videos',
@@ -61,8 +62,9 @@ export class MyVideosComponent implements OnInit {
       console.log("hi");
       // this.sharedService.setPrevUrl(this.prev_url);
       this.sharedService.setVideoDTO(videoDTO);
-      this.router.navigate(['/playVideo',id]);
       this.sharedService.setVid(id);
+      this.router.navigate(['/playVideo',id]);
+     
     });
 }
 
@@ -93,6 +95,20 @@ onDelete(Video_id: Number) {
  });
 
  
+}
+
+openConfirmationDialog(Video_id: Number): void {
+  const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    width: '300px',
+  });
+
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+    if(result){
+      this.onDelete(Video_id)
+    }
+  });
 }
 
 }

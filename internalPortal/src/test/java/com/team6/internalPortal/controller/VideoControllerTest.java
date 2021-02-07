@@ -1,36 +1,26 @@
 package com.team6.internalPortal.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
 
-import com.team6.internetPortal.controller.VideoController;
-import com.team6.internetPortal.entity.Category;
-import com.team6.internetPortal.entity.Comment;
-import com.team6.internetPortal.entity.User;
-import com.team6.internetPortal.entity.Video;
-import com.team6.internetPortal.repository.IVideoRepository;
-import com.team6.internetPortal.service.ICommentService;
-import com.team6.internetPortal.service.IVideoService;
-import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.junit.Before;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.team6.internetPortal.controller.VideoController;
+import com.team6.internetPortal.entity.Category;
+import com.team6.internetPortal.entity.User;
+import com.team6.internetPortal.entity.Video;
+import com.team6.internetPortal.service.IVideoService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class VideoControllerTest {

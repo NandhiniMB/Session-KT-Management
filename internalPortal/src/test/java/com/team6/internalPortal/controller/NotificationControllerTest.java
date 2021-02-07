@@ -1,32 +1,24 @@
 package com.team6.internalPortal.controller;
 
-import com.team6.internetPortal.controller.NotificationController;
-import com.team6.internetPortal.entity.Comment;
-import com.team6.internetPortal.entity.Notification;
-import com.team6.internetPortal.service.ICommentService;
-import com.team6.internetPortal.service.INotificationService;
-import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Before;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.team6.internetPortal.controller.NotificationController;
+import com.team6.internetPortal.entity.Notification;
+import com.team6.internetPortal.service.INotificationService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

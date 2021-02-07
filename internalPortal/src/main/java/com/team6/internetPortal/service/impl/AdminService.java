@@ -17,7 +17,7 @@ public class AdminService  implements IAdminService{
 	private String adminString;
 	
 	public Set<String> getAllAdmin(){
-		System.out.println(adminString);
+		System.out.println("adminstring"+adminString);
 		if(adminString != null) {
 			return new HashSet<>(Arrays.asList(adminString.split(",")));
 		}

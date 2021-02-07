@@ -7,6 +7,7 @@ public interface IUserService {
   
 	public User saveUser(User user);
 	public User fetchUserByEmailId(String email);
-  
 
+
+    User forgotPassword(String email);
 }

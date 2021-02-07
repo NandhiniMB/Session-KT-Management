@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "like_table")
 public class Like {
@@ -31,6 +34,7 @@ public class Like {
 	private User likedUser;
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Video video;
 	
 	
@@ -73,6 +77,7 @@ public class Like {
 		this.video = video;
 	}
 
+	public Like() {}
 
 	public Like(long id, User likedUser, Video video, Date likedAt) {
 		super();

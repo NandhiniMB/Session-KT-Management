@@ -63,6 +63,18 @@ public class UserController {
 	        return userCheck;
 	    }
 
-	
+
+
+		@GetMapping("/restricted")
+	    public String restricted() {
+	        return "if you see this you are logged in";
+	    }
+
+		@PutMapping("/forgotPassword")
+		@CrossOrigin(origins = "http://localhost:4200")
+		public User updateForForgotPassword(@RequestBody String email){
+			System.out.println(email);
+			return userService.forgotPassword(email);
+		}
 
 }

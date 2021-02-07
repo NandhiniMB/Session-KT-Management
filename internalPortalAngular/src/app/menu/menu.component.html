@@ -9,7 +9,7 @@
       <input matInput placeholder="Search"><i class="material-icons">search</i>
     </mat-form-field> -->
 
-    
+    <span class="example-spacer"></span>
     <div class = "notify_icon">
         <button mat-button  (click)="openNotificationDialog()">
            <mat-icon  [matBadge]="notifications_count" matBadgeColor="white" >circle_notifications</mat-icon>
@@ -44,21 +44,15 @@
   </a> 
 </mat-nav-list>
 <mat-nav-list class="list-container">
-  <a mat-list-item routerLink="/home" routerLinkActive="active-link" (click)="sidenav.toggle()">
+  <a mat-list-item [routerLink]="['/home/subs']" (click)="sidenav.toggle()">
     <span class="material-icons">subscriptions</span>
     <a mat-list-item > My Subscriptions </a>
   </a> 
 </mat-nav-list>
 <mat-nav-list class="list-container">
-  <a mat-list-item [routerLink]="'/videos'" (click)="sidenav.toggle()">
+  <a mat-list-item [routerLink]="['/home/videos']" (click)="sidenav.toggle()">
     <span class="material-icons">video_library</span>
     <a mat-list-item > My Videos </a>
-  </a> 
-</mat-nav-list>
-<mat-nav-list class="list-container">
-  <a mat-list-item  [routerLink]="['/home/categories']" (click)="sidenav.toggle()">
-    <span class="material-icons">category</span>
-    <a mat-list-item> Categories </a>
   </a> 
 </mat-nav-list>
 <mat-nav-list class="list-container">
@@ -73,10 +67,17 @@
      
 
       <ng-container *ngFor="let admin of admins; index as i; first as isFirst">
+    
           <mat-nav-list *ngIf="(user.email == admin)" class="list-container">
           <a mat-list-item  [routerLink]="['/home/maintain']" (click)="sidenav.toggle()">
             <span class="material-icons">video_settings</span>
             <a mat-list-item > Manage Video </a>
+          </a> 
+        </mat-nav-list>
+        <mat-nav-list class="list-container">
+          <a mat-list-item *ngIf="(user.email == admin)" [routerLink]="['/home/categories']" (click)="sidenav.toggle()">
+            <span class="material-icons">category</span>
+            <a mat-list-item>Manage Categories </a>
           </a> 
         </mat-nav-list>
       </ng-container>

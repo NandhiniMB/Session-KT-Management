@@ -9,9 +9,10 @@ import { Like } from '../Models/like';
 import { RegistrationService } from '../registration.service';
 import { Comment } from '../Models/comment';
 import { ReceiveComments } from '../Models/ReceiveComments';
-
+import {Location} from '@angular/common';
 import { PlayVideoService } from '../play-video.service';
-
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-play-video',
@@ -30,11 +31,17 @@ export class PlayVideoComponent implements OnInit {
   commentedVid: Comment = null;
   comments:Array<ReceiveComments>;
   vid:Number;
+  liked = false;
+  Likes: Array<Like>;
 
-  constructor( private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { }
+  constructor(public dialog: MatDialog, private location: Location,private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { 
+    
+   
+
+  }
 
   ngOnInit(): void {
-    // this.prev_url = this.sharedService.getPrevUrl();
+
     this.videoDTO = this.sharedService.getVideoDTO();
     this.prev_url = "data:video/mp4;base64," + this.videoDTO.data;
     // this.userId = this.sharedService.getUserId();
@@ -42,17 +49,43 @@ export class PlayVideoComponent implements OnInit {
     this.user = JSON.parse(this.regservice.getUser());
     console.log(this.user);
     this.likedVid = new Like(this.videoDTO, this.user);
-
+    this.liked = this.likedVid.liked;
     this.vid=this.sharedService.getVid();
-
+    console.log(this.vid);
     this.videoService.getNumberOfComments(this.vid).subscribe(resp => {
       this.comments=resp;
       console.log(this.comments);
     })
 
-    
-    
 
+    this.playVideoService.getAllLikes().subscribe(
+      resp => {
+               this.Likes = resp;   
+               console.log(this.Likes);
+              //  this.liked = true;
+              for (let i=0; i<this.Likes.length; i++){
+
+                if(this.Likes[i].video.id === this.videoDTO.id){
+                  this.likeCount=this.likeCount+1;
+                }
+                if(this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id){
+                  this.liked = true;
+                }
+              }
+      }
+    );
+   
+  }
+
+  back(){
+    this.location.back();
+  }
+
+  report(){
+  this.videoService.reportVideo(this.videoDTO.id,this.user.id).subscribe(resp=>{
+
+    console.log(resp);
+  })
   }
 
   @ViewChild("videoPlayer", { static: false }) videoplayer: ElementRef;
@@ -99,7 +132,31 @@ export class PlayVideoComponent implements OnInit {
     this.playVideoService.likeVideoFromRemote(this.likedVid).subscribe(resp => {
       this.likeCount++;
       console.log(this.likeCount);
+      this.likedVid.liked = true;
+      this.liked = true;
     })
+  }
+
+  unlike() {
+    // this.playVideoService.deleteLikeFromRemote(this.likedVid.likedUser.id, this.)
+    this.playVideoService.getAllLikes().subscribe(
+      resp => {
+               this.Likes = resp;   
+               console.log(this.Likes);
+              //  this.liked = true;
+              for (let i=0; i<this.Likes.length; i++){
+                if(this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id){
+                  this.liked = false;
+                  console.log(this.Likes[i].id);
+                  this.playVideoService.deleteLike(this.Likes[i].id).subscribe(resp => {
+                    console.log(resp);
+                  })
+                }
+              }
+              this.likeCount--;
+      }
+    );
+  
   }
 
   comment(){
@@ -108,13 +165,38 @@ export class PlayVideoComponent implements OnInit {
     this.commentedVid = new Comment(this.comment_text, this.user, this.videoDTO);
     this.playVideoService.commentVideoFromRemote(this.commentedVid).subscribe(resp => {
       console.log(this.commentedVid);
+      this.comments.push(resp);
     })
     this.comment_text="";
 
-    
+   
+  }
+
+  reportComment(id:Number)
+  {
+    this.videoService.reportComment(id,this.user.id).subscribe(resp=>{
+
+      console.log(resp);
+    })
   }
 
 
+  openConfirmationDialog(comment): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '300px',
+    });
+  
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if(result){
+        if(comment == null)
+             this.report();
+        else
+        this.reportComment(comment);
+      }
+    });
+  }
 
 
 

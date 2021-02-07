@@ -1,0 +1,19 @@
+.example-form {
+    min-width: 500px;
+    max-width: 700px;
+    width: 100%;
+  }
+  
+//   .example-full-width {
+//     width: 100%;
+//   }
+
+.element1 {display:inline-block;margin-right:10px; width:200px; } 
+.element2 {float: right; } 
+
+mat-card{
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    margin-left: 350px;
+}

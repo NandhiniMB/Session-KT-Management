@@ -8,7 +8,7 @@ import com.team6.internetPortal.entity.Video;
 
 public interface IReportService {
 
-	 public Report saveReport(Report report);
+	 public void saveReport(long video_id,long user_id);
 
 	    //get by report id
 	    public Optional<Report> getReport(Long id);
@@ -24,4 +24,8 @@ public interface IReportService {
 	    public List<Report> getReportedVideo();
 
 		public void deleteVideo(long id);
+
+		public void saveCommentReport(long comment_id, long user_id);
+
+		public List<Report> getReportedComments();
 }

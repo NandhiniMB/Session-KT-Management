@@ -1,0 +1,85 @@
+<button style="margin-left:500px; margin-top:10px; font-size: 1.5em;" mat-stroked-button color="primary">Manage Categories</button>
+<mat-card style="margin-top:10px;">
+<div class="element1">
+    <form class="example-form" #f="ngForm"  >
+        <mat-form-field class="example-full-width">
+          <mat-label>Add Category</mat-label>
+          <input matInput name="category_name" [(ngModel)]="category_name"  placeholder="Ex. KT">
+        </mat-form-field>   
+    </form>
+</div>
+
+<div class="element2">
+    <button  mat-raised-button color="primary" (click)="onAdd(f)">
+        <span  class="material-icons">
+            library_add_check
+            </span>Add Category</button> 
+      </div>
+
+</mat-card>
+
+
+<!-- <form class="form-inline" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <input type="text" name="category_name" ngModel placeholder="Category Name">
+    <button>ADD</button>
+</form> -->
+<mat-card>
+    
+
+    <ng-container *ngFor="let category of categories">
+    
+        <mat-nav-list>
+            <div class="element1">
+                <a mat-list-item >{{category.categoryName}} </a>
+            </div>
+            <div class="element2">
+                <button mat-raised-button color="accent" (click) = "onEdit(category)">
+                    <span class="material-icons">
+                        create
+                    </span></button> 
+                <button mat-raised-button color="warn"  style="margin-left: 10px" (click) = "onDelete(category.id)">
+                        <span class="material-icons">
+                            delete
+                </span></button> 
+            </div>
+            
+        </mat-nav-list>
+         
+      </ng-container>
+
+</mat-card>
+
+
+<!-- <mat-card *ngIf="loadEditComponent" > -->
+    <!-- <form class="form-inline" #f="ngForm" (ngSubmit)="editSession(f)" >
+        <input type="text" name="session_name" [(ngModel)]="selectedSession.session_name" placeholder="Session Name" default>
+        <input type="text" name="trainer_name" [(ngModel)]="selectedSession.trainer_name" placeholder="Trainer Name">
+        <input type="date" name="date" [(ngModel)]="selectedSession.date" placeholder="Date">
+        <button>Edit</button>
+    </form> -->
+
+    <!-- <mat-form-field class="example-full-width" (click)= "edit()">
+        <mat-label>AddCategory</mat-label>
+        <input matInput name="category_name" [(ngModel)] = "selectedCategory.categor_name"  >
+        <button>Edit</button>
+      </mat-form-field> 
+   
+</mat-card> -->
+
+<mat-card *ngIf="loadEditComponent">
+    <div class="element1">
+        <form class="example-form" #f="ngForm"  >
+            <mat-form-field class="example-full-width" >
+                <input matInput name="new_category_name" [(ngModel)] = "selectedCategory.categoryName"  >
+              </mat-form-field> 
+        </form>
+    </div>
+    
+    <div class="element2">
+        <button  mat-raised-button color="primary" (click)="edit(f)">
+            <span  class="material-icons">
+                library_add_check
+                </span>Edit Category</button> 
+          </div>
+    
+    </mat-card>

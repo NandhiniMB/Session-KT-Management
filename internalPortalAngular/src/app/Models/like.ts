@@ -6,10 +6,12 @@ export class Like {
     likedAt: Date;
     video: VideoDTO;
     likedUser: User;
+    liked: boolean;
 
     constructor(video: VideoDTO, user: User) {
         this.video = video;
         this.likedUser = user;
+        this.liked = false;
     }
 
 }   

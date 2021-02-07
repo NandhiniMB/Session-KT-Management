@@ -9,13 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team6.internetPortal.entity.Report;
-import com.team6.internetPortal.entity.Video;
 import com.team6.internetPortal.service.IReportService;
 
 @RestController
@@ -37,17 +34,28 @@ public class ReportsController
 	public List<Report> getReportedVideos() throws MalformedURLException {
 		return reportsService.getReportedVideo();
 	}
+    
+    @GetMapping("/getcomment")
+	public List<Report> getReportedComments() throws MalformedURLException {
+		return reportsService.getReportedComments();
+	}
 	
-    @PostMapping("/reports")
-    public Report saveReport(@RequestBody Report report){
+//    @PostMapping("/reports")
+//    public Report saveReport(@RequestBody Report report){
+//
+//        return reportsService.saveReport(report);
+//    }
 
-        return reportsService.saveReport(report);
+    @GetMapping("/{video_id}/{user_id}")
+    public void saveReport(@PathVariable Long video_id,@PathVariable Long user_id){
+
+        reportsService.saveReport(video_id,user_id);
     }
+    
+    @GetMapping("/comment/{comment_id}/{user_id}")
+    public void saveCommentReport(@PathVariable long comment_id,@PathVariable long user_id){
 
-    @GetMapping("/reports/{id}")
-    public Optional<Report> saveReport(@PathVariable Long id){
-
-        return reportsService.getReport(id);
+        reportsService.saveCommentReport(comment_id,user_id);
     }
 
     @GetMapping("/reports/comment/{id}")

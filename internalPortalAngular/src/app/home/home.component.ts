@@ -31,12 +31,12 @@ export class HomeComponent implements OnInit{
   subscribedvideo : Array<DBFile> = [];
   image = null;
   imageToShow = null;
-  mostViews:Array<DBFile>= [];
+  mostViews:Array<any>= [];
  // labelPosition: 'all' | 'subscribed' = 'all';
   prev_url: any;
   displayedColumns: String[] = ['id', 'title','description','creator','views', 'category', 'uploadTime', 'play'];
   activeButton: 'all' | 'subscribed' | 'mostviewed' ='all';
-  dataSource = this.video;
+  dataSource:any=this.video;
 
   constructor(private router: Router, private videoService: VideoDetailsService, private sharedService: SharedService,private RegService:RegistrationService) { }
 
@@ -46,6 +46,8 @@ export class HomeComponent implements OnInit{
       this.video = resp;
       this.mostViews=this.video
       this.dataSource = this.video;
+      console.log("on",this.dataSource);
+  
     })
   
     
@@ -79,6 +81,7 @@ export class HomeComponent implements OnInit{
 
 onSelectAll(){
   this.dataSource = this.video;
+  console.log("onSelect",this.dataSource);
   console.log("aLL"+this.video)
 
   this.activeButton = "all";
@@ -91,6 +94,8 @@ onSelectSubscribe(){
     console.log("subscribed"+resp);
     this.subscribedvideo = resp;
     this.dataSource = this.subscribedvideo;
+    console.log("subs",this.dataSource);
+  
   })
   this.activeButton = "subscribed";
  // this.subscribedvideo.filter()
@@ -100,14 +105,14 @@ onSelectSubscribe(){
 onSelectMostViewed(){
 
   this.activeButton = "mostviewed";
-  this.mostViews=this.mostViews.sort((a, b) => {
-    console.log(a.views);
-    console.log(b.views);
-     return ((a.views > b.views) ? 1 : -1)});
+  this.mostViews=this.video;
+  this.mostViews=this.mostViews.sort((a, b) => (a.views > b.views ? -1:1));
 
   console.log("in most viwed")
   console.log(this.mostViews);
-  this.dataSource=this.mostViews;
+  this.mostViews=this.mostViews.slice(0,2);
+  this.dataSource=new MatTableDataSource(this.mostViews);
+  console.log("mostView",this.dataSource);
   
 
 }

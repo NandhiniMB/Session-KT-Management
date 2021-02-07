@@ -46,7 +46,7 @@ export class AllCategoriesComponent implements OnInit {
   }
   displayedColumns: String[] = ['id', 'category', 'uploadTime','button'];
 
-  subscribe(id:Number,index:Number){
+  subscribe(id:Number,index:number){
     console.log(index);
     this.categories.forEach(category=>{
       if(category.id===id){

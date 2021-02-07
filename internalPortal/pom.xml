@@ -15,7 +15,40 @@
 	<description>AU Project</description>
 	<properties>
 		<java.version>11</java.version>
+		<sonar.projectKey>internalPortal</sonar.projectKey>
+
+		<sonar.login>admin</sonar.login>
+		<sonar.password>admin123</sonar.password>
+		<sonar.host.url>http://127.0.0.1:9000</sonar.host.url>
+
+	
+ 	 
+	
 	</properties>
+
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+			<properties>
+				<sonar.projectKey>internalPortal</sonar.projectKey>
+
+				<sonar.login>admin</sonar.login>
+				<sonar.password>admin123</sonar.password>
+				<sonar.host.url>http://127.0.0.1:9000</sonar.host.url>
+			</properties>
+
+
+
+		</profile>
+
+	</profiles>
+
+
+
 	<dependencies>
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->
@@ -34,7 +67,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 
 
@@ -64,6 +101,40 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-mail</artifactId>
     </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin.external.google</groupId>
+			<artifactId>android-json</artifactId>
+			<version>0.0.20131108.vaadin1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin.external.google</groupId>
+			<artifactId>android-json</artifactId>
+			<version>0.0.20131108.vaadin1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.sonarsource.scanner.maven</groupId>
+			<artifactId>sonar-maven-plugin</artifactId>
+			<version>3.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.15</version>
+		</dependency>
 
 	</dependencies>
 
@@ -81,6 +152,14 @@
 					</excludes>
 				</configuration>
 			</plugin>
+	<plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.7.0.1746</version>
+      </plugin>
+
+
+
 		</plugins>
 	</build>
 

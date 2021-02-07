@@ -24,7 +24,6 @@ public class SubscriptionController {
 	{
 		subscriptionService.send_mail(mailrequest);
 		return ;
-		
 	}
 	
 	@PostMapping("/subscribe")

@@ -18,6 +18,11 @@ public class Like {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	public Like()
+	{
+		super();
+	}
+
 	
 	@Column
 	private Date  likedAt;

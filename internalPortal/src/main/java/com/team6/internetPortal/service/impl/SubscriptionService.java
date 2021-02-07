@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team6.internalPortal.RequestBody.MailRequest;
+import com.team6.internetPortal.entity.Like;
 import com.team6.internetPortal.entity.Subscription;
 import com.team6.internetPortal.repository.ISubscriptionRepository;
 import com.team6.internetPortal.service.ISubscriptionService;
@@ -38,5 +39,13 @@ public class SubscriptionService implements ISubscriptionService{
 		return subscriptionRepository.save(userSubscription);
 	}
 	
+	@Override
+	public List<Subscription> getAllSubscriptions(long id) {
+		return subscriptionRepository.findAllByUserId(id);
+	}
 
+	@Override
+	public void deleteSubscription(int catId, long userId) {
+		subscriptionRepository.deleteByCatUser(catId,userId);
+	}
 }

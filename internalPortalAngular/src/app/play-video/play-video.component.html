@@ -28,13 +28,17 @@
        </video>
         <div style="justify-content: center; text-align: center;">
 
-            <button mat-stroked-button (click)="playPause()">Play/Pause</button>
+            <!-- <button mat-stroked-button (click)="playPause()">Play/Pause</button>
             <button mat-stroked-button (click)="makeBig()">Big</button>
             <button mat-stroked-button (click)="makeSmall()">Small</button>
-            <button mat-stroked-button (click)="makeNormal()">Normal</button>
+            <button mat-stroked-button (click)="makeNormal()">Normal</button> -->
             <button mat-stroked-button (click)="restart();">Restart</button>
-            <button mat-stroked-button (click)="skip(-10)">Rewind</button>
-            <button mat-stroked-button (click)="skip(10)">Fastforward</button>
+            <button mat-stroked-button (click)="skip(-10)"><span class="material-icons">
+              replay_10
+              </span></button>
+            <button mat-stroked-button (click)="skip(10)"><span class="material-icons">
+              forward_10
+              </span></button>
         </div>
       
        </div> 

@@ -21,6 +21,10 @@ import { VideoStatusComponent } from './video-status/video-status.component';
 import { ReportedVideosComponent } from './reported-videos/reported-videos.component';
 import { CategoryComponent } from './category/category.component';
 import { PlayVideoComponent } from './play-video/play-video.component';
+import { ManageCategoryComponent } from './manage-category/manage-category.component';
+import { AllCategoriesComponent } from './all-categories/all-categories.component';
+import { SubscribedCategoriesComponent } from './subscribed-categories/subscribed-categories.component';
+
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
@@ -40,18 +44,20 @@ import { MatExpansionModule } from '@angular/material//expansion';
 //import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 // import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
-import { ManageCategoryComponent } from './manage-category/manage-category.component';
-
-import { AllCategoriesComponent } from './all-categories/all-categories.component';
 import { MyVideosComponent } from './my-videos/my-videos.component';
 import { EditComponent } from './edit/edit.component';
+
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ReportedCommentsComponent } from './reported-comments/reported-comments.component';
+
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
 
 
 
@@ -75,11 +81,12 @@ import { ReportedCommentsComponent } from './reported-comments/reported-comments
     ManageCategoryComponent,
     AllCategoriesComponent,
     NotificationDialog,
+    SubscribedCategoriesComponent,
     MyVideosComponent,
     EditComponent,
     ConfirmationDialogComponent,
-    ReportedCommentsComponent
-
+    ReportedCommentsComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -107,7 +114,8 @@ import { ReportedCommentsComponent } from './reported-comments/reported-comments
     MatPaginatorModule,
     MatButtonToggleModule,
     MatRadioModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent],

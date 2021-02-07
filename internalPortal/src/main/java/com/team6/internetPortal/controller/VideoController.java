@@ -51,6 +51,12 @@ public class VideoController {
 	public List<Video> getApprrovedVideos(){
 		return videoService.getApprovedVideos();
 	}
+
+	@GetMapping("/pending")
+	@CrossOrigin(origins = "http://localhost:4200")
+	public List<Video> getPendingVideos(){
+		return videoService.getPendingVideos();
+	}
 	
 	@PostMapping("/{id}") 
 	public Video updateVideo(@RequestBody Video video)
@@ -90,6 +96,7 @@ public class VideoController {
     	dbfile.setLastModifiedOn(new Date(System.currentTimeMillis()));
     	dbfile.setStatus(constants.status.PENDING);
     	dbfile.setCreator(dbfile.getCreator());
+    	dbfile.setViews(0);
     	System.out.println(dbfile.getCreator().getEmail());
     	int rows=videoService.savefile(dbfile);
     	return rows;

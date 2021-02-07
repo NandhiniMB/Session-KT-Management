@@ -31,6 +31,7 @@ export class VideoDetailsService {
   REPORT_VIDEO = '/report/';
   REPORT_COMMENT = '/report/comment';
   GET_REPORTED_COMMENT='/report/getcomment';
+  GET_PENDING_VIDEOS='/video/pending';
   file:File;
 
   VIEW_VIDEO = '/video/view'
@@ -48,15 +49,18 @@ export class VideoDetailsService {
   public getAll(): Observable<any> {
     return this.http.get(this.BASE_URL + this.GET_ALL_VIDEOS);
   }
+  
 
   getAllCategory(): Observable<any>{
     return this.http.get('http://localhost:8080'+this.GET_CATEGORY);
   }
 
   
-  // public getPending(): Observable<any> {
-  //   return this.http.get(this.GET_PENDING_VIDEOS);
-  // }
+  public getPending(): Observable<any> {
+    return this.http.get(this.GET_PENDING_VIDEOS);
+  }
+
+  
 
   public getAllApproved(): Observable<any> {
     return this.http.get(this.GET_APPROVED_VIDEOS);

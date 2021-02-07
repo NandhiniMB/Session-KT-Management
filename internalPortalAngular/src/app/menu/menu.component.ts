@@ -25,22 +25,22 @@ export class NotificationDialog {
   //notifications_count : Number;
   ngOnInit(): void {
 
+    this.NotificationService.notifyCount.subscribe(count => this.notifications_count = count);
     this.user = JSON.parse(this.RegService.getUser());
     console.log(this.user.id);
     this.NotificationService.getNotifications(this.user.id).subscribe(notification => {
       console.log(notification);
       this.notifications = notification;
-      this.notifications_count = this.notifications.length;
+      this.NotificationService.updateNotifyCount(this.notifications.length);
     })
 
   }
    public OnNotificationsRead(notification:any){
-
     let notify_id=notification.id;
     this.NotificationService.ReadNotifications(notification).subscribe(notification => {
       console.log(notification);
       this.notifications = this.notifications.filter(notification=> !( notification.id== notify_id));
-      this.notifications_count = this.notifications.length;
+      this.NotificationService.updateNotifyCount(this.notifications.length);
     })
   
    }
@@ -79,9 +79,13 @@ export class MenuComponent implements OnInit  {
   this.NotificationService.getNotifications(this.user.id).subscribe(notification => {
     console.log(notification);
     this.notifications = notification;
-    this.notifications_count = this.notifications.length;
+    this.NotificationService.updateNotifyCount(this.notifications.length);
    // alert(this.notifications_count);
+
+
   })
+
+  this.NotificationService.notifyCount.subscribe(count=> this.notifications_count = count);
 
   }
 

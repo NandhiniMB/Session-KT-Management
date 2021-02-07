@@ -51,6 +51,29 @@ public interface IVideoRepository extends JpaRepository<Video,Long> {
 	public long getViewCount(@Param("id") long id);
 
 
+	@Query(value = "SELECT * FROM video v  where v.status = 'PENDING'" ,nativeQuery = true)
+	public List<Video> findPendingVideos();
+
+	//=======================================
+	@Modifying
+	@Transactional
+	@Query(value = "DELETE FROM like_table where video_id = :vid", nativeQuery = true)
+	public void deleteForeignLikes(@Param("vid") long vid);
+
+	@Modifying
+	@Transactional
+	@Query(value = "DELETE FROM comment where video_id = :vid", nativeQuery = true)
+	public void deleteForeignComments(@Param("vid") long vid);
+
+	@Modifying
+	@Transactional
+	@Query(value = "DELETE FROM report where video_id = :vid", nativeQuery = true)
+	public void deleteForeignReports(@Param("vid") long vid);
+
+	@Modifying
+	@Transactional
+	@Query(value = "DELETE FROM report where comment_id IN (SELECT id FROM comment WHERE video_id = :vid)", nativeQuery = true)
+	public void deleteForeignCommentReports(@Param("vid") long vid);
 	
 	
 

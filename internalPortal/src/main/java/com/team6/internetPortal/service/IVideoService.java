@@ -38,6 +38,8 @@ public interface IVideoService{
 
 	public List<Video> getApprovedVideos();
 
+	public List<Video> getPendingVideos();
+
 	public Video updateStatus(Video video);
 
 	public Video editDetails(Video video);

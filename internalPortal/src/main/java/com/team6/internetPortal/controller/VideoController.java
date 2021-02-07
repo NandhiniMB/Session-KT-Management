@@ -90,6 +90,7 @@ public class VideoController {
     	dbfile.setLastModifiedOn(new Date(System.currentTimeMillis()));
     	dbfile.setStatus(constants.status.PENDING);
     	dbfile.setCreator(dbfile.getCreator());
+    	dbfile.setViews(0);
     	System.out.println(dbfile.getCreator().getEmail());
     	int rows=videoService.savefile(dbfile);
     	return rows;

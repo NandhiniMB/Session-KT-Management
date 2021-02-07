@@ -46,6 +46,10 @@ public interface IVideoRepository extends JpaRepository<Video,Long> {
 	@Query(value = "SELECT * FROM video v  where v.status = 'APPROVED'" ,nativeQuery = true)
 	public List<Video> findApprovedVideos(@Param("approved") status approved);
 
+	
+	@Query(value = "SELECT v.views FROM video v  where v.status = 'APPROVED' and v.id=:id" ,nativeQuery = true)
+	public long getViewCount(@Param("id") long id);
+
 
 	
 	

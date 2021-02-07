@@ -31,10 +31,11 @@ export class HomeComponent implements OnInit{
   subscribedvideo : Array<DBFile> = [];
   image = null;
   imageToShow = null;
+  mostViews:Array<DBFile>= [];
  // labelPosition: 'all' | 'subscribed' = 'all';
   prev_url: any;
-  displayedColumns: String[] = ['id', 'title','description', 'category', 'uploadTime', 'play'];
-  activeButton: 'all' | 'subscribed' ='all';
+  displayedColumns: String[] = ['id', 'title','description','creator','views', 'category', 'uploadTime', 'play'];
+  activeButton: 'all' | 'subscribed' | 'mostviewed' ='all';
   dataSource = this.video;
 
   constructor(private router: Router, private videoService: VideoDetailsService, private sharedService: SharedService,private RegService:RegistrationService) { }
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit{
     this.videoService.getAllApproved().subscribe(resp => {
       console.log(resp);
       this.video = resp;
+      this.mostViews=this.video
       this.dataSource = this.video;
     })
   
@@ -92,6 +94,21 @@ onSelectSubscribe(){
   })
   this.activeButton = "subscribed";
  // this.subscribedvideo.filter()
+
+}
+
+onSelectMostViewed(){
+
+  this.activeButton = "mostviewed";
+  this.mostViews=this.mostViews.sort((a, b) => {
+    console.log(a.views);
+    console.log(b.views);
+     return ((a.views > b.views) ? 1 : -1)});
+
+  console.log("in most viwed")
+  console.log(this.mostViews);
+  this.dataSource=this.mostViews;
+  
 
 }
   // interface PeriodicElement {

@@ -191,7 +191,7 @@ public class VideoService implements IVideoService{
 	@Override
 	public long videoViewed(Video video) {
 		// TODO Auto-generated method stub
-		long count = video.getViews();
+		long count = videoRepository.getViewCount(video.getId());
 		System.out.println("init"+count);
 		count++;
 		video.setViews(count);	

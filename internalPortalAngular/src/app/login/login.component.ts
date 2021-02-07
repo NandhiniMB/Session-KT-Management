@@ -5,9 +5,11 @@ import { RegistrationService } from '../registration.service';
 import {AdminService} from '../service/admin.service';
 import { User } from '../Models/User';
 import {Admin} from '../Models/Admin';
-// import { Route } from '@angular/compiler/src/core';
+// import { Route } from '@angular/compiler/src/core'
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SharedService } from '../shared.service';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 
 @Component({
   selector: 'app-login',
@@ -26,15 +28,16 @@ export class LoginComponent implements OnInit {
     // Validators.email,
   ]);
 
+
   user: User = new User();
- 
+  email: String;
   message: String = '';
 
 // <<<<<<< HEAD
  
 // =======================================================================
 
-  constructor(private Regservice: RegistrationService,private router: Router, private sharedService: SharedService) { }
+  constructor(private Regservice: RegistrationService,private router: Router, private sharedService: SharedService, public dialog: MatDialog) { }
 // =======
 //   email: String;
 //   constructor(private service: RegistrationService, private router: Router) { }
@@ -77,4 +80,17 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/register']);
     console.log("navigated to register page");
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ForgotPasswordComponent, {
+      width: '300px',
+      data: {email: this.email}
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.email = result;
+    });
+  }
+
 }

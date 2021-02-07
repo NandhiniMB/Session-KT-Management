@@ -16,4 +16,6 @@ public interface ICommentService {
 
 	Comment findwithCommentrId(Long id);
 
+	void deleteComment(long id);
+
 }

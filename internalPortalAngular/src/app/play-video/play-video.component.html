@@ -8,7 +8,7 @@
          <!-- <mat-form-field  floatLabel="never" style="left: 80px; width: 60%;"> 
           <input matInput placeholder="Search"><i class="material-icons">search</i>
         </mat-form-field> -->
-        <button *ngIf="videoDTO.creator.id!=user.id" mat-raised-button color="warn" style="margin-left: 1000px" (click)="report()"><span class="material-icons">
+        <button *ngIf="videoDTO.creator.id!=user.id" mat-raised-button color="warn" style="margin-left: 1000px" (click)="openConfirmationDialog(null)"><span class="material-icons">
             report 
             </span>Report Video</button>
         
@@ -28,13 +28,17 @@
        </video>
         <div style="justify-content: center; text-align: center;">
 
-            <button mat-stroked-button (click)="playPause()">Play/Pause</button>
+            <!-- <button mat-stroked-button (click)="playPause()">Play/Pause</button>
             <button mat-stroked-button (click)="makeBig()">Big</button>
             <button mat-stroked-button (click)="makeSmall()">Small</button>
-            <button mat-stroked-button (click)="makeNormal()">Normal</button>
+            <button mat-stroked-button (click)="makeNormal()">Normal</button> -->
             <button mat-stroked-button (click)="restart();">Restart</button>
-            <button mat-stroked-button (click)="skip(-10)">Rewind</button>
-            <button mat-stroked-button (click)="skip(10)">Fastforward</button>
+            <button mat-stroked-button (click)="skip(-10)"><span class="material-icons">
+              replay_10
+              </span></button>
+            <button mat-stroked-button (click)="skip(10)"><span class="material-icons">
+              forward_10
+              </span></button>
         </div>
       
        </div> 
@@ -72,6 +76,13 @@
                                   <th>{{comment.commentor.name }}</th>
                                   <!-- <th>{{comment.</th> -->
                                   <th>{{comment.commentedOn | date}}</th>
+                                  <th>  <button *ngIf="comment.commentor.id!=user.id" mat-icon-button (click)=openConfirmationDialog(comment.id)>
+                                    <mat-icon matTooltip="Report the Comment"
+                                    matTooltipClass="example-tooltip-red">report_gmailerrorred</mat-icon>
+                                  </button> </th>
+
+                                
+
                                 </tr>
                             </table>
                     

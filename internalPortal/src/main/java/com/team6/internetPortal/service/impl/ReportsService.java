@@ -72,6 +72,25 @@ public class ReportsService implements IReportService
 		
 	}
 
+	@Override
+	public void saveCommentReport(long comment_id, long user_id) {
+		// TODO Auto-generated method stub
+		reportsRepository.saveCommentReport(comment_id,user_id);
+		
+	}
+
+	@Override
+	public List<Report> getReportedComments() {
+		// TODO Auto-generated method stub
+		List<Report> reports =  reportsRepository.getReportedComments();
+		Set<Long> comment_set = new HashSet<>();
+		List<Report> unique_report  =reports.stream()
+        .filter(r -> comment_set.add(r.getComment().getId()))
+        .collect(Collectors.toList());
+		return unique_report;
+	
+	}
+
 
 
 

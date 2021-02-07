@@ -11,6 +11,7 @@ export class RegistrationService {
 
   LOGIN = "/login";
   REGISTER = "/register";
+  FORGOT_PASSWORD = "/forgotPassword";
   
   constructor(private http: HttpClient) { }
   user:User = new User();
@@ -33,6 +34,11 @@ export class RegistrationService {
   }
 
   public registerUserFromRemote(user: User): Observable<any> {
-    return this.http.post("http://localhost:8080/" + this.REGISTER, user);
+    return this.http.post("http://localhost:8080" + this.REGISTER, user);
+  }
+
+  public forgotPassword(email: String): Observable<any> {
+    console.log(email);
+    return this.http.put("http://localhost:8080" + this.FORGOT_PASSWORD, email);
   }
 }

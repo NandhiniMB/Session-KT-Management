@@ -38,6 +38,10 @@
     "/category":{
         "target" : "http://localhost:8080",
         "secure" : false
+    },
+    "/comment":{
+        "target" : "http://localhost:8080",
+        "secure" : false
     }
     
 

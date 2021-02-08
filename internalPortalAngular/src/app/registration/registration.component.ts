@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../Models/User';
-import { RegistrationService } from '../registration.service';
+import { RegistrationService } from '../service/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -19,22 +18,22 @@ export class RegistrationComponent implements OnInit {
 
   passwordFormControl = new FormControl(null, [
     Validators.required,
-    // Validators.email,
+
   ]);
 
   usernameFormControl = new FormControl(null, [
     Validators.required,
-    // Validators.email,
+
   ]);
 
   nameFormControl = new FormControl(null, [
     Validators.required,
-    // Validators.email,
+
   ]);
 
   user: User = new User();
 
-  message: String  = '';
+  message: String = '';
 
 
   constructor(private service: RegistrationService, private router: Router) { }
@@ -44,14 +43,14 @@ export class RegistrationComponent implements OnInit {
 
   registerUser() {
     this.service.registerUserFromRemote(this.user).subscribe(
-      data => { 
+      data => {
         console.log("Response Received");
         this.router.navigate(['/login']);
       },
       error => {
         this.message = "The Email Id already Exists!!";
         console.log("Exception Occurred");
-      } 
+      }
     );
   }
 

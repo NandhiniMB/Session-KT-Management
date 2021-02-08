@@ -104,7 +104,6 @@ public class VideoController {
     
     @PutMapping("/updatestat")
     public Video UpdateStatus(@RequestBody Video video) {
-    	
     	return videoService.updateStatus(video);
     }
 
@@ -122,7 +121,6 @@ public class VideoController {
     
     @GetMapping("/mostview")
     public List<Video> mostViewedVideo(){
-    	
     	return videoService.mostViewedVideo();
     }
 }

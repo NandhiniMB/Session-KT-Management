@@ -57,7 +57,6 @@ public class UserController {
 		@PutMapping("/forgotPassword")
 		@CrossOrigin(origins = "http://localhost:4200")
 		public User updateForForgotPassword(@RequestBody String email){
-			System.out.println(email);
 			return userService.forgotPassword(email);
 		}
 

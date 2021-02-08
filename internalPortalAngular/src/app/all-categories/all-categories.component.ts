@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../Models/Category';
 import { Subscribe } from '../Models/Subscribe';
 import { User } from '../Models/User';
-import { RegistrationService } from '../registration.service';
-import { SubscribeService } from '../subscribe.service';
-import { VideoDetailsService } from '../video-details.service';
+import { RegistrationService } from '../service/registration.service';
+import { SubscribeService } from '../service/subscribe.service';
+import { VideoDetailsService } from '../service/video-details.service';
 
 @Component({
   selector: 'app-all-categories',
@@ -21,8 +21,7 @@ export class AllCategoriesComponent implements OnInit {
   isSubscribed:Array<Boolean>=[];
   length:Number;
   ind:number;
-  constructor(private service:VideoDetailsService, private regService:RegistrationService, private subscribeService:SubscribeService) { 
-  }
+  constructor(private service:VideoDetailsService, private regService:RegistrationService, private subscribeService:SubscribeService) { }
 
   ngOnInit(): void {
 
@@ -33,7 +32,6 @@ export class AllCategoriesComponent implements OnInit {
     this.user=JSON.parse(this.regService.getUser());
     this.subscribeService.getAllSubscriptions(this.user.id).subscribe( resp=>{
       this.subscriptions= resp;
-      console.log(resp);
       this.length=this.categories.length;
       for(let i=0;i<this.length;i++){
         this.isSubscribed.push(false);
@@ -44,27 +42,35 @@ export class AllCategoriesComponent implements OnInit {
       if(this.categories[i].id===this.subscriptions[j].category.id){
         this.isSubscribed[i]=true;
       }
-    }
+  // this.categories.forEach(category=>{
+  // for(let i=0;i<this.subscriptions.length;i++){
+  //   if(category.id===this.subscriptions[i].category.id){
+  //       this.ind=this.subscriptions[i].category.id;
+  //       this.isSubscribed[this.ind - 1]=true;
+  //   }
+  // }
+  // console.log(this.isSubscribed);
+  //   });
   }
-  console.log(this.isSubscribed);
+}
     });
   }
+
   displayedColumns: String[] = ['id', 'category', 'uploadTime','button'];
 
-  subscribe(id:Number,index:number){
+  subscribe(id: Number, index: number) {
     console.log(index);
-    this.categories.forEach(category=>{
-      if(category.id===id){
-        this.subscribedCategory=new Subscribe(category,this.user);
+    this.categories.forEach(category => {
+      if (category.id === id) {
+        this.subscribedCategory = new Subscribe(category, this.user);
       }
     });
     console.log(id);
     console.log(this.subscribedCategory);
-    this.subscribeService.subscribeCategoryFromRemote(this.subscribedCategory).subscribe(resp=>{
+    this.subscribeService.subscribeCategoryFromRemote(this.subscribedCategory).subscribe(resp => {
       console.log(resp);
     })
     window.location.reload();
-    // this.subscribedCategory=new Subscribe(this.categories.);
 }
 unSubscribe(id:Number){
 this.subscribeService.deleteSubscription(id,this.user.id).subscribe(resp=>{

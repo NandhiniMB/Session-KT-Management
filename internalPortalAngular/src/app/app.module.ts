@@ -8,9 +8,6 @@ import {MenuComponent, NotificationDialog} from './menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTooltipModule} from '@angular/material/tooltip';
-// import {MatPaginator} from '@angular/material/paginator';
-// import {MatTableDataSource} from '@angular/material/table';
-
 import { HttpClientModule } from '@angular/common/http';
 import { LoginSuccessComponent } from './login-success/login-success.component';
 import { HomeComponent } from './home/home.component';
@@ -24,7 +21,6 @@ import { PlayVideoComponent } from './play-video/play-video.component';
 import { ManageCategoryComponent } from './manage-category/manage-category.component';
 import { AllCategoriesComponent } from './all-categories/all-categories.component';
 import { SubscribedCategoriesComponent } from './subscribed-categories/subscribed-categories.component';
-
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
@@ -41,15 +37,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material//expansion';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 //import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
-// import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-
 import { MyVideosComponent } from './my-videos/my-videos.component';
 import { EditComponent } from './edit/edit.component';
 
@@ -115,7 +109,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MatButtonToggleModule,
     MatRadioModule,
     MatTooltipModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

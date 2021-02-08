@@ -171,9 +171,5 @@ public class Video  {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
-//	 @Override
-//	    public int compareTo(Video v) {
-//	         return this.getViews() > v.getViews();
-//	    }
+
 }

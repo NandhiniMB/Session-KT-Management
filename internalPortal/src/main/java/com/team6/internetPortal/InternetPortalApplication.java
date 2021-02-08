@@ -31,13 +31,5 @@ public class InternetPortalApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
-		User user = new User();
-
-		user.setUserName("VirusUndetected");
-		user.setEmail("gaurangathavale@gmail.com");
-		user.setName("Gaurang");
-		user.setPassword("Password123");
-		user.setCreatedOn(new Date(System.currentTimeMillis()));
-	}
+	public void run(String... args) throws Exception { }
 }

@@ -78,8 +78,4 @@ public class Notification {
 		this.description = description;
 		this.isRead = isRead;
 	}
-	
-	
-	
-	
 }

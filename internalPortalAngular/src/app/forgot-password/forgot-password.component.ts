@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistrationService } from '../registration.service';
+import { RegistrationService } from '../service/registration.service';
 
 @Component({
   selector: 'app-forgot-password',

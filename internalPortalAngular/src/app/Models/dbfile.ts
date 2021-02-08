@@ -11,6 +11,7 @@ export class DBFile {
     is_archived:Boolean;
     created_on:Date;
     last_modified_on:Date;
+    views:number;
     file1:File
     constructor(){}
 }

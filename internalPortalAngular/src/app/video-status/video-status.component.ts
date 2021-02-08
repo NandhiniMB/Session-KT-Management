@@ -18,7 +18,7 @@ export class VideoStatusComponent implements OnInit {
   prev_url: any;
   ngOnInit(): void {
 
-    this.VideoService.getAll().subscribe(resp => {
+    this.VideoService.getPending().subscribe(resp => {
       console.log(resp);
       this.video = resp;
     })

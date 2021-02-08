@@ -67,7 +67,11 @@ public class VideoService implements IVideoService{
 	}
 	@Override
 	public void deleteVideo(long id) {
-		
+		videoRepository.deleteForeignLikes(id);
+		//Add for delete commentReports
+		videoRepository.deleteForeignCommentReports(id);
+		videoRepository.deleteForeignComments(id);
+		videoRepository.deleteForeignReports(id);
 		videoRepository.deleteById(id);
 	}
 
@@ -110,6 +114,7 @@ public class VideoService implements IVideoService{
     	dbfile.setLastModifiedOn(new Date(System.currentTimeMillis()));
     	dbfile.setStatus(c.status.PENDING);
     	dbfile.setCreator(dbfile.getCreator());
+    	dbfile.setViews(0);
     	return videoRepository.update(dbfile.getId(),dbfile.getTitle(),dbfile.getDescription(),dbfile.getCreator(),dbfile.getCreatedOn(),dbfile.getLastModifiedOn(),dbfile.getCategory(),dbfile.getStatus());
     }
 
@@ -127,6 +132,12 @@ public class VideoService implements IVideoService{
 	@Override
 	public List<Video> getApprovedVideos() {
 		return videoRepository.findApprovedVideos(c.status.APPROVED);
+	}
+
+	@Override
+	public List<Video> getPendingVideos() {
+		// TODO Auto-generated method stub
+		return videoRepository.findPendingVideos(c.status.PENDING);
 	}
 
 	@Override
@@ -171,14 +182,13 @@ public class VideoService implements IVideoService{
 		System.out.println(video);
 		video.setLastModifiedOn(new Date(System.currentTimeMillis()));
 		Video v = videoRepository.save(video);
-		//System.out.println("Hellooooooooooooooo" + v);
 		return v;
 	}
 
 	@Override
 	public long videoViewed(Video video) {
 		// TODO Auto-generated method stub
-		long count = video.getViews();
+		long count = videoRepository.getViewCount(video.getId());
 		System.out.println("init"+count);
 		count++;
 		video.setViews(count);	

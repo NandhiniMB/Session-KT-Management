@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DBFile } from './Models/dbfile';
-import {Category} from './Models/Category';
-import { VideoDTO } from './Models/VideoDTO';
+import { DBFile } from '../Models/dbfile';
+import {Category} from '../Models/Category';
+import { VideoDTO } from '../Models/VideoDTO';
 
 @Injectable({
   providedIn: 'root'

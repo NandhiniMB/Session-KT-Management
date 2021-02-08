@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { VideoDetailsService } from '../video-details.service';
+import { VideoDetailsService } from '../service/video-details.service';
 import { ViewChild, ElementRef } from "@angular/core";
-import { DomSanitizer } from '@angular/platform-browser';
-import { SharedService } from '../shared.service';
+import { SharedService } from '../service/shared.service';
 import { VideoDTO } from '../Models/VideoDTO';
 import { User } from '../Models/User';
 import { Like } from '../Models/like';
-import { RegistrationService } from '../registration.service';
+import { RegistrationService } from '../service/registration.service';
 import { Comment } from '../Models/comment';
 import { ReceiveComments } from '../Models/ReceiveComments';
-import {Location} from '@angular/common';
-import { PlayVideoService } from '../play-video.service';
+import { Location } from '@angular/common';
+import { PlayVideoService } from '../service/play-video.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-play-video',
@@ -22,21 +21,19 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 export class PlayVideoComponent implements OnInit {
 
   video: Blob = null;
-  comment_text:string="";
-  likeCount:number=0;
-  videoDTO: VideoDTO  = null;
+  comment_text: string = "";
+  likeCount: number = 0;
+  videoDTO: VideoDTO = null;
   prev_url: any;
   user: User = null;
   likedVid: Like;
   commentedVid: Comment = null;
-  comments:Array<ReceiveComments>;
-  vid:Number;
+  comments: Array<ReceiveComments>;
+  vid: Number;
   liked = false;
   Likes: Array<Like>;
 
-  constructor(public dialog: MatDialog, private location: Location,private videoService: VideoDetailsService, private sharedService: SharedService , private regservice: RegistrationService, private playVideoService: PlayVideoService) { 
-    
-   
+  constructor(public dialog: MatDialog, private location: Location, private videoService: VideoDetailsService, private sharedService: SharedService, private regservice: RegistrationService, private playVideoService: PlayVideoService) {
 
   }
 
@@ -44,48 +41,47 @@ export class PlayVideoComponent implements OnInit {
 
     this.videoDTO = this.sharedService.getVideoDTO();
     this.prev_url = "data:video/mp4;base64," + this.videoDTO.data;
-    // this.userId = this.sharedService.getUserId();
+
     console.log(this.regservice.getUser());
     this.user = JSON.parse(this.regservice.getUser());
     console.log(this.user);
     this.likedVid = new Like(this.videoDTO, this.user);
     this.liked = this.likedVid.liked;
-    this.vid=this.sharedService.getVid();
+    this.vid = this.sharedService.getVid();
     console.log(this.vid);
     this.videoService.getNumberOfComments(this.vid).subscribe(resp => {
-      this.comments=resp;
+      this.comments = resp;
       console.log(this.comments);
     })
 
-
     this.playVideoService.getAllLikes().subscribe(
       resp => {
-               this.Likes = resp;   
-               console.log(this.Likes);
-              //  this.liked = true;
-              for (let i=0; i<this.Likes.length; i++){
+        this.Likes = resp;
+        console.log(this.Likes);
 
-                if(this.Likes[i].video.id === this.videoDTO.id){
-                  this.likeCount=this.likeCount+1;
-                }
-                if(this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id){
-                  this.liked = true;
-                }
-              }
+        for (let i = 0; i < this.Likes.length; i++) {
+
+          if (this.Likes[i].video.id === this.videoDTO.id) {
+            this.likeCount = this.likeCount + 1;
+          }
+          if (this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id) {
+            this.liked = true;
+          }
+        }
       }
     );
-   
+
   }
 
-  back(){
+  back() {
     this.location.back();
   }
 
-  report(){
-  this.videoService.reportVideo(this.videoDTO.id,this.user.id).subscribe(resp=>{
+  report() {
+    this.videoService.reportVideo(this.videoDTO.id, this.user.id).subscribe(resp => {
 
-    console.log(resp);
-  })
+      console.log(resp);
+    })
   }
 
   @ViewChild("videoPlayer", { static: false }) videoplayer: ElementRef;
@@ -127,7 +123,7 @@ export class PlayVideoComponent implements OnInit {
     video.currentTime = 0;
   }
 
-  like(){
+  like() {
     console.log(this.likedVid);
     this.playVideoService.likeVideoFromRemote(this.likedVid).subscribe(resp => {
       this.likeCount++;
@@ -138,36 +134,36 @@ export class PlayVideoComponent implements OnInit {
   }
 
   unlike() {
-    // this.playVideoService.deleteLikeFromRemote(this.likedVid.likedUser.id, this.)
+
     this.playVideoService.getAllLikes().subscribe(
       resp => {
-               this.Likes = resp;   
-               console.log(this.Likes);
-              //  this.liked = true;
-              for (let i=0; i<this.Likes.length; i++){
-                if(this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id){
-                  this.liked = false;
-                  console.log(this.Likes[i].id);
-                  this.playVideoService.deleteLike(this.Likes[i].id).subscribe(resp => {
-                    console.log(resp);
-                  })
-                }
-              }
-              this.likeCount--;
+        this.Likes = resp;
+        console.log(this.Likes);
+
+        for (let i = 0; i < this.Likes.length; i++) {
+          if (this.Likes[i].likedUser.id === this.user.id && this.Likes[i].video.id === this.videoDTO.id) {
+            this.liked = false;
+            console.log(this.Likes[i].id);
+            this.playVideoService.deleteLike(this.Likes[i].id).subscribe(resp => {
+              console.log(resp);
+            })
+          }
+        }
+        this.likeCount--;
       }
     );
-  
+
   }
 
-  videoEnd(){
+  videoEnd() {
     console.log("here");
     console.log(this.videoDTO);
-    this.videoService.videoViewed(this.videoDTO).subscribe(resp=>{
+    this.videoService.videoViewed(this.videoDTO).subscribe(resp => {
       console.log(resp);
       this.videoDTO.views = resp;
     })
   }
-  comment(){
+  comment() {
     console.log(this.comments);
     console.log(this.comment_text);
     this.commentedVid = new Comment(this.comment_text, this.user, this.videoDTO);
@@ -175,37 +171,31 @@ export class PlayVideoComponent implements OnInit {
       console.log(this.commentedVid);
       this.comments.push(resp);
     })
-    this.comment_text="";
+    this.comment_text = "";
 
-   
   }
 
-  reportComment(id:Number)
-  {
-    this.videoService.reportComment(id,this.user.id).subscribe(resp=>{
+  reportComment(id: Number) {
+    this.videoService.reportComment(id, this.user.id).subscribe(resp => {
 
       console.log(resp);
     })
   }
 
-
   openConfirmationDialog(comment): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '300px',
     });
-  
-  
+
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      if(result){
-        if(comment == null)
-             this.report();
+      if (result) {
+        if (comment == null)
+          this.report();
         else
-        this.reportComment(comment);
+          this.reportComment(comment);
       }
     });
   }
-
-
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../Models/category';
-import { VideoDetailsService } from '../video-details.service';
+import { VideoDetailsService } from '../service/video-details.service';
 export interface Tile {
   color: string;
   cols: number;

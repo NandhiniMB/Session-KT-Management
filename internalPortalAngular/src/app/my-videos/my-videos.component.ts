@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { DBFile } from '../Models/dbfile';
 import { User } from '../Models/User';
 import { VideoDTO } from '../Models/VideoDTO';
-import { RegistrationService } from '../registration.service';
-import { SharedService } from '../shared.service';
-import { VideoDetailsService } from '../video-details.service';
+import { RegistrationService } from '../service/registration.service';
+import { SharedService } from '../service/shared.service';
+import { VideoDetailsService } from '../service/video-details.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { EditComponent } from '../edit/edit.component';
 import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-dialog.component';
@@ -26,16 +26,14 @@ export class MyVideosComponent implements OnInit {
   displayedColumns: String[] = ['id', 'title','description', 'category', 'uploadTime', 'status', 'play', 'edit','delete'];
   prev_url: any;
 
-
   constructor(private videoService: VideoDetailsService, private regService: RegistrationService, private sharedService: SharedService, private router: Router, public dialog: MatDialog) {
     this.user = JSON.parse(this.regService.getUser());
     this.videoService.getAll().subscribe(resp => {
       console.log(resp);
       this.video = resp;
-      // this.myVideos = this.video;
+      
       for(let i=0; i<this.video.length; i++){
-        // console.log(this.video[i].creator.id);
-        // console.log(this.user.id);
+        
         if(this.video[i].creator.id === this.user.id){
           if(this.myVideos.length === 0){
             this.myVideos = [this.video[i]];
@@ -43,7 +41,7 @@ export class MyVideosComponent implements OnInit {
           else{
           this.myVideos.push(this.video[i]);
           }
-          // console.log("hiiiiii");
+          
         }
       }
       console.log(this.myVideos);
@@ -60,7 +58,7 @@ export class MyVideosComponent implements OnInit {
       console.log(resp);
       this.prev_url = "data:video/mp4;base64," + videoDTO.data;
       console.log("hi");
-      // this.sharedService.setPrevUrl(this.prev_url);
+      
       this.sharedService.setVideoDTO(videoDTO);
       this.sharedService.setVid(id);
       this.router.navigate(['/playVideo',id]);
@@ -84,24 +82,19 @@ openDialog(video): void {
 
 onDelete(Video_id: Number) {
   
-  
   this.videoService.deleteVideo(Video_id).subscribe(resp => {
-  //  const videoDTO: VideoDTO = resp as VideoDTO;
-    console.log(resp);
-    // this.prev_url = "data:video/mp4;base64," + videoDTO.data;
-    // console.log("hi");
+  
+    console.log(resp);   
     this.myVideos = this.myVideos.filter(v => {return v.id!=Video_id})
     
  });
 
- 
 }
 
 openConfirmationDialog(Video_id: Number): void {
   const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
     width: '300px',
   });
-
 
   dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result: ${result}`);

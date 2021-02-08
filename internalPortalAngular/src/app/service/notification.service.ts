@@ -16,8 +16,6 @@ export class NotificationService  {
     console.log(count);
   }); }
 
- 
- 
   public updateNotifyCount(count){
     this.notifyCount.next(count);
   }

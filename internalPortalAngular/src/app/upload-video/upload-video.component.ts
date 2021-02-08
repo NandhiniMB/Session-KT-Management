@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DBFile } from '../Models/dbfile';
-import { VideoDetailsService } from '../video-details.service';
+import { VideoDetailsService } from '../service/video-details.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Category } from '../Models/category';
-import { RegistrationService } from '../registration.service';
+import { RegistrationService } from '../service/registration.service';
 
 @Component({
   selector: 'app-upload-video',
@@ -24,7 +24,7 @@ export class UploadVideoComponent implements OnInit {
   fileAttr = 'Choose File';
   flag:Boolean=false;
   isVisible:Boolean=true;
-  // id:Number;
+  
   constructor(private service:VideoDetailsService,private httpClient: HttpClient, private _fb: FormBuilder,private RegService : RegistrationService) { }
 
   ngOnInit(): void {
@@ -48,13 +48,7 @@ export class UploadVideoComponent implements OnInit {
     this.instruction='Click upload button to upload the video.';
   }
 
-  onUpload(){
-    // this.service.upLoadFromRemote(this.files).subscribe(resp=>{
-    //   this.message="Video Successfully Uploaded";
-    // },
-    // error=>{
-    //   this.message="Error uploading video";
-    // })
+  oonUpload(){
     const uploadImageData = new FormData();
     uploadImageData.append('file', this.files, this.files.name);
     this.httpClient.post('http://localhost:8080/video/uploadFile', uploadImageData, { observe: 'response' })
@@ -73,8 +67,7 @@ export class UploadVideoComponent implements OnInit {
       this.flag=true;
       this.isVisible=false;
       this.instruction='Click the save button to save the video details.'
-      alert('Click the save button now to upload the data.');
-  }
+      alert('Click the save button now to upload the data.');}
 
   onSaveData(){
     this.categories.forEach(category=>{

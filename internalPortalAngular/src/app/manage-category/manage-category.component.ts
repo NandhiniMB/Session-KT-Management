@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../Models/Category';
-import { VideoDetailsService } from '../video-details.service';
+import { VideoDetailsService } from '../service/video-details.service';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -14,29 +14,29 @@ export class ManageCategoryComponent implements OnInit {
 
   constructor(private videoService:VideoDetailsService, private _snackBar: MatSnackBar) { }
 
-  loadEditComponent : boolean = false;
-  c:Category=new Category();
-  selectedCategory:Category = new Category();
-  categories : Array<Category>;
-  category_name:String;
+  loadEditComponent: boolean = false;
+  c: Category = new Category();
+  selectedCategory: Category = new Category();
+  categories: Array<Category>;
+  category_name: String;
   ngOnInit(): void {
-    this.videoService.getAllCategory().subscribe(categories=>{
-      this.categories=categories;
+    this.videoService.getAllCategory().subscribe(categories => {
+      this.categories = categories;
       console.log(categories);
     });
   }
 
   onAdd(f: NgForm) {
-    console.log(f.value.category_name);  
-    
-    this.c.categoryName=f.value.category_name;
-    this.videoService.addCategory(this.c).subscribe(category=>{
+    console.log(f.value.category_name);
+
+    this.c.categoryName = f.value.category_name;
+    this.videoService.addCategory(this.c).subscribe(category => {
       console.log(category);
       this.categories.push(category);
-     this.category_name=' ';
+      this.category_name = ' ';
     });
-    
-    
+
+
   }
 
   
@@ -62,13 +62,13 @@ this.videoService.deleteCategory(id).subscribe(resp=>{
     console.log("selected"+this.selectedCategory.categoryName);
     this.loadEditComponent=true;
   }
-  edit(f:NgForm){
-    this.loadEditComponent=false;
-    this.c.id=this.selectedCategory.id;
+  edit(f: NgForm) {
+    this.loadEditComponent = false;
+    this.c.id = this.selectedCategory.id;
     this.c.categoryName = f.value.new_category_name;
-    this.videoService.updateCategory(this.c).subscribe(category=>{
+    this.videoService.updateCategory(this.c).subscribe(category => {
       console.log(category);
-      // this.categories.push(category);
+
     })
   }
 }

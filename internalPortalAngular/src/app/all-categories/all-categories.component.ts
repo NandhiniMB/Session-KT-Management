@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../Models/Category';
 import { Subscribe } from '../Models/Subscribe';
 import { User } from '../Models/User';
-import { RegistrationService } from '../registration.service';
-import { SubscribeService } from '../subscribe.service';
-import { VideoDetailsService } from '../video-details.service';
+import { RegistrationService } from '../service/registration.service';
+import { SubscribeService } from '../service/subscribe.service';
+import { VideoDetailsService } from '../service/video-details.service';
 
 @Component({
   selector: 'app-all-categories',
@@ -51,16 +51,16 @@ export class AllCategoriesComponent implements OnInit {
 
   displayedColumns: String[] = ['id', 'category', 'uploadTime','button'];
 
-  subscribe(id:Number,index:number){
+  subscribe(id: Number, index: number) {
     console.log(index);
-    this.categories.forEach(category=>{
-      if(category.id===id){
-        this.subscribedCategory=new Subscribe(category,this.user);
+    this.categories.forEach(category => {
+      if (category.id === id) {
+        this.subscribedCategory = new Subscribe(category, this.user);
       }
     });
     console.log(id);
     console.log(this.subscribedCategory);
-    this.subscribeService.subscribeCategoryFromRemote(this.subscribedCategory).subscribe(resp=>{
+    this.subscribeService.subscribeCategoryFromRemote(this.subscribedCategory).subscribe(resp => {
       console.log(resp);
     })
     window.location.reload();

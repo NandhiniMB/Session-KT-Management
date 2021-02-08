@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { DBFile } from './Models/dbfile';
-import { User } from './Models/User';
-import { VideoDTO } from './Models/VideoDTO';
+import { DBFile } from '../Models/dbfile';
+import { User } from '../Models/User';
+import { VideoDTO } from '../Models/VideoDTO';
 
 @Injectable({
   providedIn: 'root'

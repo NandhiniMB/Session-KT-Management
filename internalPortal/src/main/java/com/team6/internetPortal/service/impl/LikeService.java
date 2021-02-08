@@ -7,6 +7,7 @@ import com.team6.internetPortal.entity.Like;
 import com.team6.internetPortal.repository.ILikeRepository;
 import com.team6.internetPortal.service.ILikeService;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,6 +19,7 @@ public class LikeService implements ILikeService {
 
     //save
     public Like saveLike(Like like){
+        like.setLikedAt(new Date(System.currentTimeMillis()));
         return userLikesRepository.save(like);
     }
 

@@ -86,28 +86,14 @@ public class VideoController {
     @PostMapping("/saveVideoData")
     @CrossOrigin(origins="http://localhost:4200")
     public int UploadVideoData(@RequestBody Video dbfile) {
-    	dbfile.setCreatedOn(new Date(System.currentTimeMillis()));
-    	dbfile.setLastModifiedOn(new Date(System.currentTimeMillis()));
-    	dbfile.setStatus(constants.status.PENDING);
-    	dbfile.setCreator(dbfile.getCreator());
-    	System.out.println(dbfile.getCreator().getEmail());
-    	int rows=videoService.savefile(dbfile);
-    	return rows;
+    	return videoService.savefile(dbfile);
     }
     
     @PostMapping("/uploadFile")
     @CrossOrigin(origins="http://localhost:4200")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
       Video dbFile = videoService.storeFile(file);
-      System.out.println("========================="+file.getSize()+"=======================");
-//      String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-//              .path("/downloadFile/")
-//              .path(""+dbFile.getId())
-//              .toUriString();        
-//      return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
-//              file.getContentType(), file.getSize());        
       return new UploadFileResponse(dbFile.getTitle(),dbFile.getDescription(),dbFile.getId());
-//      return dbFile.getTitle()+" "+dbFile.getDescription();
   }
     
     @PutMapping("/updatestat")

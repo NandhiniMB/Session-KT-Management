@@ -18,21 +18,7 @@ public class UserController {
 	    @PostMapping("/register")
 	    @CrossOrigin(origins = "http://localhost:4200")
 	    public User registerUser(@RequestBody User user) throws Exception{
-	        String tempEmail = user.getEmail();
-
-	        // Check if null or empty
-	        if(tempEmail != null && !"".equals(tempEmail)){
-
-	            // Check if no user found with entered emailId
-	            if(userService.fetchUserByEmailId(tempEmail) != null){
-	                throw new Exception("User with "+ tempEmail +" already exists!");
-	            }
-	        }
-	        user.setCreatedOn(new Date(System.currentTimeMillis()));
-
-	        User userObj;
-	        userObj = userService.saveUser(user);
-	        return userObj;
+	    	return userService.saveUser(user);
 	    }
 
 	    @PostMapping("/login")

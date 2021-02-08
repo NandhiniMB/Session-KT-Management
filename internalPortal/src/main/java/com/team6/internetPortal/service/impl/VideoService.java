@@ -63,15 +63,6 @@ public class VideoService implements IVideoService{
 	@Override
 	public Video updateVideo(Video video) 
 	{
-//	  Optional<Video> v = videoRepository.findById(video.getId());
-//	  Video new_video = new Video();
-//      new_video.setTitle(video.getTitle());
-//      new_video.setDescription(video.getDescription());
-//      new_video.setCreator(video.getCreator());
-//      new_video.setCategory(video.getCategory());
-//      new_video.setCreated_on(video.getCreated_on());
-//      new_video.setIs_archived(video.isIs_archived());
-//      new_video.setLast_modified_on(new Date(System.currentTimeMillis()));
       return videoRepository.save(video);
 	}
 	@Override
@@ -92,11 +83,6 @@ public class VideoService implements IVideoService{
 		}
 		return null;
 	}
-
-//	@Override
-//	public Video getVideo(long id){
-//		return videoRepository.findById(id).get();
-//	}
 
 
 	
@@ -120,7 +106,10 @@ public class VideoService implements IVideoService{
 }
     
     public int savefile(Video dbfile) {
-    	System.out.println(dbfile);
+    	dbfile.setCreatedOn(new Date(System.currentTimeMillis()));
+    	dbfile.setLastModifiedOn(new Date(System.currentTimeMillis()));
+    	dbfile.setStatus(c.status.PENDING);
+    	dbfile.setCreator(dbfile.getCreator());
     	return videoRepository.update(dbfile.getId(),dbfile.getTitle(),dbfile.getDescription(),dbfile.getCreator(),dbfile.getCreatedOn(),dbfile.getLastModifiedOn(),dbfile.getCategory(),dbfile.getStatus());
     }
 
@@ -137,13 +126,11 @@ public class VideoService implements IVideoService{
 
 	@Override
 	public List<Video> getApprovedVideos() {
-		// TODO Auto-generated method stub
 		return videoRepository.findApprovedVideos(c.status.APPROVED);
 	}
 
 	@Override
 	public Video updateStatus(Video video) {
-		// TODO Auto-generated method stub
 		System.out.println(video);
 		Video v = videoRepository.save(video);
 		System.out.println(v);

@@ -42,8 +42,7 @@ public class CategoryService implements ICategoryService {
 	@Override
 	public void deleteCategory(int id) {
 		// TODO Auto-generated method stub
-		categoryRepository.deleteById(id);
-		
+		categoryRepository.deleteById(id);		
 	}
 	
 }

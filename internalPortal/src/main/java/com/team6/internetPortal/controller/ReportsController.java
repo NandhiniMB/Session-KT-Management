@@ -42,32 +42,27 @@ public class ReportsController
 
     @GetMapping("/{video_id}/{user_id}")
     public void saveReport(@PathVariable Long video_id,@PathVariable Long user_id){
-
         reportsService.saveReport(video_id,user_id);
     }
     
     @GetMapping("/comment/{comment_id}/{user_id}")
     public void saveCommentReport(@PathVariable long comment_id,@PathVariable long user_id){
-
         reportsService.saveCommentReport(comment_id,user_id);
     }
 
     @GetMapping("/reports/comment/{id}")
     public Report getByCommentId(@PathVariable Long id){
-
         return reportsService.getByCommentId(id);
     }
 
     @GetMapping("/reports/user/{id}")
     public Report getByUserId(@PathVariable Long id){
-
         return reportsService.getByUserId(id);
     }
 
 
     @GetMapping("/reports/video/{id}")
     public Optional<Report> getByVid(@PathVariable Long id){
-
         return reportsService.getByVid(id);
     }
 

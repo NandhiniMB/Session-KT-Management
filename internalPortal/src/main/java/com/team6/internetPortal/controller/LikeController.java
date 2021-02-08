@@ -23,7 +23,7 @@ public class LikeController {
 	    @PostMapping(value = "/likes",produces = MediaType.APPLICATION_JSON_VALUE)
 		@CrossOrigin(origins = "http://localhost:4200")
 	    public Like saveLike(@RequestBody Like user_likes){
-
+	        user_likes.setLikedAt(new Date(System.currentTimeMillis()));
 	        return userLikesService.saveLike(user_likes);
 	    }
 

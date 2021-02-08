@@ -16,12 +16,9 @@ public class SendMailService {
     void sendEmail(String[] email, String content) {
 
         SimpleMailMessage msg = new SimpleMailMessage();
-     // msg.setFrom("nandhinimb.cit@gmail.com");
-       // msg.setbcc(email);
         msg.setBcc(email);
         msg.setSubject("Internal Portal Subscription");
-       // msg.setText("Greetings of the day!, \n\nNew Video is published in the Category "+categoryName+" titled "+videoTitle+"!.\n\n Regards,\nInternal Portal Team");
-       msg.setText(content);
+        msg.setText(content);
         javaMailSender.send(msg);
 
     }

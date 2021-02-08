@@ -26,20 +26,9 @@ public class Video  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-//	@Lob
-//    private byte[] data;
 
 	@Column
 	private String path;
-
-//	public byte[] getData() {
-//		return data;
-//	}
-//
-//	public void setData(byte[] data) {
-//		this.data = data;
-//	}
 
 	@Column
 	private String title;
@@ -184,9 +173,5 @@ public class Video  {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
-//	 @Override
-//	    public int compareTo(Video v) {
-//	         return this.getViews() > v.getViews();
-//	    }
+
 }

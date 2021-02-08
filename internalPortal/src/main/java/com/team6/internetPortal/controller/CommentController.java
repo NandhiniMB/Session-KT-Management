@@ -27,6 +27,7 @@ public class CommentController
     @PostMapping("/comments")
     @CrossOrigin(origins="http://localhost:4200")
     public Comment saveComment(@RequestBody Comment user_comments){
+        user_comments.setCommentedOn(new Date(System.currentTimeMillis()));
         return userCommentsService.saveComment(user_comments);
     }
 
@@ -35,7 +36,8 @@ public class CommentController
     @CrossOrigin(origins = "http://localhost:4200")
     public List<Comment> getComment(@PathVariable Long id)
     {
-        return userCommentsService.getComment(id);
+        List<Comment> arrComments=userCommentsService.getComment(id);
+        return arrComments;
     }
 
     // get by Cmnt_id
@@ -59,8 +61,5 @@ public class CommentController
     public void deleteComment(@PathVariable long id) {
     	userCommentsService.deleteComment(id);
     }
-
-
-
 
 }

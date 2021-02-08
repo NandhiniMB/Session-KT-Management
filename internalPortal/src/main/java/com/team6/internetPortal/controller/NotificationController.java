@@ -19,7 +19,7 @@ public class NotificationController {
 
 	@Autowired
 	private INotificationService notificationService;
-	
+
 	@GetMapping("/{user_id}") 
 	public List<Notification> getUserUnreadNotification(@PathVariable long user_id) {
 		return notificationService.getUserUnreadNotification(user_id,false);

@@ -32,7 +32,6 @@ public class DocumentServiceImpl {
         Path targetLocation = this.docStorageLocation.resolve(name);
         Files.copy(multipartFile.getInputStream(), targetLocation);
         return targetLocation.toString();
-//        return path;
     }
 
     public byte[] retrieveFile(String path){

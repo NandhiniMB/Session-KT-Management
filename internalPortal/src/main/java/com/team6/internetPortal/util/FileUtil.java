@@ -7,12 +7,9 @@ import java.nio.file.Files;
 import java.sql.Blob;
 
 public class FileUtil {
-
-
-
+	
     private FileUtil(){
 
     }
-
 
 }

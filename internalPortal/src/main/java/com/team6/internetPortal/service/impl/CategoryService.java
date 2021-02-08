@@ -35,13 +35,11 @@ public class CategoryService implements ICategoryService {
 
 	@Override
 	public Category updateCategory(Category category) {
-		// TODO Auto-generated method stub
 		return categoryRepository.save(category);
 	}
 
 	@Override
 	public void deleteCategory(int id) {
-		// TODO Auto-generated method stub
 		categoryRepository.deleteById(id);		
 	}
 	

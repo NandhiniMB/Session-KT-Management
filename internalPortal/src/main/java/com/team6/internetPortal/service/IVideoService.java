@@ -25,8 +25,6 @@ public interface IVideoService{
 
 	public VideoDTO getVideo(long id);
 
-//	public Video getVideo(long id);
-
 
 	public int savefile(Video video);
 	

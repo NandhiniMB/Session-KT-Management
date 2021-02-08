@@ -13,12 +13,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Id
-//    @GeneratedValue(generator = "id")
-//    @GenericGenerator(name = "id", strategy = "uuid2")
-//    @Column(name = "id")
-//    private String id;
-
     @Column
     private String name;
 

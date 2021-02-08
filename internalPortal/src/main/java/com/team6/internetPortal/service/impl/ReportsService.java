@@ -51,14 +51,6 @@ public class ReportsService implements IReportService
     @Override
 	public List<Report> getReportedVideo() {
 		List<Report> reports = reportsRepository.findReportedVideos();
-		
-//		List<Report> unique_report = reports.stream()
-//                .collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparingInt(Report::getVideo().getId()))),
-//                                           ArrayList::new));
-		
-//		long numReports = reports.stream()
-//                .filter(r -> r.getVideo().getId().equals(c.name))
-//                .count();
 		Set<Long> video_set = new HashSet<>();
 		List<Report> unique_report  =reports.stream()
         .filter(r -> video_set.add(r.getVideo().getId()))
@@ -74,14 +66,12 @@ public class ReportsService implements IReportService
 
 	@Override
 	public void saveCommentReport(long comment_id, long user_id) {
-		// TODO Auto-generated method stub
 		reportsRepository.saveCommentReport(comment_id,user_id);
 		
 	}
 
 	@Override
 	public List<Report> getReportedComments() {
-		// TODO Auto-generated method stub
 		List<Report> reports =  reportsRepository.getReportedComments();
 		Set<Long> comment_set = new HashSet<>();
 		List<Report> unique_report  =reports.stream()

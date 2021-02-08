@@ -9,7 +9,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -29,7 +28,7 @@ public class LikeServiceImplTest {
     private ILikeRepository userLikesRepository;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception {	
     	
     }
     
@@ -63,12 +62,5 @@ public class LikeServiceImplTest {
     	when(userLikesRepository.findAll()).thenReturn(getAllLikes());
     	assertEquals(getAllLikes().get(0).getId(),iLikeService.getAllLikes().get(0).getId());
     	assertEquals(getAllLikes().get(1).getId(),iLikeService.getAllLikes().get(1).getId());
-    }
-    
-//  @Test
-//  public void deleteLikeTest() throws Exception {
-//  	when(userLikesRepository.deleteById(Mockito.any())).thenReturn();
-//  	assertEquals(createLike().getId(),iLikeService.saveLike(createLike()).getId());
-//  }
-    
+    }    
 }

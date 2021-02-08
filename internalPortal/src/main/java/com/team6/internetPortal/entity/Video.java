@@ -26,20 +26,9 @@ public class Video  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-//	@Lob
-//    private byte[] data;
 
 	@Column
 	private String path;
-
-//	public byte[] getData() {
-//		return data;
-//	}
-//
-//	public void setData(byte[] data) {
-//		this.data = data;
-//	}
 
 	@Column
 	private String title;
@@ -97,11 +86,9 @@ public class Video  {
 	}
 
 	public Video() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Video(String path) {
-		// TODO Auto-generated constructor stub
 		this.path=path;
 	}
 

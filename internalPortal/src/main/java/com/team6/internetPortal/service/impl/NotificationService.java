@@ -27,11 +27,4 @@ public class NotificationService implements INotificationService {
 		return notificationRepository.save(notificationRead);
 	}
 
-	
-
-//	@Override
-//	public List<Notification> getNotification() {
-//		return notificationRepository.findAll();
-//	}
-
 }

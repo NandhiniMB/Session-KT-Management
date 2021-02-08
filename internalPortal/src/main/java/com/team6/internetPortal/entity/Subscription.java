@@ -16,8 +16,7 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Subscription {
 
 	public Subscription() {
-//		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Id

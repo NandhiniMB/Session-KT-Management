@@ -17,8 +17,6 @@ import com.team6.internetPortal.entity.Video;
 @Repository
 public interface IVideoRepository extends JpaRepository<Video,Long> {
 
-//	public List<Video> findAllVideoByCategory(int id);
-
 	//@Query(value = "SELECT * FROM video v WHERE v.category_id  = ?1 ", nativeQuery = true)
 	public List<Video> findByCategoryId(int id);
 	
@@ -54,7 +52,6 @@ public interface IVideoRepository extends JpaRepository<Video,Long> {
 	@Query(value = "SELECT * FROM video v  where v.status = 'PENDING'" ,nativeQuery = true)
 	public List<Video> findPendingVideos();
 
-	//=======================================
 	@Modifying
 	@Transactional
 	@Query(value = "DELETE FROM like_table where video_id = :vid", nativeQuery = true)

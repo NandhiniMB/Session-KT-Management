@@ -26,6 +26,4 @@ public class NotificationService implements INotificationService {
 		notificationRead.setRead(true);
 		return notificationRepository.save(notificationRead);
 	}
-
-
 }

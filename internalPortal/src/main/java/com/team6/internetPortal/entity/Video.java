@@ -86,11 +86,9 @@ public class Video  {
 	}
 
 	public Video() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Video(String path) {
-		// TODO Auto-generated constructor stub
 		this.path=path;
 	}
 

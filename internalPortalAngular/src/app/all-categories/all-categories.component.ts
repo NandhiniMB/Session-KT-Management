@@ -36,16 +36,23 @@ export class AllCategoriesComponent implements OnInit {
       for(let i=0;i<this.length;i++){
         this.isSubscribed.push(false);
   }
-
-  this.categories.forEach(category=>{
-  for(let i=0;i<this.subscriptions.length;i++){
-    if(category.id===this.subscriptions[i].category.id){
-        this.ind=this.subscriptions[i].category.id;
-        this.isSubscribed[this.ind - 1]=true;
-    }
-  }
-  });
   console.log(this.isSubscribed);
+  for(let i=0;i<this.categories.length;i++){
+    for(let j=0;j<this.subscriptions.length;j++){
+      if(this.categories[i].id===this.subscriptions[j].category.id){
+        this.isSubscribed[i]=true;
+      }
+  // this.categories.forEach(category=>{
+  // for(let i=0;i<this.subscriptions.length;i++){
+  //   if(category.id===this.subscriptions[i].category.id){
+  //       this.ind=this.subscriptions[i].category.id;
+  //       this.isSubscribed[this.ind - 1]=true;
+  //   }
+  // }
+  // console.log(this.isSubscribed);
+  //   });
+  }
+}
     });
   }
 

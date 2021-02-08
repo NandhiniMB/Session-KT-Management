@@ -34,7 +34,6 @@ public class UserController {
 
 	            // Check if no user found with entered emailId
 	            if(userCheck != null){
-//	                System.out.println(userCheck.getEmail()+" "+ userCheck.getPassword()+ " "+ tempPassword);
 
 	                // Check Email-Password Match
 	                if(!(userCheck.getPassword()).equals(tempPassword)){

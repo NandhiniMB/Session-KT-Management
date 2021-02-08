@@ -51,14 +51,6 @@ public class ReportsService implements IReportService
     @Override
 	public List<Report> getReportedVideo() {
 		List<Report> reports = reportsRepository.findReportedVideos();
-		
-//		List<Report> unique_report = reports.stream()
-//                .collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparingInt(Report::getVideo().getId()))),
-//                                           ArrayList::new));
-		
-//		long numReports = reports.stream()
-//                .filter(r -> r.getVideo().getId().equals(c.name))
-//                .count();
 		Set<Long> video_set = new HashSet<>();
 		List<Report> unique_report  =reports.stream()
         .filter(r -> video_set.add(r.getVideo().getId()))

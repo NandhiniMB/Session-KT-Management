@@ -29,7 +29,6 @@ public class SubscriptionService implements ISubscriptionService{
 		System.out.println(email);
 		String content = "Greetings of the day!, \n\nNew Video is published in the Category "+mailrequest.getCategory().getCategoryName() +" titled "+mailrequest.getVideo().getTitle()+"!.\n\n Regards,\nInternal Portal Team";
 		sendmailService.sendEmail(email,content );
-            //sendEmailWithAttachment();
 
         System.out.println("Done");
 	}

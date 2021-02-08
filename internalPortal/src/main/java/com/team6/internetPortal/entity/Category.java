@@ -29,14 +29,6 @@ public class Category {
 	@OneToMany(mappedBy="category",fetch=FetchType.LAZY)
 	private List<Subscription> subscriptions;
 
-//	public List<Subscription> getSubscriptions() {
-//		return subscriptions;
-//	}
-//
-//	public void setSubscriptions(List<Subscription> subscriptions) {
-//		this.subscriptions = subscriptions;
-//	}
-
 	public int getId() {
 		return id;
 	}

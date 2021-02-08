@@ -106,20 +106,11 @@ public class VideoController {
     @CrossOrigin(origins="http://localhost:4200")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
       Video dbFile = videoService.storeFile(file);
-      System.out.println("========================="+file.getSize()+"=======================");
-//      String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-//              .path("/downloadFile/")
-//              .path(""+dbFile.getId())
-//              .toUriString();        
-//      return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
-//              file.getContentType(), file.getSize());        
       return new UploadFileResponse(dbFile.getTitle(),dbFile.getDescription(),dbFile.getId());
-//      return dbFile.getTitle()+" "+dbFile.getDescription();
   }
     
     @PutMapping("/updatestat")
     public Video UpdateStatus(@RequestBody Video video) {
-    	
     	return videoService.updateStatus(video);
     }
 
@@ -137,7 +128,6 @@ public class VideoController {
     
     @GetMapping("/mostview")
     public List<Video> mostViewedVideo(){
-    	
     	return videoService.mostViewedVideo();
     }
 }

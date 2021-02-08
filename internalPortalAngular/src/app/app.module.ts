@@ -41,6 +41,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material//expansion';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 //import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
@@ -115,7 +117,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MatButtonToggleModule,
     MatRadioModule,
     MatTooltipModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

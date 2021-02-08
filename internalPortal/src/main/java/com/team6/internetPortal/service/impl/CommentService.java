@@ -39,9 +39,7 @@ public class CommentService implements ICommentService {
 
 		@Override
 		public void deleteComment(long id) {
-		
-			userCommentsRepository.deleteById(id);
-			
+			System.out.println(userCommentsRepository.deleteComment(id));
 		}
 
 

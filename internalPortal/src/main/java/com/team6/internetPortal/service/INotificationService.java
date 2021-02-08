@@ -10,8 +10,5 @@ public interface INotificationService {
 
 	public Object markNotificationRead(Notification notificationRead);
 
-	
-
-	//public List<Notification> getNotification();
 
 }

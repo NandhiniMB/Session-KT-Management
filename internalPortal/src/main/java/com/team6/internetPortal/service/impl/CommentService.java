@@ -1,5 +1,6 @@
 package com.team6.internetPortal.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,13 +19,13 @@ public class CommentService implements ICommentService {
 
 	    //save
 	    public Comment saveComment(Comment user_comments){
+	    	user_comments.setCommentedOn(new Date(System.currentTimeMillis()));
 	        return userCommentsRepository.save(user_comments);
 	    }
 
 	    //get by vid
 	    public List<Comment> getComment(Long vid)
 		{
-			System.out.println("HELLo");
 	        return userCommentsRepository.findByVideoId(vid);
 	    }
 
@@ -35,13 +36,13 @@ public class CommentService implements ICommentService {
 
 		@Override
 		public Comment findwithCommentrId(Long id) {
-			return userCommentsRepository.findByCommentorId(id);}
+			return userCommentsRepository.findByCommentorId(id);
+		}
 
 		@Override
 		public void deleteComment(long id) {
 		
-			userCommentsRepository.deleteById(id);
-			
+			userCommentsRepository.deleteById(id);	
 		}
 
 
